@@ -1,0 +1,24 @@
+@import '~assets/wmnds/vars';
+@import '~assets/wmnds/mixins';
+
+.summaryTable {
+  table {
+    th,
+    td {
+      padding: $size-md $size-sm $size-md 0;
+      vertical-align: top;
+
+      &:first-child {
+        @media screen and (min-width: 768px) {
+          width: 30%;
+        }
+      }
+
+      &:last-child {
+        @media screen and (min-width: 768px) {
+          width: 100px;
+        }
+      }
+    }
+  }
+}

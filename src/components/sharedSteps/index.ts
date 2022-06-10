@@ -1,0 +1,13 @@
+export { default as AddressStep } from './AddressStep/AddressStep';
+export { default as BirthDateStep } from './BirthDateStep/BirthDateStep';
+export { default as ContactDetailsStep } from './ContactDetailsStep/ContactDetailsStep';
+export { default as FullNameStep } from './FullNameStep/FullNameStep';
+export { default as PhotoUploadStep } from './PhotoUploadStep/PhotoUpload';
+export { default as StudentProofStep } from './StudentProofStep/StudentProofStep';
+export { default as StudentOrApprenticeStep } from './StudentOrApprenticeStep/StudentOrApprenticeStep';
+export { default as EthnicityStep } from './EthnicityStep/EthnicityStep';
+export { default as EthnicityDetailsStep } from './EthnicityDetailsStep/EthnicityDetailsStep';
+export { default as CurrentPassStep } from './CurrentPassStep/CurrentPassStep';
+export { default as CategoriesStep } from './CategoriesStep/CategoriesStep';
+export { default as DrivingLicenseStep } from './DrivingLicenseStep/DrivingLicenseStep';
+export { default as DisabilityProofStep } from './DisabilityProofStep/DisabilityProofStep';

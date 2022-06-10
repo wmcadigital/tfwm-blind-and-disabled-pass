@@ -1,0 +1,46 @@
+@import '~assets/wmnds/vars';
+@import '~assets/wmnds/mixins';
+
+.ticketCard {
+  position: relative;
+}
+
+.changeTicketBtn {
+  max-width: 175px;
+  float: right;
+
+  @supports (max-width: max-content) {
+    max-width: max-content;
+  }
+
+  @media screen and (max-width: $breakpoint-md - 1) {
+    max-width: none;
+    float: left;
+  }
+}
+
+.modeIconWrapper {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.modeIcon {
+  width: 30px;
+  height: 30px;
+
+  &:not(:first-child) {
+    margin-left: $size-xsm;
+  }
+
+  &.bus {
+    fill: get-color(bus);
+  }
+
+  &.metro {
+    fill: get-color(metro);
+  }
+
+  &.rail {
+    fill: get-color(railway);
+  }
+}

@@ -1,0 +1,8 @@
+// sass-lint:disable class-name-format
+
+// Fix for text alignment on wmnds-btn--link
+.wmnds-btn {
+  &.wmnds-btn--link.wmnds-text-align-left {
+    text-align: left !important;
+  }
+}
