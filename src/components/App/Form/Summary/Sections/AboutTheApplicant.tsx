@@ -21,6 +21,8 @@ const AboutTheApplicant = () => {
     ethnicityDetails,
     ApplicantEmailAddress,
     ApplicantMobilePhoneNumber,
+    BehalfMobilePhoneNumber,
+    BehalfEmailAddress,
     currentDisabledPass,
     passNumber,
     contactPreference,
@@ -59,7 +61,13 @@ const AboutTheApplicant = () => {
     ],
     [
       <span>How would {applicationForMe ? `you` : `they`} like to be contacted?</span>,
-      <span>{`${contactPreference} ${ApplicantEmailAddress} ${ApplicantMobilePhoneNumber}`}</span>,
+      <span>
+        <p>{`${contactPreference.filter((n) => {
+          return n.includes('etter');
+        })}`}</p>
+        <p>{`${ApplicantEmailAddress || BehalfEmailAddress}`}</p>
+        <p>{`${ApplicantMobilePhoneNumber || BehalfMobilePhoneNumber}`}</p>
+      </span>,
       <ChangeAnswerButton from="ApplicantContactDetails" />,
     ],
     [

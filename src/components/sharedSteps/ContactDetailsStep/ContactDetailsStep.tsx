@@ -27,10 +27,10 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
   };
 
   const handleContinue = () => {
-    const isEmailValid = contactPref.includes('Email') && emailAddress.save();
-    const isPhoneNumberValid = contactPref.includes('Phone') && phoneNumber.save();
+    const isEmailValid = !contactPref.includes('Email') || emailAddress.save();
+    const isPhoneNumberValid = !contactPref.includes('Phone') || phoneNumber.save();
     contactPreference.save();
-    if (isEmailValid || isPhoneNumberValid) return;
+    if (!isEmailValid || !isPhoneNumberValid) return;
     handleNavigation();
   };
 
