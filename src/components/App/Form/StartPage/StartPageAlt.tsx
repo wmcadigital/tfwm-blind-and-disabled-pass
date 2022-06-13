@@ -5,32 +5,15 @@ import { useFormDataContext } from 'state/formDataState/context';
 import Icon from 'components/shared/Icon/Icon';
 
 import { TTicket } from 'types/ticket';
-import { useStartSession } from 'customHooks/axiosRequests';
-import { TSession } from 'types/session';
-import { Nullable } from 'types/helpers';
 import DisablityCategories from './DisablityCategories';
 
 const StartPageAlt = () => {
   const [, formDataDispatch] = useFormDataContext();
   const [, globalStateDispatch] = useGlobalContext();
-  const startSessionRequest = useStartSession();
   const userCanStartForm = true;
   const [formDataState] = useFormDataContext();
   const { disabilityCategories, alternateStart } = formDataState;
   const startForm = async () => {
-    let session: Nullable<TSession> = null;
-
-    try {
-      const response = await startSessionRequest.startSession();
-      session = response!?.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e);
-    }
-
-    if (!session) return;
-
-    formDataDispatch({ type: 'UPDATE_SESSION_DATA', payload: session });
     formDataDispatch({ type: 'UPDATE_TICKET_DATA', payload: {} });
     globalStateDispatch({
       type: 'ADD_TICKET_INFO',
@@ -280,7 +263,6 @@ const StartPageAlt = () => {
             btnClass="wmnds-btn wmnds-btn--start wmnds-m-t-md"
             iconRight="general-chevron-right"
             disabled={!userCanStartForm}
-            isFetching={startSessionRequest.isLoading}
             onClick={startForm}
           />
           <p className="wmnds-m-t-lg">

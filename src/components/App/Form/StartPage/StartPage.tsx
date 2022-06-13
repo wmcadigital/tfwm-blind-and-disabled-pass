@@ -4,32 +4,14 @@ import { useGlobalContext } from 'state/globalState/context';
 import { useFormDataContext } from 'state/formDataState/context';
 
 import { TTicket } from 'types/ticket';
-import { useStartSession } from 'customHooks/axiosRequests';
-import { TSession } from 'types/session';
-import { Nullable } from 'types/helpers';
 
 const StartPage = () => {
   const [, formDataDispatch] = useFormDataContext();
   const [, globalStateDispatch] = useGlobalContext();
 
-  const startSessionRequest = useStartSession();
-
   const userCanStartForm = true;
 
   const startForm = async () => {
-    let session: Nullable<TSession> = null;
-
-    try {
-      const response = await startSessionRequest.startSession();
-      session = response!?.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e);
-    }
-
-    if (!session) return;
-
-    formDataDispatch({ type: 'UPDATE_SESSION_DATA', payload: session });
     formDataDispatch({ type: 'UPDATE_TICKET_DATA', payload: {} });
     globalStateDispatch({
       type: 'ADD_TICKET_INFO',
