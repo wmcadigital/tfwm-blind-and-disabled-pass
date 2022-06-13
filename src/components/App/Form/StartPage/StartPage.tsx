@@ -73,7 +73,6 @@ const StartPage = () => {
         btnClass="wmnds-btn wmnds-btn--start wmnds-m-t-md"
         iconRight="general-chevron-right"
         disabled={!userCanStartForm}
-        isFetching={startSessionRequest.isLoading}
         onClick={startForm}
       />
     </>
