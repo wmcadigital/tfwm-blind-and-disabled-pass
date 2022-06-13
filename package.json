@@ -29,7 +29,7 @@
     "date-fns": "^2.23.0",
     "dompurify": "^2.2.7",
     "node-sass": "^6.0.1",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-app-polyfill": "^2.0.0",
     "react-datepicker": "^4.1.1",
