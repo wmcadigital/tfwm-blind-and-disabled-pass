@@ -10,10 +10,10 @@
   },
   "copyright": "WMCA",
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "react-scripts start",
     "lint:styles": "sass-lint '**/*.scss'",
     "update-packages": "ncu",
-    "build": "react-app-rewired build",
+    "build": "react-scripts build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
