@@ -17,6 +17,7 @@ const AboutTheApplicant = () => {
     ApplicantCurrentAddressLine4,
     ApplicantCurrentPostcode,
     ApplicantPhoto,
+    ethnicity,
     ethnicityDetails,
     ApplicantEmailAddress,
     ApplicantMobilePhoneNumber,
@@ -24,7 +25,6 @@ const AboutTheApplicant = () => {
     passNumber,
     contactPreference,
   } = formDataState;
-  console.log('sssssss', formDataState);
   const tableValues = [
     [
       <span>Name</span>,
@@ -49,12 +49,12 @@ const AboutTheApplicant = () => {
     ],
     [
       <span>Ethnicity</span>,
-      <span>{`${ethnicityDetails}`}</span>,
+      <span>{`${ethnicityDetails || ethnicity}`}</span>,
       <ChangeAnswerButton from="ApplicantEthnicity" />,
     ],
     [
       <span>Ethnicity</span>,
-      <span>{`${ethnicityDetails}`}</span>,
+      <span>{`${ethnicityDetails || ethnicity}`}</span>,
       <ChangeAnswerButton from="ApplicantEthnicity" />,
     ],
     [
@@ -64,7 +64,7 @@ const AboutTheApplicant = () => {
     ],
     [
       <span>Do {applicationForMe ? `you` : `they`} already have a disabled person’s pass?</span>,
-      <span>{`${currentDisabledPass}`}</span>,
+      <span>{`${currentDisabledPass ? 'Yes' : 'No'}`}</span>,
       <ChangeAnswerButton from="CurrentPass" />,
     ],
     [

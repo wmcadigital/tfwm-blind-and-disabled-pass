@@ -12,7 +12,6 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
   const [, formDataDispatch] = useFormDataContext();
   const ethnicity = useFormDataSubscription('ethnicity');
   const ethnicityDetails = useFormDataSubscription('ethnicityDetails');
-  console.log('de', ethnicity);
 
   const handleContinue = () => {
     if (!ethnicityDetails.validate()) return;
@@ -34,7 +33,6 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
 
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     ethnicityDetails.set(e.target.value);
-    console.log(ethnicityDetails, e.target.value.toLowerCase());
   };
   const white = [
     { text: 'British', html: null, value: 'British', info: null },

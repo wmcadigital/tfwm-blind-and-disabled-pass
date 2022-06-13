@@ -3,13 +3,15 @@ import { BirthDateStep } from 'components/sharedSteps';
 
 const ApplicantBirthDate = () => {
   const { goToNextStep } = useNavigationLogic('ApplicantName', 'ApplicantAddress');
-  const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
+  const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
+  const pronoun = applicationForMe.savedValue ? 'your' : `${ApplicantFirstName.currentValue}'s`;
   return (
     <BirthDateStep
       handleNavigation={goToNextStep}
       dataNamePrefix="Applicant"
-      question={`What is ${ApplicantFirstName.currentValue}'s date of birth?`}
+      question={`What is ${pronoun} date of birth?`}
     />
   );
 };

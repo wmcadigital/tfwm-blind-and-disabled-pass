@@ -20,7 +20,7 @@ const SectionTwo = ({ totalSections }: TSectionProps) => {
   return (
     <Section
       totalSections={totalSections}
-      title={applicationForMe ? 'About you' : 'About the applicant'}
+      title={applicationForMe.savedValue ? 'About you' : 'About the applicant'}
       steps={[
         ApplicantName,
         ApplicantBirthDate,

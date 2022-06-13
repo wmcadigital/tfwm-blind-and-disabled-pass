@@ -33,7 +33,6 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
     if (isEmailValid || isPhoneNumberValid) return;
     handleNavigation();
   };
-  console.log('ssssww', contactPerson.savedValue);
 
   return (
     <Question

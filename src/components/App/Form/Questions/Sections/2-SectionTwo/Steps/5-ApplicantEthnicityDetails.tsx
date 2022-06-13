@@ -3,17 +3,17 @@ import { EthnicityDetailsStep } from 'components/sharedSteps';
 
 const EthnicityDetails = () => {
   const applicationForMe = useFormDataSubscription('applicationForMe');
-  console.log('ppp', applicationForMe);
+  const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
+  const pronoun = applicationForMe.savedValue ? 'your' : `${ApplicantFirstName.currentValue}'s`;
   const nextStep = applicationForMe.currentValue ? 'ApplicantContactDetails' : 'WhoToContact';
 
   const { goToNextStep } = useNavigationLogic('ApplicantEthnicity', nextStep);
-  const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
   return (
     <EthnicityDetailsStep
       handleNavigation={goToNextStep}
       dataNamePrefix="Applicant"
-      question={`Which of the following described ${ApplicantFirstName.currentValue}'s background?`}
+      question={`Which of the following described ${pronoun} background?`}
     />
   );
 };

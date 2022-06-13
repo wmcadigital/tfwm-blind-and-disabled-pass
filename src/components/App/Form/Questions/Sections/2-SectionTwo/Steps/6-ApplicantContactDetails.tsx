@@ -8,11 +8,11 @@ const ApplicantContactDetails = () => {
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const contactPerson = useFormDataSubscription('contactPerson');
   const contact = contactPerson.savedValue ? 'you' : ApplicantFirstName.savedValue;
-  const question = applicationForMe.currentValue
+  const question = applicationForMe.savedValue
     ? 'How would you like to be contacted about the application?'
     : `How would ${contact} like to be contacted about the application?`;
 
-  const dataNamePrefix = applicationForMe ? 'Applicant' : 'Behalf';
+  const dataNamePrefix = applicationForMe.savedValue ? 'Applicant' : 'Behalf';
 
   return (
     <ContactDetailsStep

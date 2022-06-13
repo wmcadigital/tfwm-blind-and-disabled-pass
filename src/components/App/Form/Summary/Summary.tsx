@@ -7,7 +7,6 @@ import { DisabilityProof, AboutYou, AboutTheApplicant, SendRequest } from './Sec
 
 import s from './Summary.module.scss';
 
-console.log('summer');
 const Summary = () => {
   const [formDataState, formDataDispatch] = useFormDataContext();
   const { applicationForMe } = formDataState;
@@ -15,7 +14,7 @@ const Summary = () => {
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { temporaryData } = globalState.form.edit;
 
-  useNavigationLogic('DrivingLicense');
+  useNavigationLogic('DisablityCategories');
 
   useEffect(() => {
     formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: temporaryData });

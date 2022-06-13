@@ -5,7 +5,9 @@ const ApplicantName = () => {
   const { goToNextStep } = useNavigationLogic('CheckIfUserIsTheApplicant', 'ApplicantBirthDate');
   const applicationForMe = useFormDataSubscription('applicationForMe');
 
-  const question = applicationForMe ? 'What is your name?' : 'Who are you registering for?';
+  const question = applicationForMe.savedValue
+    ? 'What is your name?'
+    : 'Who are you registering for?';
 
   return (
     <FullNameStep handleNavigation={goToNextStep} dataNamePrefix="Applicant" question={question} />

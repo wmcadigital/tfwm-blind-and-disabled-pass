@@ -26,7 +26,6 @@ const StudentOrApprenticeStep = ({
   const handleContinue = () => {
     isApprentice.save();
   };
-  console.log('s', isApprentice.hasCurrentValue, stateIsApprentice);
   return (
     <div>
       {stateIsApprentice === null && (

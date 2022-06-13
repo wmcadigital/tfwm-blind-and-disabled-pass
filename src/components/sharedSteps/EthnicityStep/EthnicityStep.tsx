@@ -29,7 +29,6 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
 
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     ethnicity.set(e.target.value);
-    console.log(ethnicity, e.target.value.toLowerCase());
   };
   return (
     <Question
@@ -64,7 +63,7 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
         name="preferNotToSay"
         onChange={setCurrentValue}
         currentValue={ethnicity.currentValue}
-        radios={[{ text: 'Prefer not to say', html: null, value: 'Prefer', info: null }]}
+        radios={[{ text: 'Prefer not to say', html: null, value: 'Prefer not to say', info: null }]}
         required
       />
     </Question>

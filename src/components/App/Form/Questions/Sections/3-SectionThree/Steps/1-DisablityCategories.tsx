@@ -8,13 +8,9 @@ const DisablityCategories = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
 
-  const index = disabilityCategories.indexOf('');
-  const next =
-    index >= 0 && index < disabilityCategories.length - 1
-      ? formPath[2].find((i) => i === disabilityCategories[index + 1])
-      : 'Summary';
+  const next = formPath[2].find((i) => i === disabilityCategories[0]);
 
-  const prevStep = applicationForMe.currentValue ? 'CheckIfUserIsTheApplicant' : 'Blind';
+  const prevStep = applicationForMe.currentValue ? 'ApplicantContactDetails' : 'CurrentPass';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
 
   const question = applicationForMe.currentValue

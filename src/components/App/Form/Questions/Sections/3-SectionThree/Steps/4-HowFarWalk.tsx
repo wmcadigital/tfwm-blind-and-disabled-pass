@@ -18,7 +18,7 @@ const Distance = () => {
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     applicationForMe.set(e.target.value.toLowerCase() === 'true');
   };
-  const title = applicationForMe ? 'Before you' : 'Before they';
+  const title = applicationForMe.savedValue ? 'Before you' : 'Before they';
   const handleContinue = () => {
     if (!applicationForMe.validate()) return;
     // If user changes this step we need to delete any saved data
