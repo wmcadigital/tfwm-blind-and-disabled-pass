@@ -8,6 +8,7 @@ const Distance = () => {
 
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const distance = useFormDataSubscription(`distance`);
+  const distanceMetric = useFormDataSubscription(`distanceMetric`);
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
   const { goToNextStep } = useNavigationLogic('Walk', 'Summary');
@@ -16,23 +17,24 @@ const Distance = () => {
     : `How far can ${ApplicantFirstName.currentValue} walk?`;
 
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    applicationForMe.set(e.target.value.toLowerCase() === 'true');
+    distanceMetric.set(e.target.value.toLowerCase() === 'true');
   };
   const title = applicationForMe.savedValue ? 'Before you' : 'Before they';
   const handleContinue = () => {
-    if (!applicationForMe.validate()) return;
+    if (!distanceMetric.validate()) return;
     // If user changes this step we need to delete any saved data
     if (
-      applicationForMe.savedValue !== null &&
-      applicationForMe.currentValue !== applicationForMe.savedValue
+      distanceMetric.savedValue !== null &&
+      distanceMetric.currentValue !== distanceMetric.savedValue
     ) {
       globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
       if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
     }
-    applicationForMe.save();
+    distance.save();
+    distanceMetric.save();
     goToNextStep();
   };
-
+  const label = `Distance in ${distanceMetric.currentValue ? 'metres' : 'feet'}`;
   return (
     <Question
       question={question}
@@ -47,10 +49,10 @@ const Distance = () => {
       </ul>
       <p>You can choose to enter how far they can walk in metres or feet</p>
       <Radios
-        name="isApplicationForMe"
+        name="distanceMetric"
         onChange={setCurrentValue}
-        currentValue={applicationForMe.currentValue}
-        error={applicationForMe.error}
+        currentValue={distanceMetric.currentValue}
+        error={distanceMetric.error}
         radios={[
           { text: 'Metres', html: null, value: true, info: null },
           { text: 'Feet', html: null, value: false, info: null },
@@ -60,7 +62,7 @@ const Distance = () => {
         groupClassName="wmnds-m-b-lg"
         name="distance"
         inputmode="text"
-        label="Their distance in metres"
+        label={label}
         type="number"
         className="wmnds-col-1 wmnds-col-md-2-3"
         defaultValue={distance.currentValue}

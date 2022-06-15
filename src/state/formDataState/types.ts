@@ -106,8 +106,11 @@ export type TFormDataState = {
 
   disabilityCategories: Array<string>;
   drivingLicense: Nullable<string>;
+  hasDrivingLicense: Nullable<boolean>;
+  refusedDrivingLicense: Nullable<boolean>;
   refusedLicense: Nullable<string>;
   distance: Nullable<string>;
+  distanceMetric: Nullable<boolean>;
   alternateStart: Nullable<boolean>;
   contactPreference: Array<string>;
   contactPerson: Nullable<boolean>;

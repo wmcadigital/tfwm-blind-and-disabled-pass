@@ -102,8 +102,11 @@ const initialState: TFormDataState = {
 
   disabilityCategories: [],
   drivingLicense: null,
+  hasDrivingLicense: null,
+  refusedDrivingLicense: null,
   refusedLicense: null,
   distance: null,
+  distanceMetric: null,
   alternateStart: false,
   contactPreference: [],
   contactPerson: null,

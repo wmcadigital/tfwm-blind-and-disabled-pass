@@ -25,19 +25,17 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
       disabilityCategories.set(addOrRemove());
     };
   };
+
   const handleContinue = () => {
     disabilityCategories.save();
     handleNavigation();
   };
-  const hasError = () => {
-    const arr = disabilityCategories.savedValue;
-    if (arr?.length) {
-      return true;
-    }
-    return false;
-  };
   return (
-    <Question question={question} handleContinue={handleContinue} showError={hasError()}>
+    <Question
+      question={question}
+      handleContinue={handleContinue}
+      showError={disabilityCategories.savedValue === null}
+    >
       <p className="wmnds-m-b-lg">You can apply for more than one category</p>
       <div className="wmnds-m-b-lg">
         <Checkbox

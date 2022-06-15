@@ -72,7 +72,7 @@ const SendYourRequest = () => {
         By submitting this request you are confirming that, to the best of your knowledge, the
         details you are providing are correct.
       </p>
-      {disabilityCategories.includes('Drive') && (
+      {disabilityCategories.includes('DrivingLicense') && (
         <p>
           <Icon iconName="general-warning-triangle" className="wmnds-msg-summary__icon" />
           After you have submitted your application, you need to provide certificate of{' '}

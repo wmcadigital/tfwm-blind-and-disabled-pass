@@ -8,9 +8,8 @@ const { sanitize } = dompurify;
 const DisabilityProof = () => {
   const [formDataState] = useFormDataContext();
   const {
+    applicationForMe,
     disabilityCategories,
-    drivingLicense,
-    refusedLicense,
     proofDocumentBlind,
     proofDocumentDeaf,
     proofDocumentWalk,
@@ -18,6 +17,10 @@ const DisabilityProof = () => {
     proofDocumentLearn,
     proofDocumentLanguage,
     proofDocumentDrive,
+    distance,
+    distanceMetric,
+    hasDrivingLicense,
+    refusedDrivingLicense,
   } = formDataState;
   const filteredDisabilityCategories = () => {
     const arr: Array<String> = [];
@@ -43,23 +46,6 @@ const DisabilityProof = () => {
       return `${i}`;
     });
   };
-
-  const drivingAnswers = disabilityCategories.includes('Drive')
-    ? [
-        <span>Do you have a driving licence?</span>,
-        <span>{`${drivingLicense}`}</span>,
-        <ChangeAnswerButton from="DrivingLicense" />,
-      ]
-    : [];
-  const refusedAnswers = disabilityCategories.includes('Drive')
-    ? [
-        <span>
-          Have you ever applied for a driving license but were refused due to your condition?
-        </span>,
-        <span>{`${refusedLicense}`}</span>,
-        <ChangeAnswerButton from="RefusedLicense" />,
-      ]
-    : [];
   const proofBlind = disabilityCategories.includes('Blind')
     ? [
         <span>Proof of disability - blind or partially sighted</span>,
@@ -81,13 +67,20 @@ const DisabilityProof = () => {
         <ChangeAnswerButton from="Language" />,
       ]
     : [];
-  const proofWalk = disabilityCategories.includes('Walk')
+  const proofWalkAlt = distance
     ? [
+        <span>How far can {applicationForMe ? `you` : `they`} walk?</span>,
+        <span>
+          {distance} {distanceMetric ? `metres` : `feet`}
+        </span>,
+        <ChangeAnswerButton from="Distance" />,
+      ]
+    : [
         <span>Proof of disability - cannot walk or find it difficult to walk short distances</span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentWalk! }]} />,
         <ChangeAnswerButton from="Walk" />,
-      ]
-    : [];
+      ];
+  const proofWalk = disabilityCategories.includes('Walk') ? proofWalkAlt : [];
   const proofArms = disabilityCategories.includes('Arms')
     ? [
         <span>Proof of disability - unable to use both arms</span>,
@@ -103,6 +96,23 @@ const DisabilityProof = () => {
         </span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentLearn! }]} />,
         <ChangeAnswerButton from="Learn" />,
+      ]
+    : [];
+  const hasLicense = disabilityCategories.includes('DrivingLicense')
+    ? [
+        <span>Do {applicationForMe ? `you` : `they`} have a driving license?</span>,
+        <span>{hasDrivingLicense ? 'Yes' : 'No'}</span>,
+        <ChangeAnswerButton from="DrivingLicense" />,
+      ]
+    : [];
+  const refusedLicense = disabilityCategories.includes('DrivingLicense')
+    ? [
+        <span>
+          Have {applicationForMe ? `you` : `they`} ever applied for a Driving License but were
+          refused due to {applicationForMe ? `your` : `their`} condition?
+        </span>,
+        <span>{refusedDrivingLicense ? 'Yes' : 'No'}</span>,
+        <ChangeAnswerButton from="RefusedLicense" />,
       ]
     : [];
   const proofDrive = disabilityCategories.includes('DrivingLicense')
@@ -127,14 +137,14 @@ const DisabilityProof = () => {
           />,
           <ChangeAnswerButton from="DisablityCategories" />,
         ],
-        drivingAnswers,
-        refusedAnswers,
         proofBlind,
         proofDeaf,
         proofWalk,
         proofArms,
         proofLearn,
         proofLanguage,
+        hasLicense,
+        refusedLicense,
         proofDrive,
       ]}
     />
