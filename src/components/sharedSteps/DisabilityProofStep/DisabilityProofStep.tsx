@@ -50,7 +50,7 @@ const DisabilityProofStep = ({
   const identityDocument = proofDocument();
 
   const handleContinue = async () => {
-    let isIdentityDocumentValid = true;
+    let isIdentityDocumentValid = false;
 
     if (!identityDocument.hasCurrentValue) {
       identityDocument.set(null);
@@ -63,9 +63,12 @@ const DisabilityProofStep = ({
     handleNavigation();
   };
 
-  const questionHasError = identityDocument.hasError;
   return (
-    <Question question={question} handleContinue={handleContinue} showError={questionHasError}>
+    <Question
+      question={question}
+      handleContinue={handleContinue}
+      showError={identityDocument.hasError}
+    >
       {application() !== undefined && (
         <div
           className={

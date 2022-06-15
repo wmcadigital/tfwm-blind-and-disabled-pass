@@ -111,6 +111,7 @@ export type TFormDataState = {
   alternateStart: Nullable<boolean>;
   contactPreference: Array<string>;
   contactPerson: Nullable<boolean>;
+  changePhoto: Nullable<boolean>;
 };
 
 export type TFormDataStateKey = keyof TFormDataState;

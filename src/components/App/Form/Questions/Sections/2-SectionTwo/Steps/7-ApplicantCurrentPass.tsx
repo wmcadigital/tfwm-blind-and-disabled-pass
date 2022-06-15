@@ -13,7 +13,7 @@ const CurrentPass = () => {
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const prevStep = 'ApplicantContactDetails';
   const next = applicationForMe.currentValue ? 'DisablityCategories' : 'Name';
-  const nextStep = currentDisabledPass.currentValue ? 'CurrentPassNumber' : next;
+  const nextStep = currentDisabledPass.savedValue ? 'CurrentPassNumber' : next;
   const { goToNextStep } = useNavigationLogic(prevStep, nextStep);
 
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {

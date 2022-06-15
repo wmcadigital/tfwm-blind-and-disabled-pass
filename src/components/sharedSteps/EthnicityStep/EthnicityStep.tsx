@@ -30,12 +30,9 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     ethnicity.set(e.target.value);
   };
+  const showError = !!ethnicity.error;
   return (
-    <Question
-      question={question}
-      handleContinue={handleContinue}
-      showError={ethnicity.currentValue === ''}
-    >
+    <Question question={question} handleContinue={handleContinue} showError={showError}>
       <p className="wmnds-m-b-lg">
         This information helps TfWM monitor whether the people who claim discounted travel tickets
         through the Blind and Disabled Scheme are reflective of regional diversity.
@@ -58,7 +55,7 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
         ]}
         required
       />
-      Or
+      <p>Or</p>
       <Radios
         name="preferNotToSay"
         onChange={setCurrentValue}

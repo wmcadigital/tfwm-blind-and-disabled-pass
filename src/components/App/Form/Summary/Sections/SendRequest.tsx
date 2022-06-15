@@ -16,6 +16,8 @@ const SendYourRequest = () => {
 
   const [hasAgreedToTerms, setHasAgreedToTerms] = useState(false);
   const [termsError, setTermsError] = useState<Nullable<TError>>(null);
+  const [hasAgreedToContact, setHasAgreedToContact] = useState(false);
+  const [agreeError, setAgreeError] = useState<Nullable<TError>>(null);
 
   const [hasAgreedToPrivacy, sethasAgreedToPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState<Nullable<TError>>(null);
@@ -46,9 +48,14 @@ const SendYourRequest = () => {
       { rule: 'MANDATORY_BOOLEAN', message: 'You must agree to the privacy policy' },
     ]);
 
+    const agreeValidation = validate(hasAgreedToContact, [
+      { rule: 'MANDATORY_BOOLEAN', message: 'You must agree that we may contact your GP' },
+    ]);
+
     if (!termsValidation.isValid) setTermsError(termsValidation.error);
     if (!privacyValidation.isValid) setPrivacyError(privacyValidation.error);
-    if (!termsValidation.isValid || !privacyValidation.isValid) return;
+    if (!agreeValidation.isValid) setAgreeError(agreeValidation.error);
+    if (!termsValidation.isValid || !privacyValidation.isValid || !agreeValidation.isValid) return;
     await submitSession.submitFormData();
   };
 
@@ -76,7 +83,7 @@ const SendYourRequest = () => {
         </p>
       )}
       <Checkbox
-        name="TermsAndConditions"
+        name="ContactGPAgreement"
         classes="wmnds-m-b-md"
         labelElement={
           <span>
@@ -84,8 +91,9 @@ const SendYourRequest = () => {
             this is required.
           </span>
         }
-        defaultValue={wouldLikeNetworkClubNews.currentValue}
-        onChange={(e) => wouldLikeNetworkClubNews.set(e.target.checked)}
+        defaultValue={hasAgreedToContact}
+        onChange={toggleCheckboxValue(setHasAgreedToContact, setAgreeError)}
+        error={agreeError}
       />
       <Checkbox
         name="TermsAndConditions"

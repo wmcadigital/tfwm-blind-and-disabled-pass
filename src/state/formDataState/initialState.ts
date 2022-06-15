@@ -106,7 +106,8 @@ const initialState: TFormDataState = {
   distance: null,
   alternateStart: false,
   contactPreference: [],
-  contactPerson: false,
+  contactPerson: null,
+  changePhoto: null,
 };
 
 export default initialState;

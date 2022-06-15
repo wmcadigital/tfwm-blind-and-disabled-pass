@@ -10,7 +10,7 @@ const ApplicantPhoto = () => {
   const [formDataState] = useFormDataContext();
   const { alternateStart } = formDataState;
   const next = alternateStart ? 'RightCategories' : 'DisablityCategories';
-  const prevStep = 'ApplicantContactDetails';
+  const prevStep = 'ChangePhoto';
 
   const nextStep = applicationForMe.savedValue ? next : 'Name';
   const { goToNextStep } = useNavigationLogic(prevStep, nextStep);

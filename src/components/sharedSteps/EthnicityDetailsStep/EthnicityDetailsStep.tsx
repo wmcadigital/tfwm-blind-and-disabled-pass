@@ -100,9 +100,9 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
         return other;
     }
   };
-
+  const showError = !!ethnicityDetails.error;
   return (
-    <Question question={question} handleContinue={handleContinue}>
+    <Question question={question} handleContinue={handleContinue} showError={showError}>
       <p className="wmnds-m-b-lg">
         This information helps TfWM monitor whether the people who claim discounted travel tickets
         through the Blind and Disabled Scheme are reflective of regional diversity.
@@ -114,7 +114,7 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
         currentValue={ethnicityDetails.currentValue}
         required
       />
-      Or
+      <p>Or</p>
       <Radios
         name="preferNotToSay"
         onChange={setCurrentValue}

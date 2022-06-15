@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Question from 'components/shared/Question/Question';
 import { Input, Checkbox } from 'components/shared';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
-
+import { useFormDataContext } from 'state/formDataState/context';
 import { TSharedStepProps } from 'types/step';
 
 const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStepProps) => {
@@ -13,23 +13,25 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
   const phoneNumber = useFormDataSubscription(`${dataNamePrefix}MobilePhoneNumber`, [
     { rule: 'PHONE_NUMBER' },
   ]);
-  const contactPreference = useFormDataSubscription('contactPreference');
+  const contactPreferences = useFormDataSubscription('contactPreference');
   const contactPerson = useFormDataSubscription('contactPerson');
+  const [formDataState] = useFormDataContext();
+  const { contactPreference } = formDataState;
 
-  const [contactPref, setcontactPref] = useState(['']);
+  const [contactPref, setcontactPref] = useState(contactPreference);
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const arr = contactPref;
     const item = e.target.name;
     const addOrRemove = () => (arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item]);
     setcontactPref(addOrRemove());
-    contactPreference.set(addOrRemove());
+    contactPreferences.set(addOrRemove());
   };
 
   const handleContinue = () => {
     const isEmailValid = !contactPref.includes('Email') || emailAddress.save();
     const isPhoneNumberValid = !contactPref.includes('Phone') || phoneNumber.save();
-    contactPreference.save();
+    contactPreferences.save();
     if (!isEmailValid || !isPhoneNumberValid) return;
     handleNavigation();
   };
