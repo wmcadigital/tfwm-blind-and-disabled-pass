@@ -12,7 +12,7 @@ const Distance = () => {
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
   const { goToNextStep } = useNavigationLogic('Walk', 'Summary');
-  const question = applicationForMe
+  const question = applicationForMe.savedValue
     ? 'How far can you walk?'
     : `How far can ${ApplicantFirstName.currentValue} walk?`;
 
@@ -34,7 +34,11 @@ const Distance = () => {
     distanceMetric.save();
     goToNextStep();
   };
-  const label = `Distance in ${distanceMetric.currentValue ? 'metres' : 'feet'}`;
+  const label = `${
+    applicationForMe.savedValue ? 'Your' : `${ApplicantFirstName.currentValue}'s`
+  } distance in ${distanceMetric.currentValue ? 'metres' : 'feet'}`;
+  const pronoun = applicationForMe.savedValue ? 'you' : `${ApplicantFirstName.currentValue}`;
+  console.log(distanceMetric);
   return (
     <Question
       question={question}
@@ -47,27 +51,52 @@ const Distance = () => {
         <li>Get in a lot of pain</li>
         <li>Need help from another person</li>
       </ul>
-      <p>You can choose to enter how far they can walk in metres or feet</p>
+      <p>You can choose to enter how far {pronoun} can walk in metres or feet</p>
       <Radios
+        classes="wmnds-m-b-none"
         name="distanceMetric"
         onChange={setCurrentValue}
         currentValue={distanceMetric.currentValue}
         error={distanceMetric.error}
-        radios={[
-          { text: 'Metres', html: null, value: true, info: null },
-          { text: 'Feet', html: null, value: false, info: null },
-        ]}
+        radios={[{ text: 'Metres', html: null, value: true, info: null }]}
       />
-      <Input
-        groupClassName="wmnds-m-b-lg"
-        name="distance"
-        inputmode="text"
-        label={label}
-        type="number"
-        className="wmnds-col-1 wmnds-col-md-2-3"
-        defaultValue={distance.currentValue}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => distance.set(e.target.value)}
+      {distanceMetric.currentValue && (
+        <div className="wmnds-m-l-lg">
+          <Input
+            groupClassName="wmnds-m-b-lg wmnds-m-l-lg"
+            name="distance"
+            inputmode="text"
+            label={label}
+            type="number"
+            className="wmnds-col-1 wmnds-col-md-2-3"
+            defaultValue={distance.currentValue}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => distance.set(e.target.value)}
+          />
+        </div>
+      )}
+      <Radios
+        classes="wmnds-m-b-none"
+        name="distanceMetric"
+        onChange={setCurrentValue}
+        currentValue={distanceMetric.currentValue}
+        error={distanceMetric.error}
+        radios={[{ text: 'Feet', html: null, value: false, info: null }]}
       />
+      {distanceMetric.currentValue !== null && !distanceMetric.currentValue && (
+        <div className="wmnds-m-l-lg">
+          <Input
+            groupClassName="wmnds-m-b-lg wmnds-m-l-lg"
+            name="distance"
+            inputmode="text"
+            label={label}
+            type="number"
+            className="wmnds-col-1 wmnds-col-md-2-3"
+            defaultValue={distance.currentValue}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => distance.set(e.target.value)}
+          />
+        </div>
+      )}
+      <p> </p>
     </Question>
   );
 };
