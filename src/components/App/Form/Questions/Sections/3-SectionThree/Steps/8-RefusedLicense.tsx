@@ -37,7 +37,7 @@ const RefusedLicense = () => {
         classes="wmnds-m-b-lg"
         content={`${ApplicantFirstName.currentValue} can still apply for a disabled person’s pass even if they have a driving licence.
         After you have submitted ${ApplicantFirstName.currentValue}'s application, you need to provide certificate of revocation from the Driver and Vehicle Licensing Agency (DVLA) indicating refusal or withdrawal of their licence.
-        You’ll need to tell the DVLA about your medical condition to get John’s driving licence revoked.`}
+        You’ll need to tell the DVLA about your medical condition to get ${ApplicantFirstName.currentValue}’s driving licence revoked.`}
       />
     );
   }

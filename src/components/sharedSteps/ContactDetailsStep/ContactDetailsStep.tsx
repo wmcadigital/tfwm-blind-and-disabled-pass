@@ -13,10 +13,12 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
   const phoneNumber = useFormDataSubscription(`${dataNamePrefix}MobilePhoneNumber`, [
     { rule: 'PHONE_NUMBER' },
   ]);
+  const applicationForMe = useFormDataSubscription('applicationForMe');
   const contactPreferences = useFormDataSubscription('contactPreference');
   const contactPerson = useFormDataSubscription('contactPerson');
   const [formDataState] = useFormDataContext();
   const { contactPreference } = formDataState;
+  const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
   const [contactPref, setcontactPref] = useState(contactPreference);
 
@@ -38,7 +40,11 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
       return;
     handleNavigation();
   };
-
+  const details = applicationForMe.currentValue
+    ? `We will only use these to contact you about your application and disabled person's
+  pass.`
+    : `We will only use these to get in contact about ${ApplicantFirstName.currentValue}'s application and disabled person's
+    pass.`;
   return (
     <Question
       question={question}
@@ -46,10 +52,7 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
       showError={emailAddress.hasError || phoneNumber.hasError}
     >
       <div className="wmnds-m-b-lg">
-        <p className="wmnds-m-b-lg">
-          We will only use these to contact you about your application and disabled person&apos;s
-          pass.
-        </p>
+        <p className="wmnds-m-b-lg">{details}</p>
         <Checkbox
           name="Phone"
           classes="wmnds-m-b-md"
