@@ -1,6 +1,6 @@
 import { useGlobalContext } from 'state/globalState';
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
-import { Question, Radios } from 'components/shared';
+import { Question, Radios, InsetText } from 'components/shared';
 
 const RefusedLicense = () => {
   const { goToNextStep } = useNavigationLogic('DrivingLicense', 'Drive');
@@ -30,7 +30,17 @@ const RefusedLicense = () => {
   const question = applicationForMe.savedValue
     ? 'Have you ever applied for a Driving License but were refused due to your condition?'
     : `Has ${ApplicantFirstName.currentValue} ever applied for a Driving License but were refused due to their condition?`;
-
+  let extraInfo;
+  if (!applicationForMe.savedValue && refusedDrivingLicense.currentValue) {
+    extraInfo = (
+      <InsetText
+        classes="wmnds-m-b-lg"
+        content={`${ApplicantFirstName.currentValue} can still apply for a disabled person’s pass even if they have a driving licence.
+        After you have submitted ${ApplicantFirstName.currentValue}'s application, you need to provide certificate of revocation from the Driver and Vehicle Licensing Agency (DVLA) indicating refusal or withdrawal of their licence.
+        You’ll need to tell the DVLA about your medical condition to get John’s driving licence revoked.`}
+      />
+    );
+  }
   return (
     <Question
       question={question}
@@ -40,6 +50,7 @@ const RefusedLicense = () => {
       <Radios
         name="refusedDrivingLicense"
         onChange={setCurrentValue}
+        classes={extraInfo ? 'wmnds-m-b-sm' : ''}
         currentValue={refusedDrivingLicense.currentValue}
         error={refusedDrivingLicense.error}
         radios={[
@@ -47,6 +58,7 @@ const RefusedLicense = () => {
           { text: 'No', html: null, value: false, info: null },
         ]}
       />
+      {extraInfo}
     </Question>
   );
 };

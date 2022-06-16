@@ -6,9 +6,18 @@ import Radio from './Radio/Radio';
 
 const { sanitize } = dompurify;
 
-const Radios = ({ name, hint, error, radios, onChange, currentValue, required }: TRadiosProps) => {
+const Radios = ({
+  name,
+  hint,
+  classes,
+  error,
+  radios,
+  onChange,
+  currentValue,
+  required,
+}: TRadiosProps) => {
   return (
-    <div className="wmnds-fe-group">
+    <div className={`wmnds-fe-group ${classes}`}>
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           {hint && typeof hint === 'string' && <p>{hint}</p>}

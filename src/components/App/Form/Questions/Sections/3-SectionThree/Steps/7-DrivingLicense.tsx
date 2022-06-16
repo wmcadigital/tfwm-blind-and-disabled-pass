@@ -35,16 +35,19 @@ const DrivingLicense = () => {
       handleContinue={handleContinue}
       showError={hasDrivingLicense.hasError}
     >
-      <Radios
-        name="drivingLicense"
-        onChange={setCurrentValue}
-        currentValue={hasDrivingLicense.currentValue}
-        error={hasDrivingLicense.error}
-        radios={[
-          { text: 'Yes', html: null, value: true, info: null },
-          { text: 'No', html: null, value: false, info: null },
-        ]}
-      />
+      <>
+        <p>Full or provisional</p>
+        <Radios
+          name="drivingLicense"
+          onChange={setCurrentValue}
+          currentValue={hasDrivingLicense.currentValue}
+          error={hasDrivingLicense.error}
+          radios={[
+            { text: 'Yes', html: null, value: true, info: null },
+            { text: 'No', html: null, value: false, info: null },
+          ]}
+        />
+      </>
     </Question>
   );
 };

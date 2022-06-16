@@ -5,6 +5,7 @@ import { TRadioProps } from './Radio/Radio.types';
 export type TRadiosProps = {
   name: string;
   hint?: string | JSX.Element | null;
+  classes?: string | JSX.Element | null;
   error?: Nullable<TError>;
   radios: Array<
     Pick<TRadioProps, 'text' | 'info'> & { html: string | null } & { value: string | boolean }
