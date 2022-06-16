@@ -109,13 +109,13 @@ const DisabilityProofStep = ({
         clear enough to read.
       </p>
       <FileUpload
-        hint="Files must be jpeg or png file format"
-        accept=".png,.jpg,.jpeg"
+        hint="Files must be jpeg, png or pdf file format"
+        accept=".png,.jpg,.jpeg,.pdf"
         name={`${dataCategoryPrefix}proof`}
         defaultFile={identityDocument.currentValue}
         updateFile={identityDocument.set}
         error={identityDocument.error}
-        aria-label="Files must be jpeg or png file format"
+        aria-label="Files must be jpeg, png or pdf file format"
       />
       {alternateEvidence && (
         <Button

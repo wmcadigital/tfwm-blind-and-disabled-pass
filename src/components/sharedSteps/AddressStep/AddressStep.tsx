@@ -48,7 +48,7 @@ const AddressStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStep
 
   return (
     <Question question={question} handleContinue={handleContinue} showError={hasError}>
-      <p className="wmnds-m-b-lg">We&apos;ll send the ticket to this address.</p>
+      <p className="wmnds-m-b-lg">We&apos;ll send the pass to this address.</p>
       {isAddressMissing ? (
         <AddressManual address={address} />
       ) : (

@@ -33,6 +33,8 @@ const StartPage = () => {
           <p>apply for a disabled person&apos;s pass</p>
         </li>
       </ul>
+      <p>This process takes around 15 minutes.</p>
+
       <h2 className="wmnds-m-b-lg">Before you start</h2>
       <p>
         Gather any evidence you have of your condition. The type of evidence required depends on
