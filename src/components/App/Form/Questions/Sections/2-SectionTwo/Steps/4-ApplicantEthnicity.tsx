@@ -9,7 +9,7 @@ const ApplicantAddress = () => {
   const ethnicity = useFormDataSubscription('ethnicity');
   const nextStep = applicationForMe.currentValue ? 'ApplicantContactDetails' : 'WhoToContact';
   const { goToNextStep } = useNavigationLogic(
-    'ApplicantBirthDate',
+    'ApplicantAddress',
     ethnicity.savedValue !== 'Prefer not to say' ? 'ApplicantEthnicityDetails' : nextStep,
   );
 

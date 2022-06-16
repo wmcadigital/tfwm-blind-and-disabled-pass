@@ -58,23 +58,25 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
           defaultValue={contactPref.includes('Phone')}
         />
         {contactPref.includes('Phone') && (
-          <Input
-            groupClassName="wmnds-m-b-l wmnds-m-l-lg"
-            name="mobilePhone"
-            inputmode="tel"
-            label={
-              <>
-                Phone number
-                <br />
-                For example, 07700900457
-              </>
-            }
-            defaultValue={phoneNumber.currentValue}
-            type="text"
-            className="wmnds-col-1 wmnds-col-md-2-3"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => phoneNumber.set(e.target.value)}
-            error={phoneNumber.error}
-          />
+          <div className="wmnds-m-b-l wmnds-m-l-xl">
+            <Input
+              groupClassName="wmnds-m-b-l wmnds-m-l-md"
+              name="mobilePhone"
+              inputmode="tel"
+              label={
+                <>
+                  Phone number
+                  <br />
+                  For example, 07700900457
+                </>
+              }
+              defaultValue={phoneNumber.currentValue}
+              type="text"
+              className="wmnds-col-1 wmnds-col-md-2-3"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => phoneNumber.set(e.target.value)}
+              error={phoneNumber.error}
+            />
+          </div>
         )}
         <Checkbox
           name="Email"
@@ -84,23 +86,27 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
           onChange={handleClick}
         />
         {contactPref.includes('Email') && (
-          <Input
-            groupClassName="wmnds-m-b-lg  wmnds-m-l-lg"
-            name="email"
-            inputmode="email"
-            label={
-              <>
-                Email address
-                <br />
-                For example, name@example.com
-              </>
-            }
-            defaultValue={emailAddress.currentValue}
-            type="text"
-            className="wmnds-col-1 wmnds-col-md-2-3"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => emailAddress.set(e.target.value)}
-            error={emailAddress.error}
-          />
+          <div className="wmnds-m-b-l wmnds-m-l-xl">
+            <Input
+              groupClassName="wmnds-m-b-l wmnds-m-l-md"
+              name="email"
+              inputmode="email"
+              label={
+                <>
+                  Email address
+                  <br />
+                  For example, name@example.com
+                </>
+              }
+              defaultValue={emailAddress.currentValue}
+              type="text"
+              className="wmnds-col-1 wmnds-col-md-2-3"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                emailAddress.set(e.target.value)
+              }
+              error={emailAddress.error}
+            />
+          </div>
         )}
         {!contactPerson.savedValue === true && (
           <>

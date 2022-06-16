@@ -85,7 +85,7 @@ const AddressAutocomplete = ({ handleNotFound, address }: TAddressAutocompletePr
       ) : (
         <div className="wmnds-col-1">
           <p className="wmnds-fe-label">Postcode</p>
-          <p className="wmnds-m-b-none">
+          <p className="wmnds-m-b-lg">
             {postcode.currentValue}
             <button
               type="button"

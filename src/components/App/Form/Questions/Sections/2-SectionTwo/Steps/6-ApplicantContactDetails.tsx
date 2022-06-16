@@ -2,7 +2,7 @@ import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { ContactDetailsStep } from 'components/sharedSteps';
 
 const ApplicantContactDetails = () => {
-  const { goToNextStep } = useNavigationLogic('ApplicantEthnicityDetails', 'CurrentPass');
+  const { goToNextStep } = useNavigationLogic('ApplicantEthnicity', 'CurrentPass');
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
   const applicationForMe = useFormDataSubscription('applicationForMe');

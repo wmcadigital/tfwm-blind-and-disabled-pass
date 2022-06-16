@@ -17,7 +17,6 @@ const BirthDateStep = ({ handleNavigation, question, dataNamePrefix }: TSharedSt
       <DateInput
         hint={
           <>
-            <p>We&apos;ll use this as a security question if we are contacted for help.</p>
             <p>For example, 3 7 1985</p>
           </>
         }

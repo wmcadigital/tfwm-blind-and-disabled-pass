@@ -23,7 +23,7 @@ const Dropdown = ({
   return (
     <div className={`wmnds-fe-group wmnds-m-b-md ${className}`}>
       <fieldset className="wmnds-fe-fieldset">
-        <p>{hint}</p>
+        {hint && <p>{hint}</p>}
         <div className={`wmnds-fe-dropdown${error ? ' wmnds-fe-group--error' : ''}`}>
           {/* If there is an error, show here */}
           {error && (
