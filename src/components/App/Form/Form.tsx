@@ -33,7 +33,7 @@ const ViewToShow = () => {
           <BackButton />
         </div>
       )}
-      <div className="wmnds-col-1 wmnds-col-md-3-4">
+      <div className="wmnds-col-1 wmnds-col-md-2-3">
         <div className={`${showCardStyles ? `${s.card} bg-white` : ''} wmnds-m-b-lg`}>
           {showStartPage && <StartPage />}
           {showStartPageAlt && <StartPageAlt />}
