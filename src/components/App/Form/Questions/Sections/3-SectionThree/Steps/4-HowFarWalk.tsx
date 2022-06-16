@@ -38,7 +38,6 @@ const Distance = () => {
     applicationForMe.savedValue ? 'Your' : `${ApplicantFirstName.currentValue}'s`
   } distance in ${distanceMetric.currentValue ? 'metres' : 'feet'}`;
   const pronoun = applicationForMe.savedValue ? 'you' : `${ApplicantFirstName.currentValue}`;
-  console.log(distanceMetric);
   return (
     <Question
       question={question}
