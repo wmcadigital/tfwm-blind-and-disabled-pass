@@ -25,10 +25,11 @@ const DisabilityProof = () => {
   const pronoun = applicationForMe ? 'I' : 'They';
   const pronounc = applicationForMe ? 'I' : 'they';
   const prep = applicationForMe ? 'am' : 'are';
+  const categories = disabilityCategories || [];
 
   const filteredDisabilityCategories = () => {
     const arr: Array<String> = [];
-    disabilityCategories.map((i) => {
+    categories.map((i) => {
       if (i === 'Blind') {
         arr.push(`${pronoun} ${prep} blind or partially sighted `);
       } else if (i === 'Deaf') {
@@ -52,21 +53,21 @@ const DisabilityProof = () => {
       return `${i}`;
     });
   };
-  const proofBlind = disabilityCategories.includes('Blind')
+  const proofBlind = categories.includes('Blind')
     ? [
         <span>Proof of disability - blind or partially sighted</span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentBlind! }]} />,
         <ChangeAnswerButton from="Blind" />,
       ]
     : [];
-  const proofDeaf = disabilityCategories.includes('Deaf')
+  const proofDeaf = categories.includes('Deaf')
     ? [
         <span>Proof of disability - profoundly or severly deaf in both ears</span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentDeaf! }]} />,
         <ChangeAnswerButton from="Deaf" />,
       ]
     : [];
-  const proofLanguage = disabilityCategories.includes('Language')
+  const proofLanguage = categories.includes('Language')
     ? [
         <span>Proof of disability - cannot speak at all in any language</span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentLanguage! }]} />,
@@ -86,15 +87,15 @@ const DisabilityProof = () => {
         <FileCell filesConfig={[{ title: '', file: proofDocumentWalk! }]} />,
         <ChangeAnswerButton from="Walk" />,
       ];
-  const proofWalk = disabilityCategories.includes('Walk') ? proofWalkAlt : [];
-  const proofArms = disabilityCategories.includes('Arms')
+  const proofWalk = categories.includes('Walk') ? proofWalkAlt : [];
+  const proofArms = categories.includes('Arms')
     ? [
         <span>Proof of disability - unable to use both arms</span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentArms! }]} />,
         <ChangeAnswerButton from="Arms" />,
       ]
     : [];
-  const proofLearn = disabilityCategories.includes('Learn')
+  const proofLearn = categories.includes('Learn')
     ? [
         <span>
           Proof of disability - find it hard to learn and remember new information and live
@@ -104,14 +105,14 @@ const DisabilityProof = () => {
         <ChangeAnswerButton from="Learn" />,
       ]
     : [];
-  const hasLicense = disabilityCategories.includes('DrivingLicense')
+  const hasLicense = categories.includes('DrivingLicense')
     ? [
         <span>Do {applicationForMe ? `you` : `they`} have a driving license?</span>,
         <span>{hasDrivingLicense ? 'Yes' : 'No'}</span>,
         <ChangeAnswerButton from="DrivingLicense" />,
       ]
     : [];
-  const refusedLicense = disabilityCategories.includes('DrivingLicense')
+  const refusedLicense = categories.includes('DrivingLicense')
     ? [
         <span>
           Have {applicationForMe ? `you` : `they`} ever applied for a Driving License but were
@@ -121,7 +122,7 @@ const DisabilityProof = () => {
         <ChangeAnswerButton from="RefusedLicense" />,
       ]
     : [];
-  const proofDrive = disabilityCategories.includes('DrivingLicense')
+  const proofDrive = categories.includes('DrivingLicense')
     ? [
         <span>Proof of disability - cannot drive a car because of a medical condition</span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentDrive! }]} />,

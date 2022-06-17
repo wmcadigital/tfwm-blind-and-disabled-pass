@@ -11,10 +11,11 @@ const RightCategories = () => {
   const [changeCondition, setChangeCondition] = useState(false);
 
   const prevStep = applicationForMe.currentValue ? 'CheckIfUserIsTheApplicant' : 'CurrentPass';
-  const index = disabilityCategories.indexOf('');
+  const categories = disabilityCategories || [];
+  const index = disabilityCategories ? disabilityCategories.indexOf('') : 0;
   const next =
-    index >= 0 && index < disabilityCategories.length - 1
-      ? formPath[2].find((i) => i === disabilityCategories[index + 1])
+    index >= 0 && index < categories.length - 1
+      ? formPath[2].find((i) => i === categories[index + 1])
       : 'Summary';
 
   const nextStep = !changeCondition ? next : 'DisablityCategories';
@@ -38,21 +39,19 @@ const RightCategories = () => {
     >
       <p>You told us earlier that you:</p>
       <ul>
-        {disabilityCategories.includes('Blind') && (
-          <li>are blind or partially sighted in both eyes</li>
-        )}
-        {disabilityCategories.includes('Deaf') && (
+        {categories.includes('Blind') && <li>are blind or partially sighted in both eyes</li>}
+        {categories.includes('Deaf') && (
           <li>are very deaf or only able to hear a little sound in both ears</li>
         )}
-        {disabilityCategories.includes('Walk') && (
+        {categories.includes('Walk') && (
           <li>cannot walk or find it difficult to walk short distances</li>
         )}
-        {disabilityCategories.includes('Language') && <li>cannot speak at all in any language</li>}
-        {disabilityCategories.includes('Learn') && (
+        {categories.includes('Language') && <li>cannot speak at all in any language</li>}
+        {categories.includes('Learn') && (
           <li>find it hard to learn and remember new information and live independently</li>
         )}
-        {disabilityCategories.includes('Arms') && <li>unable to use both arms</li>}
-        {disabilityCategories.includes('DrivingLicense') && (
+        {categories.includes('Arms') && <li>unable to use both arms</li>}
+        {categories.includes('DrivingLicense') && (
           <li>cannot drive a car because I have a medical condition</li>
         )}
       </ul>

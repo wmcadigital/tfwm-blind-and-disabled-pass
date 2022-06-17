@@ -251,13 +251,13 @@ const StartPageAlt = () => {
       ) : (
         <>
           <h2>Evidence needed for the chosen category</h2>
-          {disabilityCategories.includes('Blind') && blindContent}
-          {disabilityCategories.includes('Deaf') && deafContent}
-          {disabilityCategories.includes('Walk') && walkContent}
-          {disabilityCategories.includes('Arms') && armsContent}
-          {disabilityCategories.includes('Learn') && learnContent}
-          {disabilityCategories.includes('Language') && languageContent}
-          {disabilityCategories.includes('DrivingLicense') && driveContent}
+          {disabilityCategories && disabilityCategories.includes('Blind') && blindContent}
+          {disabilityCategories && disabilityCategories.includes('Deaf') && deafContent}
+          {disabilityCategories && disabilityCategories.includes('Walk') && walkContent}
+          {disabilityCategories && disabilityCategories.includes('Arms') && armsContent}
+          {disabilityCategories && disabilityCategories.includes('Learn') && learnContent}
+          {disabilityCategories && disabilityCategories.includes('Language') && languageContent}
+          {disabilityCategories && disabilityCategories.includes('DrivingLicense') && driveContent}
           <Button
             text="Start my application"
             btnClass="wmnds-btn wmnds-btn--start wmnds-m-t-md"

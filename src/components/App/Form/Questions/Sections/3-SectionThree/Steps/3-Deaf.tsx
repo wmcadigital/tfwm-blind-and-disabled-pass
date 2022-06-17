@@ -7,11 +7,12 @@ const Deaf = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
   const applicationForMe = useFormDataSubscription('applicationForMe');
+  const categories = disabilityCategories || [];
 
-  const index = disabilityCategories.indexOf('Deaf');
+  const index = categories.indexOf('Deaf');
   const next =
-    index >= 0 && index < disabilityCategories.length - 1
-      ? formPath[2].find((i) => i === disabilityCategories[index + 1])
+    index >= 0 && index < categories.length - 1
+      ? formPath[2].find((i) => i === categories[index + 1])
       : 'Summary';
 
   const prevStep = 'DisablityCategories';

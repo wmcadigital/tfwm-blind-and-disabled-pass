@@ -100,7 +100,7 @@ const initialState: TFormDataState = {
   proofDocumentLanguage: null,
   proofDocumentDrive: null,
 
-  disabilityCategories: [],
+  disabilityCategories: null,
   drivingLicense: null,
   hasDrivingLicense: null,
   refusedDrivingLicense: null,

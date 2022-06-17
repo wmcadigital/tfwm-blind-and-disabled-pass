@@ -72,7 +72,7 @@ const SendYourRequest = () => {
         By submitting this request you are confirming that, to the best of your knowledge, the
         details you are providing are correct.
       </p>
-      {disabilityCategories.includes('DrivingLicense') && (
+      {disabilityCategories && disabilityCategories.includes('DrivingLicense') && (
         <div className="wmnds-warning-text wmnds-warning-text--info">
           <Icon iconName="general-warning-triangle" className="wmnds-warning-text__icon" />
           <p>

@@ -7,11 +7,11 @@ const Blind = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
   const applicationForMe = useFormDataSubscription('applicationForMe');
-
-  const index = disabilityCategories.indexOf('Blind');
+  const categories = disabilityCategories || [];
+  const index = categories.indexOf('Blind');
   const next =
-    index >= 0 && index < disabilityCategories.length - 1
-      ? formPath[2].find((i) => i === disabilityCategories[index + 1])
+    index >= 0 && index < categories.length - 1
+      ? formPath[2].find((i) => i === categories[index + 1])
       : 'Summary';
   const { goToNextStep } = useNavigationLogic('DisablityCategories', next);
 

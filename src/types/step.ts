@@ -23,7 +23,7 @@ export type TCategoriesStepProps = {
   handleNavigation: () => void;
   question: string;
   dataNamePrefix: 'Behalf' | 'Applicant';
-  categories: Array<string>;
+  categories?: Array<string> | null;
 };
 
 export type TSharedDocProps = {

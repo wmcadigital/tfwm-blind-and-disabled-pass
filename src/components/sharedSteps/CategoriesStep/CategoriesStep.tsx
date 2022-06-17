@@ -9,7 +9,7 @@ import { TCategoriesStepProps } from 'types/step';
 
 const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesStepProps) => {
   const disabilityCategories = useFormDataSubscription('disabilityCategories');
-  const [hasDisability, setHasDisability] = useState(categories);
+  const [hasDisability, setHasDisability] = useState(categories || []);
   const [, setHasError] = useState<Nullable<TError>>(null);
   const applicationForMe = useFormDataSubscription('applicationForMe');
 
@@ -18,7 +18,7 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
   ) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       if (setErrorState) setErrorState(null);
-      const arr = hasDisability;
+      const arr = hasDisability || [];
       const item = e.target.name;
       const addOrRemove = () =>
         arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
@@ -28,13 +28,11 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
   };
 
   const handleContinue = async () => {
-    const arr = disabilityCategories.savedValue;
-    const isValid = arr && arr.length < 1;
-    if (isValid) disabilityCategories.hasError = true;
+    const isValid = disabilityCategories.save();
+    if (!isValid) return;
     disabilityCategories.save();
     handleNavigation();
   };
-  console.log('fff', disabilityCategories);
   const own = applicationForMe.savedValue ? 'You' : `They`;
   const pronoun = applicationForMe.savedValue ? 'I' : `They`;
   const pronounSmall = applicationForMe.savedValue ? 'I' : `they`;

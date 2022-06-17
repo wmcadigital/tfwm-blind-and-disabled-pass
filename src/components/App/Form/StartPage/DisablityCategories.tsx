@@ -27,12 +27,18 @@ const DisablityCategories = () => {
   };
 
   const handleContinue = () => {
+    const isValid = disabilityCategories.save();
+    if (!isValid) return;
     alternateStart.save();
     disabilityCategories.save();
   };
   const question = 'Which of the following categories apply to you?';
   return (
-    <Question question={question} handleContinue={handleContinue}>
+    <Question
+      question={question}
+      handleContinue={handleContinue}
+      showError={disabilityCategories.hasError}
+    >
       <p className="wmnds-m-b-lg">You can apply for more than one category</p>
       <div className="wmnds-m-b-lg">
         <Checkbox

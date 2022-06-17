@@ -104,7 +104,7 @@ export type TFormDataState = {
   proofDocumentLanguage: Nullable<File>;
   proofDocumentDrive: Nullable<File>;
 
-  disabilityCategories: Array<string>;
+  disabilityCategories: Nullable<Array<string>>;
   drivingLicense: Nullable<string>;
   hasDrivingLicense: Nullable<boolean>;
   refusedDrivingLicense: Nullable<boolean>;
