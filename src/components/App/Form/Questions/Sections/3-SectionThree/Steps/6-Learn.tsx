@@ -20,7 +20,9 @@ const Learn = () => {
   const question =
     'Proof of disability - find it hard to learn and remember new information and live independently';
   const canApply = true;
-
+  const pronoun = applicationForMe.currentValue ? 'you' : 'they';
+  const pronounOwn = applicationForMe.currentValue ? 'your' : 'their';
+  const pronounOwnC = applicationForMe.currentValue ? 'Your' : 'Their';
   const application = () => {
     return (
       <>
@@ -32,14 +34,11 @@ const Learn = () => {
         <ul>
           <li>It is difficult to understand complex information or learn new skills</li>
           <li>it is difficult to live independently</li>
-          <li>the disability started before they were an adult</li>
+          <li>the disability started before {pronoun} were an adult</li>
         </ul>
       </>
     );
   };
-  const pronoun = applicationForMe.currentValue ? 'you' : 'they';
-  const pronounOwn = applicationForMe.currentValue ? 'your' : 'their';
-  const pronounOwnC = applicationForMe.currentValue ? 'Your' : 'Their';
 
   const documentsList = () => {
     return (

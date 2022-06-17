@@ -38,7 +38,9 @@ const StartPageAlt = () => {
   const deafContent = (
     <>
       <h3>Very deaf or only able to hear a little sound in both ears</h3>
-      <p>Please upload one of the documents below:</p>
+      <p>
+        Please upload <strong>one</strong> of the documents below:
+      </p>
       <ul>
         <li>Proof you are registered with your local social services department as deaf</li>
         <li>Audiogram from a specialist saying you cannot hear very well</li>
@@ -67,7 +69,9 @@ const StartPageAlt = () => {
           </>
         </div>
       </div>
-      <p>Please upload one of the documents below:</p>
+      <p>
+        Please upload <strong>one</strong> of the documents below:
+      </p>
       <ul>
         <li>
           A letter from Department of Works and Pensions (DWP) less than 12 months old that says you
@@ -106,7 +110,9 @@ const StartPageAlt = () => {
           </>
         </div>
       </div>
-      <p>Please upload one of the documents below:</p>
+      <p>
+        Please upload <strong>one</strong> of the documents below:
+      </p>
       <ul>
         <li>A medical report that says you cannot use both arms for daily tasks</li>
       </ul>
@@ -130,13 +136,14 @@ const StartPageAlt = () => {
             <ul>
               <li>It is difficult to understand complex information or learn new skills</li>
               <li>it is difficult to live independently</li>
-              it is difficult to live independently
-              <li />
+              <li>the disability started before you were an adult</li>
             </ul>
           </>
         </div>
       </div>
-      <p>Please upload one of the documents below:</p>
+      <p>
+        Please upload <strong>at least two</strong> of the documents below:
+      </p>
       <ul>
         <li>A letter from your school about your learning ability</li>
         <li>
@@ -175,7 +182,9 @@ const StartPageAlt = () => {
           </>
         </div>
       </div>
-      <p>Please upload one of the documents below:</p>
+      <p>
+        Please upload <strong>one</strong> of the documents below:
+      </p>
       <ul>
         <li>
           A letter from Department of Works and Pensions (DWP) less than 12 months old that says you
@@ -207,6 +216,10 @@ const StartPageAlt = () => {
               <li>may suddenly faint or black out</li>
               <li>any disability that makes it dangerous for you to drive.</li>
             </ul>
+            <p>
+              We might need more proof or a healthcare assessment to understand how severe your
+              condition is.
+            </p>
           </>
         </div>
       </div>
@@ -224,7 +237,9 @@ const StartPageAlt = () => {
           </>
         </div>
       </div>
-      <p>Please upload one of the documents below:</p>
+      <p>
+        Please upload <strong>one</strong> of the documents below:
+      </p>
       <ul>
         <li>Proof of any medicine you have taken in the last six months</li>
         <li>A medical letter about your epilepsy or seizure</li>
