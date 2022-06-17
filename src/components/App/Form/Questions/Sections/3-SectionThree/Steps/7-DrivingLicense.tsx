@@ -27,11 +27,13 @@ const DrivingLicense = () => {
     hasDrivingLicense.set(e.target.value.toLowerCase() === 'true');
   };
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
-  const pronoun = applicationForMe.savedValue ? 'you' : `${ApplicantFirstName.currentValue}`;
+  const pronoun = applicationForMe.savedValue
+    ? 'Do you'
+    : `Does ${ApplicantFirstName.currentValue}`;
 
   return (
     <Question
-      question={`Do ${pronoun} have a driving license?`}
+      question={`${pronoun} have a driving license?`}
       handleContinue={handleContinue}
       showError={hasDrivingLicense.hasError}
     >

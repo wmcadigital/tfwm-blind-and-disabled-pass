@@ -11,6 +11,7 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
   const disabilityCategories = useFormDataSubscription('disabilityCategories');
   const [hasDisability, setHasDisability] = useState(categories);
   const [, setHasError] = useState<Nullable<TError>>(null);
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const toggleCheckboxValue = (
     setErrorState?: React.Dispatch<React.SetStateAction<Nullable<TError>>>,
@@ -30,19 +31,29 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
     disabilityCategories.save();
     handleNavigation();
   };
+  const own = applicationForMe.savedValue ? 'You' : `They`;
+  const pronoun = applicationForMe.savedValue ? 'I' : `They`;
+  const pronounSmall = applicationForMe.savedValue ? 'I' : `they`;
+  const pronounOwn = applicationForMe.savedValue ? 'my' : `their`;
+  const prep = applicationForMe.savedValue ? 'am' : `are`;
+
   return (
     <Question
       question={question}
       handleContinue={handleContinue}
       showError={disabilityCategories.savedValue === null}
     >
-      <p className="wmnds-m-b-lg">You can apply for more than one category</p>
+      <p className="wmnds-m-b-lg">{own} can apply for more than one category</p>
       <div className="wmnds-m-b-lg">
         <Checkbox
           name="Blind"
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Blind')}
-          labelElement={<span>I am blind or partially sighted in both eyes</span>}
+          labelElement={
+            <span>
+              {pronoun} {prep} blind or partially sighted in both eyes
+            </span>
+          }
           onChange={toggleCheckboxValue(setHasError)}
         />
         <Checkbox
@@ -50,7 +61,9 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Deaf')}
           labelElement={
-            <span>I am very deaf or only able to hear a little sound in both ears</span>
+            <span>
+              {pronoun} {prep} very deaf or only able to hear a little sound in both ears
+            </span>
           }
           onChange={toggleCheckboxValue(setHasError)}
         />
@@ -58,21 +71,27 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
           name="Language"
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Language')}
-          labelElement={<span>I cannot speak at all in any language</span>}
+          labelElement={<span>{pronoun} cannot speak at all in any language</span>}
           onChange={toggleCheckboxValue(setHasError)}
         />
         <Checkbox
           name="Walk"
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Walk')}
-          labelElement={<span>I cannot walk or find it difficult to walk short distances</span>}
+          labelElement={
+            <span>{pronoun} cannot walk or find it difficult to walk short distances</span>
+          }
           onChange={toggleCheckboxValue(setHasError)}
         />
         <Checkbox
           name="Arms"
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Arms')}
-          labelElement={<span>I am unable to use both arms</span>}
+          labelElement={
+            <span>
+              {pronoun} {prep} unable to use both arms
+            </span>
+          }
           onChange={toggleCheckboxValue(setHasError)}
         />
         <Checkbox
@@ -80,7 +99,9 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Learn')}
           labelElement={
-            <span>I find it hard to learn, remember new information and live on my own</span>
+            <span>
+              {pronoun} find it hard to learn, remember new information and live on {pronounOwn} own
+            </span>
           }
           onChange={toggleCheckboxValue(setHasError)}
         />
@@ -88,7 +109,11 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
           name="DrivingLicense"
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('DrivingLicense')}
-          labelElement={<span>I cannot drive a car because I have a medical condition</span>}
+          labelElement={
+            <span>
+              {pronoun} cannot drive a car because {pronounSmall} have a medical condition
+            </span>
+          }
           onChange={toggleCheckboxValue(setHasError)}
         />
       </div>

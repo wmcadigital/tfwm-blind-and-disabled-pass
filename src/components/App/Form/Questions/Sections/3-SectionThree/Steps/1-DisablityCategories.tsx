@@ -9,7 +9,7 @@ const DisablityCategories = () => {
   const { disabilityCategories } = formDataState;
   const filteredCategories = disabilityCategories.filter((x) => x !== '');
   const next = formPath[2].find((i) => i === filteredCategories[0]);
-  const prevStep = applicationForMe.currentValue ? 'ApplicantContactDetails' : 'CurrentPass';
+  const prevStep = applicationForMe.currentValue ? 'CurrentPass' : 'CurrentPass';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
 
   const question = applicationForMe.currentValue

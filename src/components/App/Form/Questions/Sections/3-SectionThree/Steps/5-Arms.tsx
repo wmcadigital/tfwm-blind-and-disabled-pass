@@ -1,4 +1,4 @@
-import { useNavigationLogic } from 'customHooks';
+import { useNavigationLogic, useFormDataSubscription } from 'customHooks';
 import { DisabilityProofStep } from 'components/sharedSteps';
 import { useFormDataContext } from 'state/formDataState/context';
 import { formPath } from 'components/App/Form/Questions/Sections';
@@ -6,6 +6,7 @@ import { formPath } from 'components/App/Form/Questions/Sections';
 const Arms = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const index = disabilityCategories.indexOf('Arms');
   const next =
@@ -28,10 +29,11 @@ const Arms = () => {
       </>
     );
   };
+  const pronoun = applicationForMe.currentValue ? 'you' : 'they';
   const documentsList = () => {
     return (
       <ul>
-        <li>A medical report that says you cannot use both arms for daily tasks</li>
+        <li>A medical report that says {pronoun} cannot use both arms for daily tasks</li>
       </ul>
     );
   };

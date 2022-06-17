@@ -1,4 +1,4 @@
-import { useNavigationLogic } from 'customHooks';
+import { useNavigationLogic, useFormDataSubscription } from 'customHooks';
 import { DisabilityProofStep } from 'components/sharedSteps';
 import { useFormDataContext } from 'state/formDataState/context';
 import { formPath } from 'components/App/Form/Questions/Sections';
@@ -6,6 +6,7 @@ import { formPath } from 'components/App/Form/Questions/Sections';
 const Learn = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const index = disabilityCategories.indexOf('Learn');
   const next =
@@ -30,33 +31,39 @@ const Learn = () => {
         <ul>
           <li>It is difficult to understand complex information or learn new skills</li>
           <li>it is difficult to live independently</li>
-          it is difficult to live independently
-          <li />
+          <li>the disability started before they were an adult</li>
         </ul>
       </>
     );
   };
+  const pronoun = applicationForMe.currentValue ? 'you' : 'they';
+  const pronounOwn = applicationForMe.currentValue ? 'your' : 'their';
+  const pronounOwnC = applicationForMe.currentValue ? 'Your' : 'Their';
+
   const documentsList = () => {
     return (
       <ul>
-        <li>A letter from your school about your learning ability</li>
+        <li>
+          A letter from {pronounOwn} school about {pronounOwn} learning ability
+        </li>
         <li>
           The full statement of Special Educational Needs or Individual Education Plan and any
           reviews
         </li>
-        <li>Your care plan or support plan</li>
+        <li>{pronounOwnC} care plan or support plan</li>
         <li>
           A letter from social services or from a manager of a residential care home that says you
-          meet the three statements above.
+          meet the <strong>three statements</strong> above.
         </li>
         <li>
-          A copy of your patient summary, confirming you have been diagnosed with a severe, moderate
-          or mild learning disability. This can be obtained from your Doctors surgery.
+          A copy of {pronounOwn} patient summary, confirming {pronoun} have been diagnosed with a
+          severe, moderate or mild learning disability. This can be obtained from {pronounOwn}{' '}
+          Doctors surgery.
         </li>
         <li>
-          A letter from a medical professional such as a GP, that says you have a learning
+          A letter from a medical professional such as a GP, that says {pronoun} have a learning
           disability and whether it is mild, moderate or severe. A medical professional does not
-          have to be your GP. For example, it can also include a CPN, learning disability
+          have to be {pronounOwn} GP. For example, it can also include a CPN, learning disability
           specialist, Occupational Health therapist or a Psychiatrist.
         </li>
       </ul>

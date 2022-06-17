@@ -1,4 +1,4 @@
-import { useNavigationLogic } from 'customHooks';
+import { useNavigationLogic, useFormDataSubscription } from 'customHooks';
 import { DisabilityProofStep } from 'components/sharedSteps';
 import { useFormDataContext } from 'state/formDataState/context';
 import { formPath } from 'components/App/Form/Questions/Sections';
@@ -6,6 +6,7 @@ import { formPath } from 'components/App/Form/Questions/Sections';
 const Deaf = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const index = disabilityCategories.indexOf('Deaf');
   const next =
@@ -21,12 +22,16 @@ const Deaf = () => {
     return undefined;
   };
   const canApply = false;
+  const pronoun = applicationForMe.currentValue ? 'you' : 'they';
+  const pronounOwn = applicationForMe.currentValue ? 'your' : 'their';
 
   const documentsList = () => {
     return (
       <ul>
-        <li>Proof you are registered with your local social services department as deaf</li>
-        <li>Audiogram from a specialist saying you cannot hear very well</li>
+        <li>
+          Proof {pronoun} are registered with {pronounOwn} local social services department as deaf
+        </li>
+        <li>Audiogram from a specialist saying {pronoun} cannot hear very well</li>
       </ul>
     );
   };

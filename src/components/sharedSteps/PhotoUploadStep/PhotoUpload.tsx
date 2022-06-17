@@ -25,7 +25,7 @@ const PhotoUploadStep = ({ handleNavigation, question }: TSharedStepSimpleProps)
 
   return (
     <Question question={question} handleContinue={handleContinue} showError={file.hasError}>
-      <p>We&apos;ll use this on your new ticket.</p>
+      <p>We&apos;ll use this on your new pass.</p>
       <p>This must be a clear portrait photo of your face without any filters.</p>
       <FileUpload
         label="Your photo"

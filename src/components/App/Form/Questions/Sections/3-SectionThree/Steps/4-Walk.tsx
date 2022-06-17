@@ -1,4 +1,4 @@
-import { useNavigationLogic } from 'customHooks';
+import { useNavigationLogic, useFormDataSubscription } from 'customHooks';
 import { DisabilityProofStep } from 'components/sharedSteps';
 import { useFormDataContext } from 'state/formDataState/context';
 import { formPath } from 'components/App/Form/Questions/Sections';
@@ -6,6 +6,7 @@ import { formPath } from 'components/App/Form/Questions/Sections';
 const Walk = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const index = disabilityCategories.indexOf('Walk');
   const next =
@@ -32,25 +33,29 @@ const Walk = () => {
     );
   };
   const canApply = true;
+  const pronoun = applicationForMe.currentValue ? 'you' : 'they';
+  const pronounOwn = applicationForMe.currentValue ? 'your' : 'their';
   const documentsList = () => {
     return (
       <ul>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says you
+          A letter from Department of Works and Pensions (DWP) less than 12 months old that says{' '}
+          {pronoun}
           get the High Rate Mobility Component of the Disability Living Allowance
         </li>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says you
+          A letter from Department of Works and Pensions (DWP) less than 12 months old that says{' '}
+          {pronoun}
           get a Personal Independence Payment (PIP) with a score of 8 or more in the &apos;Moving
           around&apos; activity
         </li>
         <li>
-          A letter from the Service Personnel &amp; Veterans Agency (SPA) that says you get a War
-          Pensions Mobility Supplement (WPMS)
+          A letter from the Service Personnel &amp; Veterans Agency (SPA) that says {pronoun} get a
+          War Pensions Mobility Supplement (WPMS)
         </li>
         <li>
-          A copy of both sides of your Disabled Persons&apos; Parking permit (Blue badge). This must
-          be one of the new style plastic permits.
+          A copy of both sides of {pronounOwn} Disabled Persons&apos; Parking permit (Blue badge).
+          This must be one of the new style plastic permits.
         </li>
       </ul>
     );

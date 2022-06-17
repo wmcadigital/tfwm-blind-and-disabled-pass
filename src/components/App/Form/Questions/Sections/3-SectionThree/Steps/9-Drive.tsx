@@ -1,4 +1,4 @@
-import { useNavigationLogic } from 'customHooks';
+import { useNavigationLogic, useFormDataSubscription } from 'customHooks';
 import { DisabilityProofStep } from 'components/sharedSteps';
 import { useFormDataContext } from 'state/formDataState/context';
 import { formPath } from 'components/App/Form/Questions/Sections';
@@ -6,6 +6,7 @@ import { formPath } from 'components/App/Form/Questions/Sections';
 const Drive = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const index = disabilityCategories.indexOf('Drive');
   const next =
@@ -15,23 +16,37 @@ const Drive = () => {
 
   const prevStep = 'DisablityCategories';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
-  const question = 'Proof of disability - cannot drive a car because I have a medical condition';
+  const question = `Proof of disability - cannot drive a car because ${
+    applicationForMe.currentValue ? 'I' : 'they'
+  } have a medical condition`;
   const canApply = true;
+  const pronoun = applicationForMe.currentValue ? 'you' : 'they';
+  const pronounOwn = applicationForMe.currentValue ? 'your' : 'their';
+  const pronounPre = applicationForMe.currentValue ? 'yourself' : 'themself';
 
   const application = () => {
     return (
       <>
         <ul>
-          <li>if you would be refused a driving licence because of your medical condition</li>
-          <li>if you are over 16.</li>
+          <li>
+            if {pronoun} would be refused a driving licence because of {pronounOwn} medical
+            condition
+          </li>
+          <li>if {pronoun} are over 16.</li>
         </ul>
-        <p>You may get a pass if you have one of these conditions</p>
+        <p>
+          {pronoun} may get a pass if {pronoun} have one of these conditions
+        </p>
         <ul>
-          <li>have fits you cannot control (epilepsy)</li>
+          <li>have fits {pronoun} cannot control (epilepsy)</li>
           <li>have severe mental health issues</li>
           <li>may suddenly faint or black out</li>
-          <li>any disability that makes it dangerous for you to drive.</li>
+          <li>any disability that makes it dangerous for {pronoun} to drive.</li>
         </ul>
+        <p>
+          We might need more proof or a healthcare assessment to understand how severe {pronounOwn}
+          condition is.
+        </p>
       </>
     );
   };
@@ -39,8 +54,8 @@ const Drive = () => {
     return (
       <>
         <ul>
-          <li>if you have a driving licence</li>
-          <li>if your medical condition is due to alcohol or drugs</li>
+          <li>if {pronoun} have a driving licence</li>
+          <li>if {pronounOwn} medical condition is due to alcohol or drugs</li>
         </ul>
       </>
     );
@@ -48,19 +63,23 @@ const Drive = () => {
   const documentsList = () => {
     return (
       <ul>
-        <li>Proof of any medicine you have taken in the last six months</li>
-        <li>A medical letter about your epilepsy or seizure</li>
+        <li>Proof of any medicine {pronoun} have taken in the last six months</li>
+        <li>A medical letter about {pronounOwn} epilepsy or seizure</li>
         <li>
           A letter from the Driving and Vehicle Licensing Agency (DVLA), less than 12 months old,
-          that says your driving licence has been refused or taken away
+          that says {pronounOwn} driving licence has been refused or taken away
         </li>
         <li>
-          A letter from your GP, CPN, Epilepsy specialist, Occupational Health therapist or
+          A letter from {pronounOwn} GP, CPN, Epilepsy specialist, Occupational Health therapist or
           Psychiatrist, that:
           <ul>
-            <li>Says you would not get a driving licence if you applied</li>
-            <li>says you would be a danger to yourself or others if you did drive</li>
-            <li>confirms your condition</li>
+            <li>
+              Says {pronoun} would not get a driving licence if {pronoun} applied
+            </li>
+            <li>
+              says {pronoun} would be a danger to {pronounPre} or others if {pronoun} did drive
+            </li>
+            <li>confirms {pronounOwn} condition</li>
           </ul>
         </li>
       </ul>

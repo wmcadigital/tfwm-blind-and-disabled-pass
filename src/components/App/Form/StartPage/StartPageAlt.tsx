@@ -27,7 +27,7 @@ const StartPageAlt = () => {
   };
   const blindContent = (
     <>
-      <h2>Blind or partially sighted in both eyes</h2>
+      <h3>Blind or partially sighted in both eyes</h3>
       <p>Please have one of these documents ready before you apply:</p>
       <ul>
         <li>A registration card from your local council</li>
@@ -37,7 +37,7 @@ const StartPageAlt = () => {
   );
   const deafContent = (
     <>
-      <h2>Very deaf or only able to hear a little sound in both ears</h2>
+      <h3>Very deaf or only able to hear a little sound in both ears</h3>
       <p>Please upload one of the documents below:</p>
       <ul>
         <li>Proof you are registered with your local social services department as deaf</li>
@@ -47,7 +47,7 @@ const StartPageAlt = () => {
   );
   const walkContent = (
     <>
-      <h2>Cannot walk or find it difficult to walk short distances</h2>
+      <h3>Cannot walk or find it difficult to walk short distances</h3>
       <div className="wmnds-ticket-summary-msg wmnds-ticket-summary-msg--you-can wmnds-m-b-md">
         <div className="wmnds-ticket-summary-msg__header">
           <Icon iconName="general-checkmark" className="wmnds-ticket-summary-msg__icon" />
@@ -91,7 +91,7 @@ const StartPageAlt = () => {
   );
   const armsContent = (
     <>
-      <h2>Unable to use both arms</h2>
+      <h3>Unable to use both arms</h3>
       <div className="wmnds-ticket-summary-msg wmnds-ticket-summary-msg--you-can wmnds-m-b-md">
         <div className="wmnds-ticket-summary-msg__header">
           <Icon iconName="general-checkmark" className="wmnds-ticket-summary-msg__icon" />
@@ -114,7 +114,7 @@ const StartPageAlt = () => {
   );
   const learnContent = (
     <>
-      <h2>Find it hard to learn and remember new information and live independently</h2>
+      <h3>Find it hard to learn and remember new information and live independently</h3>
       <div className="wmnds-ticket-summary-msg wmnds-ticket-summary-msg--you-can wmnds-m-b-md">
         <div className="wmnds-ticket-summary-msg__header">
           <Icon iconName="general-checkmark" className="wmnds-ticket-summary-msg__icon" />
@@ -163,7 +163,7 @@ const StartPageAlt = () => {
   );
   const languageContent = (
     <>
-      <h2>Cannot speak at all in any language</h2>
+      <h3>Cannot speak at all in any language</h3>
       <div className="wmnds-ticket-summary-msg wmnds-ticket-summary-msg--you-cannot wmnds-m-b-md">
         <div className="wmnds-ticket-summary-msg__header">
           <Icon iconName="general-cross" className="wmnds-ticket-summary-msg__icon" />
@@ -188,7 +188,7 @@ const StartPageAlt = () => {
   );
   const driveContent = (
     <>
-      <h2>Cannot drive a car because I have a medical condition</h2>
+      <h3>Cannot drive a car because I have a medical condition</h3>
       <div className="wmnds-ticket-summary-msg wmnds-ticket-summary-msg--you-can wmnds-m-b-md">
         <div className="wmnds-ticket-summary-msg__header">
           <Icon iconName="general-checkmark" className="wmnds-ticket-summary-msg__icon" />
@@ -250,7 +250,7 @@ const StartPageAlt = () => {
         <DisablityCategories />
       ) : (
         <>
-          <h1>Evidence needed for the chosen category</h1>
+          <h2>Evidence needed for the chosen category</h2>
           {disabilityCategories.includes('Blind') && blindContent}
           {disabilityCategories.includes('Deaf') && deafContent}
           {disabilityCategories.includes('Walk') && walkContent}

@@ -20,8 +20,10 @@ const DisabilityProofStep = ({
   const proofDocumentLearn = useFormDataSubscription('proofDocumentLearn');
   const proofDocumentLanguage = useFormDataSubscription('proofDocumentLanguage');
   const proofDocumentDrive = useFormDataSubscription('proofDocumentDrive');
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const { goToNextStep } = useNavigationLogic('DisablityCategories', 'Distance');
+  const pronoun = applicationForMe.currentValue ? 'You' : 'They';
 
   const proofDocument = () => {
     if (question.includes('blind')) {
@@ -62,7 +64,7 @@ const DisabilityProofStep = ({
     if (!isIdentityDocumentValid) return;
     handleNavigation();
   };
-
+  const one = !question.includes('learn') ? 'one' : 'at least two';
   return (
     <Question
       question={question}
@@ -83,7 +85,7 @@ const DisabilityProofStep = ({
               className="wmnds-ticket-summary-msg__icon"
             />
             <h3 className="wmnds-ticket-summary-msg__title">
-              {canApply ? 'You can apply' : 'You cannot apply'}
+              {canApply ? `${pronoun} can apply` : `${pronoun} cannot apply`}
             </h3>
           </div>
           <div className="wmnds-ticket-summary-msg__info">
@@ -95,14 +97,16 @@ const DisabilityProofStep = ({
         <div className="wmnds-ticket-summary-msg wmnds-ticket-summary-msg--you-cannot wmnds-m-b-md">
           <div className="wmnds-ticket-summary-msg__header">
             <Icon iconName="general-cross" className="wmnds-ticket-summary-msg__icon" />
-            <h3 className="wmnds-ticket-summary-msg__title">You cannot apply</h3>
+            <h3 className="wmnds-ticket-summary-msg__title">{pronoun} cannot apply</h3>
           </div>
           <div className="wmnds-ticket-summary-msg__info">
             <>{applicationNot()}</>
           </div>
         </div>
       )}
-      <p>Please upload one of the documents below:</p>
+      <p>
+        Please upload <strong>{one}</strong> of the documents below:
+      </p>
       {documentsList()}
       <p>
         You can take a picture of the document on a mobile phone. Please make sure the image is

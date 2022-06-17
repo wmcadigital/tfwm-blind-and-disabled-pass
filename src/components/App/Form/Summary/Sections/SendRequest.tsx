@@ -74,12 +74,15 @@ const SendYourRequest = () => {
       </p>
       {disabilityCategories.includes('DrivingLicense') && (
         <p>
-          <Icon iconName="general-warning-triangle" className="wmnds-msg-summary__icon" />
-          After you have submitted your application, you need to provide certificate of{' '}
-          <a href="/">
-            revocation from the Driver and Vehicle Licensing Agency (DVLA) indicating refusal or
-            withdrawal of your licence.
-          </a>
+          <Icon
+            iconName="general-warning-triangle"
+            className="wmnds-msg-summary__icon wmnds-col-1 wmnds-col-md-1-3"
+          />
+          <span className="wmnds-m-l-md wmnds-col-1 wmnds-col-md-2-3">
+            After you have submitted your application, you need to provide certificate of{' '}
+            <a href="/">revocation from the Driver and Vehicle Licensing Agency (DVLA)</a>{' '}
+            indicating refusal or withdrawal of your licence.
+          </span>
         </p>
       )}
       <Checkbox

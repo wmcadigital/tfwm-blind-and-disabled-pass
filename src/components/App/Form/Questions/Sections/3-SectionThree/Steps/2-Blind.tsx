@@ -1,4 +1,4 @@
-import { useNavigationLogic } from 'customHooks';
+import { useNavigationLogic, useFormDataSubscription } from 'customHooks';
 import { DisabilityProofStep } from 'components/sharedSteps';
 import { useFormDataContext } from 'state/formDataState/context';
 import { formPath } from 'components/App/Form/Questions/Sections';
@@ -6,6 +6,7 @@ import { formPath } from 'components/App/Form/Questions/Sections';
 const Blind = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
+  const applicationForMe = useFormDataSubscription('applicationForMe');
 
   const index = disabilityCategories.indexOf('Blind');
   const next =
@@ -19,11 +20,12 @@ const Blind = () => {
     return undefined;
   };
   const canApply = false;
+  const pronoun = applicationForMe.currentValue ? 'your' : 'their';
 
   const documentsList = () => {
     return (
       <ul>
-        <li>A registration card from your local council</li>
+        <li>A registration card from {pronoun} local council</li>
         <li>Certificate of Vision Impairment (a CVI, which used to be called a BD8)</li>
       </ul>
     );
