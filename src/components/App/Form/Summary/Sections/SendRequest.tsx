@@ -73,17 +73,14 @@ const SendYourRequest = () => {
         details you are providing are correct.
       </p>
       {disabilityCategories.includes('DrivingLicense') && (
-        <p>
-          <Icon
-            iconName="general-warning-triangle"
-            className="wmnds-msg-summary__icon wmnds-col-1 wmnds-col-md-1-3"
-          />
-          <span className="wmnds-m-l-md wmnds-col-1 wmnds-col-md-2-3">
+        <div className="wmnds-warning-text wmnds-warning-text--info">
+          <Icon iconName="general-warning-triangle" className="wmnds-warning-text__icon" />
+          <p>
             After you have submitted your application, you need to provide certificate of{' '}
-            <a href="/">revocation from the Driver and Vehicle Licensing Agency (DVLA)</a>{' '}
+            <a href="/##">revocation from the Driver and Vehicle Licensing Agency (DVLA)</a>{' '}
             indicating refusal or withdrawal of your licence.
-          </span>
-        </p>
+          </p>
+        </div>
       )}
       <Checkbox
         name="ContactGPAgreement"
@@ -103,7 +100,7 @@ const SendYourRequest = () => {
         classes="wmnds-m-b-md"
         labelElement={
           <span>
-            Agree to the <a href="/">terms and condition</a>
+            Agree to the <a href="/##">terms and condition</a>
           </span>
         }
         defaultValue={hasAgreedToTerms}
@@ -115,7 +112,7 @@ const SendYourRequest = () => {
         classes="wmnds-m-b-md"
         labelElement={
           <span>
-            Agree to the <a href="/">privacy policy</a>
+            Agree to the <a href="/#">privacy policy</a>
           </span>
         }
         defaultValue={hasAgreedToPrivacy}
