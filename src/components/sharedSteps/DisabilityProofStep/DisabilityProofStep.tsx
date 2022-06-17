@@ -52,15 +52,7 @@ const DisabilityProofStep = ({
   const identityDocument = proofDocument();
 
   const handleContinue = async () => {
-    let isIdentityDocumentValid = false;
-
-    if (!identityDocument.hasCurrentValue) {
-      identityDocument.set(null);
-      identityDocument.clearSavedValue();
-    } else {
-      isIdentityDocumentValid = identityDocument.save();
-    }
-
+    const isIdentityDocumentValid = identityDocument.save();
     if (!isIdentityDocumentValid) return;
     handleNavigation();
   };

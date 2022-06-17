@@ -27,10 +27,14 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
     };
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
+    const arr = disabilityCategories.savedValue;
+    const isValid = arr && arr.length < 1;
+    if (isValid) disabilityCategories.hasError = true;
     disabilityCategories.save();
     handleNavigation();
   };
+  console.log('fff', disabilityCategories);
   const own = applicationForMe.savedValue ? 'You' : `They`;
   const pronoun = applicationForMe.savedValue ? 'I' : `They`;
   const pronounSmall = applicationForMe.savedValue ? 'I' : `they`;
@@ -41,7 +45,7 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
     <Question
       question={question}
       handleContinue={handleContinue}
-      showError={disabilityCategories.savedValue === null}
+      showError={disabilityCategories.hasError}
     >
       <p className="wmnds-m-b-lg">{own} can apply for more than one category</p>
       <div className="wmnds-m-b-lg">
