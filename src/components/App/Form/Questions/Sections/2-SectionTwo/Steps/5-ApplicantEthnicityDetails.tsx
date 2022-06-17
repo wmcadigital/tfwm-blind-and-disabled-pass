@@ -34,7 +34,7 @@ const EthnicityDetails = () => {
     <EthnicityDetailsStep
       handleNavigation={goToNextStep}
       dataNamePrefix="Applicant"
-      question={`Which of the following described ${pronoun} ${ethnicityHeader} background?`}
+      question={`Which of the following best describes ${pronoun} ${ethnicityHeader} background?`}
     />
   );
 };

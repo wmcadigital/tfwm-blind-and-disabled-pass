@@ -64,7 +64,7 @@ const DateInputs = ({ name, defaultDate, onChange, hasError, hint }: TDateInputP
       {hasError && <span className="wmnds-fe-error-message">{errorMessage}</span>}
 
       <div className={`wmnds-fe-group ${hasError ? 'wmnds-fe-group--error' : ''}`}>
-        <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
+        <div className="wmnds-col-1-8 wmnds-col-sm-1-12 wmnds-m-r-md">
           <SingleDateInput
             maxLength={2}
             dateType="Day"
@@ -74,7 +74,7 @@ const DateInputs = ({ name, defaultDate, onChange, hasError, hint }: TDateInputP
             hasError={hasError && !isDayValid}
           />
         </div>
-        <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
+        <div className="wmnds-col-1-8 wmnds-col-sm-1-12 wmnds-m-r-md">
           <SingleDateInput
             maxLength={2}
             dateType="Month"
@@ -84,7 +84,7 @@ const DateInputs = ({ name, defaultDate, onChange, hasError, hint }: TDateInputP
             hasError={hasError && !isMonthValid}
           />
         </div>
-        <div className="wmnds-col-1-2 wmnds-col-sm-1-8">
+        <div className="wmnds-col-1-4 wmnds-col-sm-1-8">
           <SingleDateInput
             maxLength={4}
             dateType="Year"
