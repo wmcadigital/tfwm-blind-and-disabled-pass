@@ -52,7 +52,7 @@ const RightCategories = () => {
           <li>find it hard to learn and remember new information and live independently</li>
         )}
         {disabilityCategories.includes('Arms') && <li>unable to use both arms</li>}
-        {disabilityCategories.includes('Drive') && (
+        {disabilityCategories.includes('DrivingLicense') && (
           <li>cannot drive a car because I have a medical condition</li>
         )}
       </ul>

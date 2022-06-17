@@ -22,6 +22,7 @@ const DisablityCategories = () => {
         arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
       setHasDisability(addOrRemove());
       disabilityCategories.set(addOrRemove());
+      console.log('sss', disabilityCategories);
       alternateStart.set(true);
     };
   };
