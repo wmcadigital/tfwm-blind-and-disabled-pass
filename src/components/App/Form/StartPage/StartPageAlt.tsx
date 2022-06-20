@@ -74,13 +74,13 @@ const StartPageAlt = () => {
       </p>
       <ul>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says you
-          get the High Rate Mobility Component of the Disability Living Allowance
+          A letter from the Department for Work and Pensions (DWP) less than 12 months old that says
+          you get the High Rate Mobility Component of the Disability Living Allowance
         </li>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says you
-          get a Personal Independence Payment (PIP) with a score of 8 or more in the Moving around
-          activity
+          A letter from the Department for Work and Pensions (DWP) less than 12 months old that says
+          you get a Personal Independence Payment (PIP) with a score of 8 or more in the Moving
+          around activity
         </li>
         <li>
           A letter from the Service Personnel &amp; Veterans Agency (SPA) that says you get a War
@@ -187,9 +187,9 @@ const StartPageAlt = () => {
       </p>
       <ul>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says you
-          get a Personal Independence Payment (PIP) with a score of 8 or more in the Communicating
-          verbally activity.
+          A letter from the Department for Work and Pensions (DWP) less than 12 months old that says
+          get a Personal Independence Payment (PIP) with a score of 8 or more in the
+          &apos;Communicating verbally&apos; activity.
         </li>
         <li>A medical report that says you do not have any speech</li>
       </ul>

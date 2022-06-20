@@ -31,10 +31,9 @@ const Language = () => {
     return (
       <ul>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says{' '}
-          {pronoun}
-          get a Personal Independence Payment (PIP) with a score of 8 or more in the Communicating
-          verbally activity.
+          A letter from the Department for Work and Pensions (DWP) less than 12 months old that says{' '}
+          {pronoun} get a Personal Independence Payment (PIP) with a score of 8 or more in the
+          &apos;Communicating verbally&apos; activity.
         </li>
         <li>A medical report that says {pronoun} do not have any speech</li>
       </ul>

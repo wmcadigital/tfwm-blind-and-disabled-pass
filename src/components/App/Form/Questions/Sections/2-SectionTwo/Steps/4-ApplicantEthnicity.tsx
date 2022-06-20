@@ -17,7 +17,7 @@ const ApplicantAddress = () => {
     <EthnicityStep
       handleNavigation={goToNextStep}
       dataNamePrefix="Applicant"
-      question={`What is ${pronoun} ethnicity group?`}
+      question={`What is ${pronoun} ethnic group?`}
     />
   );
 };

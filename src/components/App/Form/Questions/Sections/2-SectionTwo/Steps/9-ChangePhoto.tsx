@@ -1,10 +1,14 @@
 import { useGlobalContext } from 'state/globalState';
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Question, Radios } from 'components/shared';
+import { useFormDataContext } from 'state/formDataState/context';
 
 const CurrentPass = () => {
   const changePhoto = useFormDataSubscription('changePhoto');
-  const nextStep = changePhoto.savedValue ? 'ApplicantPhoto' : 'DisablityCategories';
+  const [formDataState] = useFormDataContext();
+  const { alternateStart } = formDataState;
+  const nextOne = alternateStart ? 'RightCategories' : 'DisablityCategories';
+  const nextStep = changePhoto.savedValue ? 'ApplicantPhoto' : nextOne;
   const { goToNextStep } = useNavigationLogic('CurrentPassNumber', nextStep);
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { isEditing } = globalState.form;

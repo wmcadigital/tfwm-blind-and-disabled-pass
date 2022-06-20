@@ -1,6 +1,7 @@
 import { useGlobalContext } from 'state/globalState';
 import { BackButton } from 'components/shared';
 
+import useFormDataSubscription from 'customHooks/useFormDataSubscription';
 import StartPage from './StartPage';
 import StartPageAlt from './StartPage/StartPageAlt';
 import Form from './Questions';
@@ -25,10 +26,10 @@ const ViewToShow = () => {
   const showSuccess = isStarted && isFinished && !isEditing && isSubmitted;
 
   const showCardStyles = !showStartPage && !showSuccess;
-
+  const alternateStart = useFormDataSubscription('alternateStart').savedValue;
   return (
     <div className="wmnds-container wmnds-p-t-sm wmnds-p-b-lg wmnds-grid">
-      {!showStartPage && !showSuccess && (
+      {!showStartPage && !showSuccess && alternateStart && (
         <div className="wmnds-col-1 wmnds-m-b-lg">
           <BackButton />
         </div>

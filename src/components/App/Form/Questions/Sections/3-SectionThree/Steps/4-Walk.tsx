@@ -40,15 +40,13 @@ const Walk = () => {
     return (
       <ul>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says{' '}
-          {pronoun}
-          get the High Rate Mobility Component of the Disability Living Allowance
+          A letter from the Department for Work and Pensions (DWP) less than 12 months old that says{' '}
+          {pronoun} get the High Rate Mobility Component of the Disability Living Allowance
         </li>
         <li>
-          A letter from Department of Works and Pensions (DWP) less than 12 months old that says{' '}
-          {pronoun}
-          get a Personal Independence Payment (PIP) with a score of 8 or more in the &apos;Moving
-          around&apos; activity
+          A letter from the Department for Work and Pensions (DWP) less than 12 months old that says{' '}
+          {pronoun} get a Personal Independence Payment (PIP) with a score of 8 or more in the
+          &apos;Moving around&apos; activity
         </li>
         <li>
           A letter from the Service Personnel &amp; Veterans Agency (SPA) that says {pronoun} get a

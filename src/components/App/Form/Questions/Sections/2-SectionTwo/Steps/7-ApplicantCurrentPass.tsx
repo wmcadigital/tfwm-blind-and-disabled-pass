@@ -1,11 +1,15 @@
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Question, Radios } from 'components/shared';
+import { useFormDataContext } from 'state/formDataState/context';
 
 const CurrentPass = () => {
   const currentDisabledPass = useFormDataSubscription('currentDisabledPass');
   const applicationForMe = useFormDataSubscription('applicationForMe');
+  const [formDataState] = useFormDataContext();
+  const { alternateStart } = formDataState;
+  const nextOne = alternateStart ? 'RightCategories' : 'DisablityCategories';
   const prevStep = 'ApplicantContactDetails';
-  const next = applicationForMe.savedValue ? 'DisablityCategories' : 'Name';
+  const next = applicationForMe.savedValue ? nextOne : 'Name';
   const nextStep = currentDisabledPass.savedValue ? 'CurrentPassNumber' : next;
   const { goToNextStep } = useNavigationLogic(prevStep, nextStep);
 

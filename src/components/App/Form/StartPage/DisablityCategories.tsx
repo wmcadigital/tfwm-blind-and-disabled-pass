@@ -4,11 +4,14 @@ import { Checkbox } from 'components/shared';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
 import { TError } from 'types/validation';
 import { Nullable } from 'types/helpers';
+import { useFormDataContext } from 'state/formDataState/context';
 
 const DisablityCategories = () => {
-  const disabilityCategories = useFormDataSubscription('disabilityCategories');
+  const disabilityCategories1 = useFormDataSubscription('disabilityCategories');
   const alternateStart = useFormDataSubscription('alternateStart');
-  const [hasDisability, setHasDisability] = useState(['']);
+  const [formDataState] = useFormDataContext();
+  const { disabilityCategories } = formDataState;
+  const [hasDisability, setHasDisability] = useState(disabilityCategories || []);
   const [, setHasError] = useState<Nullable<TError>>(null);
 
   const toggleCheckboxValue = (
@@ -21,23 +24,24 @@ const DisablityCategories = () => {
       const addOrRemove = () =>
         arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
       setHasDisability(addOrRemove());
-      disabilityCategories.set(addOrRemove());
+      disabilityCategories1.set(addOrRemove());
       alternateStart.set(true);
     };
   };
 
   const handleContinue = () => {
-    const isValid = disabilityCategories.save();
+    const isValid =
+      disabilityCategories1.save() || (disabilityCategories && disabilityCategories?.length > 0);
     if (!isValid) return;
     alternateStart.save();
-    disabilityCategories.save();
+    disabilityCategories1.save();
   };
   const question = 'Which of the following categories apply to you?';
   return (
     <Question
       question={question}
       handleContinue={handleContinue}
-      showError={disabilityCategories.hasError}
+      showError={disabilityCategories1.hasError}
     >
       <p className="wmnds-m-b-lg">You can apply for more than one category</p>
       <div className="wmnds-m-b-lg">
