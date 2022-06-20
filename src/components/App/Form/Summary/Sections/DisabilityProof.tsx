@@ -129,31 +129,33 @@ const DisabilityProof = () => {
         <ChangeAnswerButton from="Drive" />,
       ]
     : [];
-
+  const tableData = [
+    [
+      <span>Which categories apply?</span>,
+      <span
+        dangerouslySetInnerHTML={{
+          __html: sanitize(filteredDisabilityCategories().toString().replace(/,/g, '<br><br>')),
+        }}
+      />,
+      <ChangeAnswerButton from="DisablityCategories" />,
+    ],
+    proofBlind,
+    proofDeaf,
+    proofWalk,
+    proofArms,
+    proofLearn,
+    proofLanguage,
+    hasLicense,
+    refusedLicense,
+    proofDrive,
+  ].filter((el) => {
+    return el !== [] && el.length !== 0;
+  });
   return (
     <Table
       title="Proof of disability"
       cellClasses={['', '', 'wmnds-text-align-right']}
-      values={[
-        [
-          <span>Which categories apply?</span>,
-          <span
-            dangerouslySetInnerHTML={{
-              __html: sanitize(filteredDisabilityCategories().toString().replace(/,/g, '<br><br>')),
-            }}
-          />,
-          <ChangeAnswerButton from="DisablityCategories" />,
-        ],
-        proofBlind,
-        proofDeaf,
-        proofWalk,
-        proofArms,
-        proofLearn,
-        proofLanguage,
-        hasLicense,
-        refusedLicense,
-        proofDrive,
-      ]}
+      values={tableData}
     />
   );
 };

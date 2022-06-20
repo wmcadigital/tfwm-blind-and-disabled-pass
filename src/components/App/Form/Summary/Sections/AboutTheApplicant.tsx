@@ -75,17 +75,21 @@ const AboutTheApplicant = () => {
       <span>{`${currentDisabledPass ? 'Yes' : 'No'}`}</span>,
       <ChangeAnswerButton from="CurrentPass" />,
     ],
-    [
-      <span>Current disabled person’s pass number</span>,
-      <span>{`${passNumber}`}</span>,
-      <ChangeAnswerButton from="CurrentPassNumber" />,
-    ],
+    currentDisabledPass
+      ? [
+          <span>Current disabled person’s pass number</span>,
+          <span>{`${passNumber}`}</span>,
+          <ChangeAnswerButton from="CurrentPassNumber" />,
+        ]
+      : [],
     [
       <span>Updated Photo</span>,
       <ImageCell image={ApplicantPhoto!} />,
       <ChangeAnswerButton from="ApplicantPhoto" />,
     ],
-  ];
+  ].filter((el) => {
+    return el !== [] && el.length !== 0;
+  });
 
   return (
     <Table
