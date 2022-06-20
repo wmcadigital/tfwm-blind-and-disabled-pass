@@ -13,10 +13,7 @@ const RightCategories = () => {
   const prevStep = applicationForMe.currentValue ? 'CheckIfUserIsTheApplicant' : 'CurrentPass';
   const categories = disabilityCategories || [];
   const index = disabilityCategories ? disabilityCategories.indexOf('') : 0;
-  const next =
-    index >= 0 && index < categories.length - 1
-      ? formPath[2].find((i) => i === categories[index + 1])
-      : 'Summary';
+  const next = formPath[2].find((i) => i === categories[index + 1]);
 
   const nextStep = !changeCondition ? next : 'DisablityCategories';
 
