@@ -24,12 +24,13 @@ const ViewToShow = () => {
   const showForm = isStarted && (!isFinished || isEditing);
   const showSummary = isStarted && isFinished && !isEditing && !isSubmitted;
   const showSuccess = isStarted && isFinished && !isEditing && isSubmitted;
-
   const showCardStyles = !showStartPage && !showSuccess;
   const alternateStart = useFormDataSubscription('alternateStart').savedValue;
+  const showBack = param ? alternateStart : true;
+
   return (
     <div className="wmnds-container wmnds-p-t-sm wmnds-p-b-lg wmnds-grid">
-      {!showStartPage && !showSuccess && alternateStart && (
+      {!showStartPage && !showSuccess && showBack && (
         <div className="wmnds-col-1 wmnds-m-b-lg">
           <BackButton />
         </div>

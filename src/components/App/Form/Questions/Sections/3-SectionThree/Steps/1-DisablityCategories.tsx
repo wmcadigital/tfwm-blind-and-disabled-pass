@@ -5,6 +5,8 @@ import { formPath } from 'components/App/Form/Questions/Sections';
 
 const DisablityCategories = () => {
   const applicationForMe = useFormDataSubscription('applicationForMe');
+  const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
+
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
   const filteredCategories = disabilityCategories
@@ -29,7 +31,7 @@ const DisablityCategories = () => {
 
   const question = applicationForMe.currentValue
     ? 'Which of the following categories apply to you?'
-    : 'Which of the following categories apply to them?';
+    : `Which of the following categories apply to ${ApplicantFirstName.currentValue}?`;
 
   const dataNamePrefix = applicationForMe.currentValue ? 'Applicant' : 'Behalf';
 
