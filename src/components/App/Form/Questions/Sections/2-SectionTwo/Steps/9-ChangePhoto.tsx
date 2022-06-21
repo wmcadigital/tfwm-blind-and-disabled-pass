@@ -4,6 +4,9 @@ import { Question, Radios } from 'components/shared';
 import { useFormDataContext } from 'state/formDataState/context';
 
 const CurrentPass = () => {
+  const applicationForMe = useFormDataSubscription('applicationForMe');
+  const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
+
   const changePhoto = useFormDataSubscription('changePhoto');
   const [formDataState] = useFormDataContext();
   const { alternateStart } = formDataState;
@@ -26,13 +29,11 @@ const CurrentPass = () => {
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     changePhoto.set(e.target.value.toLowerCase() === 'true');
   };
-
+  const question = applicationForMe.currentValue
+    ? 'Do you want to change the photo on your card?'
+    : `Do you want to change the photo on  ${ApplicantFirstName.currentValue}'s' card?`;
   return (
-    <Question
-      question="Do you want to change the photo on your card?"
-      handleContinue={handleContinue}
-      showError={changePhoto.hasError}
-    >
+    <Question question={question} handleContinue={handleContinue} showError={changePhoto.hasError}>
       <Radios
         name="ischangePhoto"
         onChange={setCurrentValue}
