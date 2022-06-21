@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { Button, GenericError } from 'components/shared';
 
 import { TQuestionProps } from './Question.types';
+import s from './Question.module.scss';
 
 const Question = ({ question, handleContinue, children, showError, isLoading }: TQuestionProps) => {
   return (
     <>
       {showError && <GenericError />}
-      <h2 className="wmnds-m-t-lg wmnds-m-b-lg">{question}</h2>
+      <h2 className={`wmnds-m-t-lg wmnds-m-b-lg ${s.header}`}>{question}</h2>
       {children}
       <div className="wmnds-col-1">
         <Button
