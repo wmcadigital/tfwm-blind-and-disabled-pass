@@ -209,7 +209,9 @@ const StartPageAlt = () => {
               <li>if you would be refused a driving licence because of your medical condition</li>
               <li>if you are over 16.</li>
             </ul>
-            <p>You may get a pass if you have one of these conditions</p>
+            <p>
+              You <strong>may</strong> get a pass if you have one of these conditions
+            </p>
             <ul>
               <li>have fits you cannot control (epilepsy)</li>
               <li>have severe mental health issues</li>

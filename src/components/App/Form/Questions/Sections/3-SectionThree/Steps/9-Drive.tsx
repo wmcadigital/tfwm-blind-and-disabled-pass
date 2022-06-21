@@ -36,7 +36,7 @@ const Drive = () => {
           <li>if {pronoun} are over 16.</li>
         </ul>
         <p>
-          {pronoun} may get a pass if {pronoun} have one of these conditions
+          {pronoun} <strong>may</strong> get a pass if {pronoun} have one of these conditions
         </p>
         <ul>
           <li>have fits {pronoun} cannot control (epilepsy)</li>
