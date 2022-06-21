@@ -37,7 +37,7 @@ const DisabilityProof = () => {
       } else if (i === 'Walk') {
         arr.push(`${pronoun} can't walk short distances without severe discomfort`);
       } else if (i === 'Arms') {
-        arr.push(`${pronoun} ${prep}unable to use both arms`);
+        arr.push(`${pronoun} ${prep} unable to use both arms`);
       } else if (i === 'Language') {
         arr.push(`${pronoun} can't speak at all in any language`);
       } else if (i === 'Learn') {
@@ -141,10 +141,10 @@ const DisabilityProof = () => {
     ],
     proofBlind,
     proofDeaf,
+    proofLanguage,
     proofWalk,
     proofArms,
     proofLearn,
-    proofLanguage,
     hasLicense,
     refusedLicense,
     proofDrive,

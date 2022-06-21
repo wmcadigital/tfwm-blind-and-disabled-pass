@@ -30,6 +30,13 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
   const handleContinue = async () => {
     const isValid = disabilityCategories.save();
     if (!isValid) return;
+    // If user changes this step we need to delete any saved data
+    if (
+      disabilityCategories &&
+      disabilityCategories.currentValue !== disabilityCategories.savedValue
+    ) {
+      console.log('new', disabilityCategories);
+    }
     disabilityCategories.save();
     handleNavigation();
   };
