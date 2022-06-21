@@ -39,18 +39,26 @@ const StartPage = () => {
       <p>
         Gather any evidence you have of your condition. The type of evidence required depends on
         which category you apply for. If you do not know what evidence you need,{' '}
-        <a href=".html">tell us which categories apply to you</a> and we will tell you what
+        <a href="/?alt=">tell us which categories apply to you</a> and we will tell you what
         documents you need to submit with your application.
       </p>
       <p>
         You can read about{' '}
-        <a href=".html">how we assess disabled person&apos;s pass applications.</a>
+        <a href="https://www.tfwm.org.uk/swift-and-tickets/discounts-and-free-travel-passes/get-a-disabled-person-s-pass/">
+          how we assess disabled person&apos;s pass applications.
+        </a>
       </p>
       <p>
-        You can <a href=".html">contact us if you need help</a> completing your application.
+        You can{' '}
+        <a href="https://www.tfwm.org.uk/get-help/contact-us/">contact us if you need help</a>{' '}
+        completing your application.
       </p>
       <p>
-        You can also <a href=".html">print and complete a paper application form</a> if you prefer.
+        You can also{' '}
+        <a href="https://www.tfwm.org.uk/swift-and-tickets/discounts-and-free-travel-passes/get-a-disabled-person-s-pass/">
+          print and complete a paper application form
+        </a>{' '}
+        if you prefer.
       </p>
       <Button
         text="Start now"
