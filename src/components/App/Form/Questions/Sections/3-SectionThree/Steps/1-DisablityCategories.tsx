@@ -10,6 +10,19 @@ const DisablityCategories = () => {
   const filteredCategories = disabilityCategories
     ? disabilityCategories.filter((x) => x !== '')
     : [];
+  const arr = [
+    'Blind',
+    'Deaf',
+    'Language',
+    'Walk',
+    'Distance',
+    'Arms',
+    'Learn',
+    'DrivingLicense',
+    'RefusedLicense',
+    'Drive',
+  ];
+  filteredCategories.sort((a, b) => arr.indexOf(a) - arr.indexOf(b));
   const next = formPath[2].find((i) => i === filteredCategories[0]);
   const prevStep = applicationForMe.currentValue ? 'CurrentPass' : 'CurrentPass';
   const { goToNextStep } = useNavigationLogic(prevStep, next);

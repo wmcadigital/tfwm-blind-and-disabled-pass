@@ -111,6 +111,7 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
         name="ethnicity"
         radios={radioOptions()}
         onChange={setCurrentValue}
+        classes="wmnds-m-b-sm"
         currentValue={ethnicityDetails.currentValue}
         required
       />

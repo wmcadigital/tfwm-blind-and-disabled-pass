@@ -40,6 +40,7 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
       <Radios
         name="ethnicity"
         onChange={setCurrentValue}
+        classes="wmnds-m-b-sm"
         currentValue={ethnicity.currentValue}
         radios={[
           { text: 'White', html: null, value: 'White', info: null },
