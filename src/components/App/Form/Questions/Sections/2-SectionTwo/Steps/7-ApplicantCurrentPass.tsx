@@ -1,5 +1,6 @@
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Question, Radios } from 'components/shared';
+import { useGlobalContext } from 'state/globalState';
 
 const CurrentPass = () => {
   const currentDisabledPass = useFormDataSubscription('currentDisabledPass');
@@ -7,6 +8,7 @@ const CurrentPass = () => {
   const prevStep = 'ApplicantContactDetails';
   const nextStep = currentDisabledPass.savedValue ? 'CurrentPassNumber' : 'ApplicantPhoto';
   const { goToNextStep } = useNavigationLogic(prevStep, nextStep);
+  const [, globalStateDispatch] = useGlobalContext();
 
   const setCurrentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     currentDisabledPass.set(e.target.value.toLowerCase() === 'true');
@@ -14,6 +16,13 @@ const CurrentPass = () => {
 
   const handleContinue = () => {
     currentDisabledPass.save();
+    // If user changes this step we need to delete any saved data
+    if (currentDisabledPass.currentValue) {
+      globalStateDispatch({
+        type: 'GO_TO_SECTION_AND_STEP',
+        payload: { section: 2, step: 9 },
+      });
+    }
     goToNextStep();
   };
 
