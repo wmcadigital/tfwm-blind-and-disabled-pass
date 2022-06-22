@@ -2,10 +2,14 @@ import { useNavigationLogic, useFormDataSubscription } from 'customHooks';
 import { DisabilityProofStep } from 'components/sharedSteps';
 import { useFormDataContext } from 'state/formDataState/context';
 import { formPath } from 'components/App/Form/Questions/Sections';
+import { useGlobalContext } from 'state/globalState';
 
 const Blind = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
+  const [globalState] = useGlobalContext();
+  const { isEditing } = globalState.form;
+  console.log(isEditing, 'pppp');
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const categories = disabilityCategories || [];
   const index = categories.indexOf('Blind');

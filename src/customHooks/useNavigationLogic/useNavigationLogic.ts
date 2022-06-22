@@ -50,7 +50,14 @@ const useNavigationLogic: TUseNavigationLogic = (prevStepName, nextStepName) => 
 
     const stepToNavigateTo = getSectionAndStep(nextStepName);
 
-    if (isEditing && isSectionAndStepGreater(stepToNavigateTo, edit.to!)) {
+    if (
+      isEditing &&
+      isSectionAndStepGreater(stepToNavigateTo, edit.to!) &&
+      currentSection !== 2 &&
+      currentStep !== 6 &&
+      currentStep !== 10 &&
+      currentStep !== 11
+    ) {
       globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
       return;
     }

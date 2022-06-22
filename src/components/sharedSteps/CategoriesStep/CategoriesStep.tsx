@@ -4,14 +4,24 @@ import { Checkbox } from 'components/shared';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
 import { TError } from 'types/validation';
 import { Nullable } from 'types/helpers';
+import { useGlobalContext } from 'state/globalState';
 
 import { TCategoriesStepProps } from 'types/step';
 
 const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesStepProps) => {
+  const [, globalStateDispatch] = useGlobalContext();
   const disabilityCategories = useFormDataSubscription('disabilityCategories');
   const [hasDisability, setHasDisability] = useState(categories || []);
   const [, setHasError] = useState<Nullable<TError>>(null);
   const applicationForMe = useFormDataSubscription('applicationForMe');
+  const proofDocumentBlind = useFormDataSubscription('proofDocumentBlind');
+  const proofDocumentDeaf = useFormDataSubscription('proofDocumentDeaf');
+  const proofDocumentWalk = useFormDataSubscription('proofDocumentWalk');
+  const distanceMetric = useFormDataSubscription('distanceMetric');
+  const proofDocumentArms = useFormDataSubscription('proofDocumentArms');
+  const proofDocumentLearn = useFormDataSubscription('proofDocumentLearn');
+  const proofDocumentLanguage = useFormDataSubscription('proofDocumentLanguage');
+  const proofDocumentDrive = useFormDataSubscription('proofDocumentDrive');
 
   const toggleCheckboxValue = (
     setErrorState?: React.Dispatch<React.SetStateAction<Nullable<TError>>>,
@@ -26,16 +36,48 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
       disabilityCategories.set(addOrRemove());
     };
   };
-
+  const checkProof = () => {
+    const arr = disabilityCategories.currentValue ? disabilityCategories.currentValue : [];
+    if (arr.includes('Blind') && !proofDocumentBlind.savedValue) {
+      return 3;
+    }
+    if (arr.includes('Deaf') && !proofDocumentDeaf.savedValue) {
+      return 4;
+    }
+    if (arr.includes('Walk') && distanceMetric.savedValue === null) {
+      if (!proofDocumentWalk.savedValue) {
+        return 6;
+      }
+      return 0;
+    }
+    if (arr.includes('Arms') && !proofDocumentArms.savedValue) {
+      return 8;
+    }
+    if (arr.includes('Learn') && !proofDocumentLearn.savedValue) {
+      return 9;
+    }
+    if (arr.includes('Language') && !proofDocumentLanguage.savedValue) {
+      return 5;
+    }
+    if (arr.includes('DrivingLicense') && !proofDocumentDrive.savedValue) {
+      return 10;
+    }
+    return 0;
+  };
   const handleContinue = async () => {
     const isValid = disabilityCategories.save();
     if (!isValid) return;
     // If user changes this step we need to delete any saved data
     if (
       disabilityCategories &&
-      disabilityCategories.currentValue !== disabilityCategories.savedValue
+      disabilityCategories.currentValue !== disabilityCategories.savedValue &&
+      checkProof() !== 0
     ) {
-      console.log('new', disabilityCategories);
+      checkProof();
+      globalStateDispatch({
+        type: 'GO_TO_SECTION_AND_STEP',
+        payload: { section: 3, step: checkProof() },
+      });
     }
     disabilityCategories.save();
     handleNavigation();

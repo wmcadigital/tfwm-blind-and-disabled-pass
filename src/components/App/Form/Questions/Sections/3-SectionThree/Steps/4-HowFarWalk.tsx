@@ -1,17 +1,25 @@
-import { useGlobalContext } from 'state/globalState';
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Question, Radios, Input } from 'components/shared';
+import { useFormDataContext } from 'state/formDataState/context';
+import { formPath } from 'components/App/Form/Questions/Sections';
 
 const Distance = () => {
-  const [globalState, globalStateDispatch] = useGlobalContext();
-  const { isEditing } = globalState.form;
+  const [formDataState] = useFormDataContext();
 
+  const { disabilityCategories } = formDataState;
+  const categories = disabilityCategories || [];
+
+  const index = categories.indexOf('Walk');
+  const next =
+    index >= 0 && index < categories.length - 1
+      ? formPath[2].find((i) => i === categories[index + 1])
+      : 'Summary';
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const distance = useFormDataSubscription(`distance`);
   const distanceMetric = useFormDataSubscription(`distanceMetric`);
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
-  const { goToNextStep } = useNavigationLogic('Walk', 'Summary');
+  const { goToNextStep } = useNavigationLogic('Walk', next);
   const question = applicationForMe.savedValue
     ? 'How far can you walk?'
     : `How far can ${ApplicantFirstName.currentValue} walk?`;
@@ -22,14 +30,6 @@ const Distance = () => {
   const title = applicationForMe.savedValue ? 'Before you' : 'Before they';
   const handleContinue = () => {
     if (!distanceMetric.validate()) return;
-    // If user changes this step we need to delete any saved data
-    if (
-      distanceMetric.savedValue !== null &&
-      distanceMetric.currentValue !== distanceMetric.savedValue
-    ) {
-      globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
-      if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
-    }
     distance.save();
     distanceMetric.save();
     goToNextStep();

@@ -2,6 +2,7 @@ import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Button, FileUpload, Question } from 'components/shared';
 import { TSharedStepDocsProps, sharedStepSimplePropTypes } from 'types/step';
 import Icon from 'components/shared/Icon/Icon';
+import { useGlobalContext } from 'state/globalState';
 
 const DisabilityProofStep = ({
   handleNavigation,
@@ -13,9 +14,13 @@ const DisabilityProofStep = ({
   alternateEvidence,
   applicationNot,
 }: TSharedStepDocsProps) => {
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
+  const disabilityCategories = useFormDataSubscription('disabilityCategories');
   const proofDocumentBlind = useFormDataSubscription('proofDocumentBlind');
   const proofDocumentDeaf = useFormDataSubscription('proofDocumentDeaf');
   const proofDocumentWalk = useFormDataSubscription('proofDocumentWalk');
+  const distanceMetric = useFormDataSubscription('distanceMetric');
   const proofDocumentArms = useFormDataSubscription('proofDocumentArms');
   const proofDocumentLearn = useFormDataSubscription('proofDocumentLearn');
   const proofDocumentLanguage = useFormDataSubscription('proofDocumentLanguage');
@@ -51,10 +56,45 @@ const DisabilityProofStep = ({
   };
   const identityDocument = proofDocument();
 
+  const checkProof = () => {
+    const arr = disabilityCategories.savedValue ? disabilityCategories.savedValue : [];
+    if (arr.includes('Blind') && !proofDocumentBlind.savedValue) {
+      return 3;
+    }
+    if (arr.includes('Deaf') && !proofDocumentDeaf.savedValue) {
+      return 4;
+    }
+    if (arr.includes('Walk') && (!proofDocumentWalk.savedValue || distanceMetric === null)) {
+      return 6;
+    }
+    if (arr.includes('Arms') && !proofDocumentArms.savedValue) {
+      return 8;
+    }
+    if (arr.includes('Learn') && !proofDocumentLearn.savedValue) {
+      return 9;
+    }
+    if (arr.includes('Language') && !proofDocumentLanguage.savedValue) {
+      return 5;
+    }
+    if (arr.includes('DrivingLicense') && !proofDocumentDrive.savedValue) {
+      return 10;
+    }
+    return 0;
+  };
+  const stepTo = checkProof();
   const handleContinue = async () => {
     const isIdentityDocumentValid = identityDocument.save();
     if (!isIdentityDocumentValid) return;
-    handleNavigation();
+    // If user changes this step we need to delete any saved data
+    if (isEditing && stepTo !== 0) {
+      checkProof();
+      globalStateDispatch({
+        type: 'GO_TO_SECTION_AND_STEP',
+        payload: { section: 3, step: stepTo },
+      });
+    } else {
+      handleNavigation();
+    }
   };
   const one = !question.includes('learn') ? 'one' : 'at least two';
   return (
