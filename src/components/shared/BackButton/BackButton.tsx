@@ -1,12 +1,15 @@
+import { useEffect } from 'react';
 import { useGlobalContext } from 'state/globalState/context';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
 
 const BackButton = () => {
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { previousSection, previousStep, isEditing } = globalState.form;
-
-  const shouldGoToQuestion = previousSection > 0 && previousStep > 0;
   const alternateStart = useFormDataSubscription('alternateStart');
+  useEffect(() => {
+    alternateStart.set(false);
+  });
+  const shouldGoToQuestion = previousSection > 0 && previousStep > 0;
 
   const onClick = () => {
     if (shouldGoToQuestion) globalStateDispatch({ type: 'GO_BACK' });
@@ -14,6 +17,7 @@ const BackButton = () => {
       globalStateDispatch({ type: 'CLEAR_TEMP_FORM_DATA' });
       globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     } else {
+      alternateStart.set(false);
       globalStateDispatch({ type: 'SHOW_START_PAGE' });
       alternateStart.set(false);
       alternateStart.save();

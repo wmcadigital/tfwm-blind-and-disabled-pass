@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Question from 'components/shared/Question/Question';
 import { Checkbox } from 'components/shared';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
@@ -28,13 +28,15 @@ const DisablityCategories = () => {
       alternateStart.set(true);
     };
   };
-
+  useEffect(() => {
+    alternateStart.set(true);
+  });
   const handleContinue = () => {
-    const isValid =
-      disabilityCategories1.save() || (disabilityCategories && disabilityCategories?.length > 0);
-    if (!isValid) return;
-    alternateStart.save();
     disabilityCategories1.save();
+    const isValid = disabilityCategories1.save();
+    if (!isValid) return;
+    alternateStart.set(true);
+    alternateStart.save();
   };
   const question = 'Which of the following categories apply to you?';
   return (
