@@ -8,7 +8,7 @@ const DisablityCategories = () => {
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
   const [formDataState] = useFormDataContext();
-  const { disabilityCategories } = formDataState;
+  const { disabilityCategories, alternateStart } = formDataState;
   const filteredCategories = disabilityCategories
     ? disabilityCategories.filter((x) => x !== '')
     : [];
@@ -26,7 +26,7 @@ const DisablityCategories = () => {
   ];
   filteredCategories.sort((a, b) => arr.indexOf(a) - arr.indexOf(b));
   const next = formPath[2].find((i) => i === filteredCategories[0]);
-  const prevStep = applicationForMe.currentValue ? 'CurrentPass' : 'CurrentPass';
+  const prevStep = alternateStart ? 'RightCategories' : 'CurrentPass';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
 
   const question = applicationForMe.currentValue
