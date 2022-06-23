@@ -6,6 +6,7 @@ import Icon from 'components/shared/Icon/Icon';
 
 import { TTicket } from 'types/ticket';
 import DisablityCategories from './DisablityCategories';
+import s from './StartPageAlt.module.scss';
 
 const StartPageAlt = () => {
   const [, formDataDispatch] = useFormDataContext();
@@ -49,7 +50,7 @@ const StartPageAlt = () => {
   );
   const walkContent = (
     <>
-      <h3>Cannot walk or find it difficult to walk short distances</h3>
+      <h3 className={`${s.header}`}>Cannot walk or find it difficult to walk short distances</h3>
       <div className="wmnds-ticket-summary-msg wmnds-ticket-summary-msg--you-can wmnds-m-b-md">
         <div className="wmnds-ticket-summary-msg__header">
           <Icon iconName="general-checkmark" className="wmnds-ticket-summary-msg__icon" />

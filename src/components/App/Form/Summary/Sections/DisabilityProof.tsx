@@ -26,26 +26,38 @@ const DisabilityProof = () => {
   const pronounc = applicationForMe ? 'I' : 'they';
   const prep = applicationForMe ? 'am' : 'are';
   const categories = disabilityCategories || [];
-
+  const array = [
+    'Blind',
+    'Deaf',
+    'Language',
+    'Walk',
+    'Distance',
+    'Arms',
+    'Learn',
+    'DrivingLicense',
+    'RefusedLicense',
+    'Drive',
+  ];
+  categories.sort((a, b) => array.indexOf(a) - array.indexOf(b));
   const filteredDisabilityCategories = () => {
     const arr: Array<String> = [];
     categories.map((i) => {
       if (i === 'Blind') {
-        arr.push(`${pronoun} ${prep} blind or partially sighted `);
+        arr.push(`${pronoun} ${prep} blind or partially sighted in both eyes`);
       } else if (i === 'Deaf') {
-        arr.push(`${pronoun} ${prep} am profoundly or severely deaf in both ears`);
+        arr.push(`${pronoun} ${prep} very deaf or only able to hear a little sound in both ears`);
       } else if (i === 'Walk') {
-        arr.push(`${pronoun} can't walk short distances without severe discomfort`);
+        arr.push(`${pronoun} cannot walk or find it difficult to walk short distances`);
       } else if (i === 'Arms') {
         arr.push(`${pronoun} ${prep} unable to use both arms`);
       } else if (i === 'Language') {
-        arr.push(`${pronoun} can't speak at all in any language`);
+        arr.push(`${pronoun} cannot speak at all in any language`);
       } else if (i === 'Learn') {
         arr.push(
           `${pronoun} find it hard to learn and remember new information and live independently`,
         );
       } else if (i === 'DrivingLicense') {
-        arr.push(`${pronoun} can't drive a car because ${pronounc} have a medical condition`);
+        arr.push(`${pronoun} cannot drive a car because ${pronounc} have a medical condition`);
       }
       return arr;
     });
@@ -112,16 +124,17 @@ const DisabilityProof = () => {
         <ChangeAnswerButton from="DrivingLicense" />,
       ]
     : [];
-  const refusedLicense = categories.includes('DrivingLicense')
-    ? [
-        <span>
-          Have {applicationForMe ? `you` : `they`} ever applied for a Driving License but were
-          refused due to {applicationForMe ? `your` : `their`} condition?
-        </span>,
-        <span>{refusedDrivingLicense ? 'Yes' : 'No'}</span>,
-        <ChangeAnswerButton from="RefusedLicense" />,
-      ]
-    : [];
+  const refusedLicense =
+    categories.includes('DrivingLicense') && refusedDrivingLicense !== null
+      ? [
+          <span>
+            Have {applicationForMe ? `you` : `they`} ever applied for a Driving License but were
+            refused due to {applicationForMe ? `your` : `their`} condition?
+          </span>,
+          <span>{refusedDrivingLicense ? 'Yes' : 'No'}</span>,
+          <ChangeAnswerButton from="RefusedLicense" />,
+        ]
+      : [];
   const proofDrive = categories.includes('DrivingLicense')
     ? [
         <span>Proof of disability - cannot drive a car because of a medical condition</span>,

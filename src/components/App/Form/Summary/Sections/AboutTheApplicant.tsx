@@ -75,7 +75,7 @@ const AboutTheApplicant = () => {
       <span>{`${currentDisabledPass ? 'Yes' : 'No'}`}</span>,
       <ChangeAnswerButton from="CurrentPass" />,
     ],
-    currentDisabledPass
+    currentDisabledPass && passNumber
       ? [
           <span>Current disabled person’s pass number</span>,
           <span>{`${passNumber}`}</span>,

@@ -32,7 +32,7 @@ const PhotoUploadStep = ({ handleNavigation, question }: TSharedStepSimpleProps)
         without any filters.
       </p>
       <FileUpload
-        label="Your photo"
+        label={applicationForMe.savedValue ? 'Your photo' : 'Their photo'}
         hint="Files must be jpeg or png file format"
         accept=".png, .jpg, .jpeg"
         name="ApplicantPhoto"
