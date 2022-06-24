@@ -74,7 +74,7 @@ const DisabilityProof = () => {
     : [];
   const proofDeaf = categories.includes('Deaf')
     ? [
-        <span>Proof of disability - profoundly or severly deaf in both ears</span>,
+        <span>Proof of disability - deaf or only able to hear a little sound in both ears</span>,
         <FileCell filesConfig={[{ title: '', file: proofDocumentDeaf! }]} />,
         <ChangeAnswerButton from="Deaf" />,
       ]
