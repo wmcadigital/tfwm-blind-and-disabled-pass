@@ -63,6 +63,7 @@ const useNavigationLogic: TUseNavigationLogic = (prevStepName, nextStepName) => 
     }
 
     globalStateDispatch({ type: 'GO_TO_SECTION_AND_STEP', payload: stepToNavigateTo });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [edit.to, globalStateDispatch, isEditing, nextStepName]);
 
   useEffect(() => {
