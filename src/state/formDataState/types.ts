@@ -84,11 +84,7 @@ export type TFormDataState = {
   accountNumber: Nullable<string>;
   sortCode: Nullable<string>;
   relationshipToApplicant: Nullable<string>;
-  has16to18Card: Nullable<boolean>;
-  cardNumber16to18: Nullable<string>;
-  imported: Nullable<boolean>;
   discarded: Nullable<boolean>;
-  isChild: Nullable<boolean>;
   ticketPrice: Nullable<number>;
   receiveByftFree: Nullable<boolean>;
   // Uploaded files

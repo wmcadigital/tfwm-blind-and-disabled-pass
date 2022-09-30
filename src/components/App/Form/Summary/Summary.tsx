@@ -27,15 +27,19 @@ const Summary = () => {
       <h2>Check your answers</h2>
       {applicationForMe ? (
         <>
-          <AboutTheApplicant />
-          <DisabilityProof />
+          <div id="application-summary">
+            <AboutTheApplicant />
+            <DisabilityProof />
+          </div>
           <SendRequest />
         </>
       ) : (
         <>
-          <AboutTheApplicant />
-          <AboutYou />
-          <DisabilityProof />
+          <div id="application-summary">
+            <AboutTheApplicant />
+            <AboutYou />
+            <DisabilityProof />
+          </div>
           <SendRequest />
         </>
       )}

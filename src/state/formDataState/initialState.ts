@@ -80,11 +80,7 @@ const initialState: TFormDataState = {
   accountNumber: null,
   sortCode: null,
   relationshipToApplicant: null,
-  has16to18Card: false,
-  cardNumber16to18: null,
-  imported: null,
   discarded: null,
-  isChild: false,
   ticketPrice: null,
   receiveByftFree: null,
   // Uploaded files

@@ -19,11 +19,14 @@ const SuccessPage = () => {
       />
       <div>
         <h2>What happens next?</h2>
-        <p>You’ll receive an email to confirm your Direct Debit has been set up.</p>
+        <p>You’ll receive an email to confirm that we have received your application.</p>
         <p>
-          Once we confirm your Direct Debit, your Swift card will take up to 10 working days to
-          arrive. If you have not received your new pass at least 3 working days before the start
-          date, please contact our Ticketing Services Team on 0345 303 6760.
+          It can take up to 6 weeks to process an application.It may take longer if we need more
+          information from you.
+        </p>
+        <p>
+          If you’ve not received a response after 6 weeks contact our Ticketing Services team on
+          0345 303 6760.
         </p>
       </div>
     </>
