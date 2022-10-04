@@ -7,6 +7,7 @@ const initialState: TGlobalState = {
     isFinished: false,
     isSubmitted: false,
     isEditing: false,
+    isLoading: false,
     edit: {
       from: null,
       to: null,

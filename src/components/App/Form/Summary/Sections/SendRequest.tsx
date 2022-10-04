@@ -25,7 +25,7 @@ const SendYourRequest = () => {
       rule: 'OPTIONAL',
     },
   ]);
-  const [, globalStateDispatch] = useGlobalContext();
+  const [globalState, globalStateDispatch] = useGlobalContext();
   const fileData = [];
   const applicationNumber = Math.floor(Math.random() * 10000000 + 1).toString();
   const files = [
@@ -67,6 +67,9 @@ const SendYourRequest = () => {
         content: base64File.split('base64,')[1],
       });
     }
+    globalStateDispatch({
+      type: 'LOAD_FORM',
+    });
     await fetch(`https://internal-api.wmca.org.uk/emails/api/email`, {
       method: 'POST',
       headers: {
@@ -124,7 +127,6 @@ const SendYourRequest = () => {
     if (!termsValidation.isValid || !privacyValidation.isValid || !agreeValidation.isValid) return;
     sendEmailHandler();
   };
-
   return (
     <div>
       <h3 className="wmnds-m-t-md">Now send your request</h3>
@@ -184,6 +186,7 @@ const SendYourRequest = () => {
         btnClass="wmnds-btn wmnds-btn--start wmnds-m-t-lg"
         onClick={handleSubmit}
         text="Accept and send"
+        isFetching={globalState.form.isLoading}
         iconRight="general-chevron-right"
       />
     </div>

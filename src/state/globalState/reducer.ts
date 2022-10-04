@@ -22,6 +22,15 @@ const reducer: TGlobalStateReducer = (state, action) => {
         },
       };
 
+    case 'LOAD_FORM':
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          isLoading: true,
+        },
+      };
+
     case 'SHOW_START_PAGE':
       return {
         ...state,
@@ -60,6 +69,7 @@ const reducer: TGlobalStateReducer = (state, action) => {
         form: {
           ...state.form,
           isSubmitted: true,
+          isLoading: false,
           referenceNo,
         },
       };

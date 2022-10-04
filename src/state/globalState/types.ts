@@ -10,6 +10,7 @@ export type TGlobalState = {
     isFinished: boolean;
     isSubmitted: boolean;
     isEditing: boolean;
+    isLoading: boolean;
     edit: {
       from: Nullable<TSectionAndStep>;
       to: Nullable<TSectionAndStep>;
@@ -32,6 +33,10 @@ export type TSectionAndStepRange = {
 export type TGlobalStateAction =
   | {
       type: 'START_FORM';
+      payload?: null;
+    }
+  | {
+      type: 'LOAD_FORM';
       payload?: null;
     }
   | {

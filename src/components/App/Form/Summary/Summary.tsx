@@ -27,7 +27,7 @@ const Summary = () => {
       <h2>Check your answers</h2>
       {applicationForMe ? (
         <>
-          <div id="application-summary">
+          <div id="application-summary" style={{ textAlign: 'left' }}>
             <AboutTheApplicant />
             <DisabilityProof />
           </div>
@@ -35,7 +35,7 @@ const Summary = () => {
         </>
       ) : (
         <>
-          <div id="application-summary">
+          <div id="application-summary" style={{ textAlign: 'left' }}>
             <AboutTheApplicant />
             <AboutYou />
             <DisabilityProof />
