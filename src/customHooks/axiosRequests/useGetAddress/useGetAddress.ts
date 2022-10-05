@@ -5,7 +5,7 @@ const useGetAddress = (searchString: string) => {
   const { REACT_APP_API_HOST } = process.env;
 
   const { isLoading, hasError, response, sendRequest } = useAxiosRequest<TApiAddress[]>({
-    url: `${REACT_APP_API_HOST}/Addresses/AddressByPostcode/${encodeURI(searchString)}`,
+    url: `https://apis.networkwestmidlands.com/Addresses/AddressByPostcode/${encodeURI(searchString)}`,
   });
 
   return {
