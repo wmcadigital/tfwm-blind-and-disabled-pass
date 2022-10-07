@@ -9,7 +9,7 @@ const SuccessPage = () => {
     <>
       <Message
         type="success-fill-no-icon"
-        title="We've recieved your form"
+        title="We've received your form"
         content={
           <p className="wmnds-m-t-md wmnds-m-b-none">
             Your application reference number is <strong>{referenceNo}</strong>
@@ -21,7 +21,7 @@ const SuccessPage = () => {
         <h2>What happens next?</h2>
         <p>You’ll receive an email to confirm that we have received your application.</p>
         <p>
-          It can take up to 6 weeks to process an application.It may take longer if we need more
+          It can take up to 6 weeks to process an application. It may take longer if we need more
           information from you.
         </p>
         <p>
