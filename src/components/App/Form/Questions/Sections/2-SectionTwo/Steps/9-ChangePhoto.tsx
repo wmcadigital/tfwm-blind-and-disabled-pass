@@ -31,7 +31,7 @@ const CurrentPass = () => {
   };
   const question = applicationForMe.currentValue
     ? 'Do you want to change the photo on your card?'
-    : `Do you want to change the photo on  ${ApplicantFirstName.currentValue}'s' card?`;
+    : `Do you want to change the photo on  ${ApplicantFirstName.currentValue}'s card?`;
   return (
     <Question question={question} handleContinue={handleContinue} showError={changePhoto.hasError}>
       <Radios
