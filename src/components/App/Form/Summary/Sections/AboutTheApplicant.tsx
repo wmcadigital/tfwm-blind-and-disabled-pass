@@ -51,12 +51,16 @@ const AboutTheApplicant = () => {
     ],
     [
       <span>Ethnicity</span>,
-      <span>{`${ethnicityDetails || ethnicity}`}</span>,
+      <span>{`${
+        ethnicity !== 'Prefer not to say' ? ethnicityDetails || ethnicity : ethnicity
+      }`}</span>,
       <ChangeAnswerButton from="ApplicantEthnicity" />,
     ],
     [
       <span>Ethnicity</span>,
-      <span>{`${ethnicityDetails || ethnicity}`}</span>,
+      <span>{`${
+        ethnicity !== 'Prefer not to say' ? ethnicityDetails || ethnicity : ethnicity
+      }`}</span>,
       <ChangeAnswerButton from="ApplicantEthnicity" />,
     ],
     [

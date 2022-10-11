@@ -1,3 +1,4 @@
+import { useGlobalContext } from 'state/globalState';
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Question, Input } from 'components/shared';
 import { useFormDataContext } from 'state/formDataState/context';
@@ -10,9 +11,12 @@ const Distance = () => {
   const next = alternateStart ? 'RightCategories' : 'DisablityCategories';
   const { goToNextStep } = useNavigationLogic('Name', next);
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
 
   const handleContinue = () => {
     relationshipToApplicant.save();
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     goToNextStep();
   };
 

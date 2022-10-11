@@ -9,13 +9,16 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
   const { isEditing } = globalState.form;
 
   const ethnicity = useFormDataSubscription('ethnicity');
-
+  const ethnicityDetails = useFormDataSubscription('ethnicityDetails');
   const handleContinue = () => {
     if (!ethnicity.validate()) return;
     // If user changes this step we need to delete any saved data
     if (ethnicity.savedValue !== null && ethnicity.currentValue !== ethnicity.savedValue) {
-      if (isEditing && ethnicity.savedValue === 'Prefer not to say')
+      if (isEditing && ethnicity.currentValue === 'Prefer not to say') {
+        ethnicity.save();
+        ethnicityDetails.set(null);
         globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
+      }
     }
     ethnicity.save();
     handleNavigation();
