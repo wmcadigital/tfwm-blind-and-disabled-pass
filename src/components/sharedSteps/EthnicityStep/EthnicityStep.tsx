@@ -1,5 +1,4 @@
 import { Question, Radios } from 'components/shared';
-import { useFormDataContext } from 'state/formDataState';
 import { useGlobalContext } from 'state/globalState';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
 
@@ -9,19 +8,14 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { isEditing } = globalState.form;
 
-  const [, formDataDispatch] = useFormDataContext();
   const ethnicity = useFormDataSubscription('ethnicity');
 
   const handleContinue = () => {
     if (!ethnicity.validate()) return;
     // If user changes this step we need to delete any saved data
     if (ethnicity.savedValue !== null && ethnicity.currentValue !== ethnicity.savedValue) {
-      globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
-      if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
-      else {
-        formDataDispatch({ type: 'CLEAR_TICKET_HOLDER_DATA' });
-        formDataDispatch({ type: 'CLEAR_PAYER_DATA' });
-      }
+      if (isEditing && ethnicity.savedValue === 'Prefer not to say')
+        globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     }
     ethnicity.save();
     handleNavigation();

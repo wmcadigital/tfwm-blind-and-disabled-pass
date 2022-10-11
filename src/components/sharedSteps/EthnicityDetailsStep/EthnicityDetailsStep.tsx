@@ -1,4 +1,3 @@
-import { useFormDataContext } from 'state/formDataState';
 import { useGlobalContext } from 'state/globalState';
 import { Question, Radios } from 'components/shared';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
@@ -9,7 +8,6 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { isEditing } = globalState.form;
 
-  const [, formDataDispatch] = useFormDataContext();
   const ethnicity = useFormDataSubscription('ethnicity');
   const ethnicityDetails = useFormDataSubscription('ethnicityDetails');
 
@@ -21,11 +19,7 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
       ethnicityDetails.currentValue !== ethnicityDetails.savedValue
     ) {
       globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
-      if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
-      else {
-        formDataDispatch({ type: 'CLEAR_TICKET_HOLDER_DATA' });
-        formDataDispatch({ type: 'CLEAR_PAYER_DATA' });
-      }
+      if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     }
     ethnicityDetails.save();
     handleNavigation();
