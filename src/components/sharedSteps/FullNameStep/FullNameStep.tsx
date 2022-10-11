@@ -1,4 +1,5 @@
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
+import { useGlobalContext } from 'state/globalState';
 import { Input, Question, WarningText } from 'components/shared';
 import { TFullNameStepProps } from './FullNameStep.types';
 
@@ -10,11 +11,14 @@ const FullNameStep = ({
 }: TFullNameStepProps) => {
   const firstName = useFormDataSubscription(`${dataNamePrefix}FirstName`);
   const lastName = useFormDataSubscription(`${dataNamePrefix}LastName`);
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
 
   const handleContinue = () => {
     const firstNameValid = firstName.save();
     const lastNameValid = lastName.save();
     if (!firstNameValid || !lastNameValid) return;
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
 

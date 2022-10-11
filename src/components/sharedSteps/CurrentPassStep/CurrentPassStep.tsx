@@ -1,3 +1,4 @@
+import { useGlobalContext } from 'state/globalState';
 import Question from 'components/shared/Question/Question';
 import { Input } from 'components/shared';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
@@ -7,9 +8,12 @@ import { TSharedStepProps } from 'types/step';
 
 const CurrentPassStep = ({ handleNavigation, question }: TSharedStepProps) => {
   const passNumber = useFormDataSubscription('passNumber');
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
   const handleContinue = () => {
     const isPassNumber = passNumber.save();
     if (!isPassNumber) return;
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
 

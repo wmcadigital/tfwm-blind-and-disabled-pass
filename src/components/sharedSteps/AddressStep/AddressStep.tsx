@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { useGlobalContext } from 'state/globalState';
 import Question from 'components/shared/Question/Question';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
 import { TSharedStepProps } from 'types/step';
@@ -9,6 +9,8 @@ import AddressAutocomplete from './AddressAutocomplete/AddressAutocomplete';
 const AddressStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStepProps) => {
   const [isAddressMissing, setIsAddressMissing] = useState(false);
   const enterAddressManually = () => setIsAddressMissing(true);
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
 
   const addressLine1 = useFormDataSubscription(`${dataNamePrefix}CurrentAddressLine1`);
   const addressLine2 = useFormDataSubscription(`${dataNamePrefix}CurrentAddressLine2`, [
@@ -36,6 +38,7 @@ const AddressStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStep
     const line4Valid = addressLine4.save();
     const postcodeValid = postcode.save();
     if (!line1Valid || !line2Valid || !line3Valid || !line4Valid || !postcodeValid) return;
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
 

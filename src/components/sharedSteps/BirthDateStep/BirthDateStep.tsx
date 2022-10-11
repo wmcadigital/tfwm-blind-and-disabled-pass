@@ -1,14 +1,16 @@
 import Question from 'components/shared/Question/Question';
 import DateInput from 'components/shared/DateInput/DateInput';
-
+import { useGlobalContext } from 'state/globalState';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
 import { TSharedStepProps } from 'types/step';
 
 const BirthDateStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStepProps) => {
   const birthDate = useFormDataSubscription(`${dataNamePrefix}DateOfBirth`);
-
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
   const handleContinue = () => {
     if (!birthDate.save()) return;
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
 

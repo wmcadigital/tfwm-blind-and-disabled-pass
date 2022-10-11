@@ -1,4 +1,6 @@
 import { useFormDataSubscription } from 'customHooks';
+import { useGlobalContext } from 'state/globalState';
+
 import { Question, FileUpload } from 'components/shared';
 import { TSharedStepSimpleProps } from 'types/step';
 
@@ -6,7 +8,8 @@ const PhotoUploadStep = ({ handleNavigation, question }: TSharedStepSimpleProps)
   const file = useFormDataSubscription('ApplicantPhoto');
   const filename = useFormDataSubscription('filename');
   const applicationForMe = useFormDataSubscription('applicationForMe');
-
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
   const handleUpdateFile = (newFile: File | null) => {
     if (newFile === null) {
       file.set(null);
@@ -21,6 +24,7 @@ const PhotoUploadStep = ({ handleNavigation, question }: TSharedStepSimpleProps)
     const isFileValid = file.save();
     const isFilenameValid = filename.save();
     if (!isFileValid || !isFilenameValid) return;
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useGlobalContext } from 'state/globalState';
 import Question from 'components/shared/Question/Question';
 import { Input, Checkbox } from 'components/shared';
 import useFormDataSubscription from 'customHooks/useFormDataSubscription';
@@ -13,6 +14,9 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
   const phoneNumber = useFormDataSubscription(`${dataNamePrefix}MobilePhoneNumber`, [
     { rule: 'PHONE_NUMBER' },
   ]);
+  const [globalState, globalStateDispatch] = useGlobalContext();
+  const { isEditing } = globalState.form;
+
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const contactPreferences = useFormDataSubscription('contactPreference');
   const contactPerson = useFormDataSubscription('contactPerson');
@@ -38,6 +42,7 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
     contactPreferences.save();
     if (contactPref.length < 1 || (hasEmail && !isEmailValid) || (hasPhone && !isPhoneNumberValid))
       return;
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
   const details = applicationForMe.currentValue

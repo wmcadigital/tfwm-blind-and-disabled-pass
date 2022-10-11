@@ -31,7 +31,12 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
   const white = [
     { text: 'British', html: null, value: 'British', info: null },
     { text: 'Irish', html: null, value: 'Irish', info: null },
-    { text: 'Any other White background', html: null, value: 'Any', info: null },
+    {
+      text: 'Any other White background',
+      html: null,
+      value: 'Any other White background',
+      info: null,
+    },
   ];
   const mixed = [
     {
