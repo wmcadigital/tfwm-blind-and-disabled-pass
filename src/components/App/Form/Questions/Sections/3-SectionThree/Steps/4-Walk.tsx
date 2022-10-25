@@ -14,8 +14,9 @@ const Walk = () => {
     index >= 0 && index < categories.length - 1
       ? formPath[2].find((i) => i === categories[index + 1])
       : 'Summary';
-
-  const prevStep = 'DisablityCategories';
+  const previous =
+    index >= 0 ? formPath[2].find((i) => i === categories[index - 1]) : 'DisablityCategories';
+  const prevStep = previous || 'DisablityCategories';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
   const question = 'Proof of disability - cannot walk or find it difficult to walk short distances';
   const application = () => {

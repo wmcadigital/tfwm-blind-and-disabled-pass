@@ -30,7 +30,7 @@ const ViewToShow = () => {
 
   return (
     <div className="wmnds-container wmnds-p-t-sm wmnds-p-b-lg wmnds-grid">
-      {!showStartPage && !showSuccess && showBack && (
+      {!showStartPage && !showSuccess && showBack && !showSummary && (
         <div className="wmnds-col-1 wmnds-m-b-lg">
           <BackButton />
         </div>

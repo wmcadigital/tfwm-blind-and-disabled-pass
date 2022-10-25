@@ -7,6 +7,7 @@ const Drive = () => {
   const [formDataState] = useFormDataContext();
   const { disabilityCategories } = formDataState;
   const applicationForMe = useFormDataSubscription('applicationForMe');
+  const hasDrivingLicense = useFormDataSubscription('hasDrivingLicense');
   const categories = disabilityCategories || [];
 
   const index = categories.indexOf('Drive');
@@ -14,9 +15,8 @@ const Drive = () => {
     index >= 0 && index < categories.length - 1
       ? formPath[2].find((i) => i === categories[index + 1])
       : 'Summary';
-
-  const prevStep = 'DisablityCategories';
-  const { goToNextStep } = useNavigationLogic(prevStep, next);
+  const prev = hasDrivingLicense.currentValue ? 'DrivingLicense' : 'RefusedLicense';
+  const { goToNextStep } = useNavigationLogic(prev, next);
   const question = `Proof of disability - cannot drive a car because ${
     applicationForMe.currentValue ? 'I' : 'they'
   } have a medical condition`;

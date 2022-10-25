@@ -13,6 +13,7 @@ const DisabilityProofStep = ({
   dataCategoryPrefix,
   alternateEvidence,
   applicationNot,
+  applicationInfo,
 }: TSharedStepDocsProps) => {
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { isEditing } = globalState.form;
@@ -103,7 +104,7 @@ const DisabilityProofStep = ({
       handleContinue={handleContinue}
       showError={identityDocument.hasError}
     >
-      {application() !== undefined && (
+      {application && application() !== undefined && (
         <div
           className={
             canApply
@@ -134,6 +135,15 @@ const DisabilityProofStep = ({
           <div className="wmnds-ticket-summary-msg__info">
             <>{applicationNot()}</>
           </div>
+        </div>
+      )}
+      {applicationInfo && applicationInfo() !== undefined && (
+        <div className="wmnds-warning-text wmnds-warning-text--info">
+          <div style={{ color: '#3c1053' }}>
+            <Icon iconName="general-info" className="wmnds-warning-text__icon" />
+          </div>
+          <>{applicationInfo()}</>
+          <br />
         </div>
       )}
       <p>

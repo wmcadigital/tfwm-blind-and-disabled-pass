@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useState } from 'react';
-import { Button, Checkbox, Icon } from 'components/shared';
+import { Button, Checkbox } from 'components/shared';
 import { validate } from 'helpers/validation';
 import { Nullable } from 'types/helpers';
 import { TError } from 'types/validation';
@@ -10,7 +10,6 @@ import { useGlobalContext } from 'state/globalState/context';
 
 const SendYourRequest = () => {
   const [formDataState] = useFormDataContext();
-  const { disabilityCategories } = formDataState;
 
   const [hasAgreedToTerms, setHasAgreedToTerms] = useState(false);
   const [termsError, setTermsError] = useState<Nullable<TError>>(null);
@@ -134,16 +133,7 @@ const SendYourRequest = () => {
         By submitting this request you are confirming that, to the best of your knowledge, the
         details you are providing are correct.
       </p>
-      {disabilityCategories && disabilityCategories.includes('DrivingLicense') && (
-        <div className="wmnds-warning-text wmnds-warning-text--info">
-          <Icon iconName="general-warning-triangle" className="wmnds-warning-text__icon" />
-          <p>
-            After you have submitted your application, you need to provide certificate of{' '}
-            <a href="/##">revocation from the Driver and Vehicle Licensing Agency (DVLA)</a>{' '}
-            indicating refusal or withdrawal of your licence.
-          </p>
-        </div>
-      )}
+
       <Checkbox
         name="ContactGPAgreement"
         classes="wmnds-m-b-md"

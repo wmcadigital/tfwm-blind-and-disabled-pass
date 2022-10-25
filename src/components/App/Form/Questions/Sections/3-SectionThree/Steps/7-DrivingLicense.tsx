@@ -1,11 +1,21 @@
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Question, Radios } from 'components/shared';
+import { useFormDataContext } from 'state/formDataState/context';
+import { formPath } from 'components/App/Form/Questions/Sections';
 
 const DrivingLicense = () => {
+  const [formDataState] = useFormDataContext();
+  const { disabilityCategories } = formDataState;
+  const categories = disabilityCategories || [];
+
+  const index = categories.indexOf('DrivingLicense');
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const hasDrivingLicense = useFormDataSubscription('hasDrivingLicense');
   const nextStep = hasDrivingLicense.currentValue ? 'Drive' : 'RefusedLicense';
-  const { goToNextStep } = useNavigationLogic('DisablityCategories', nextStep);
+  const previous =
+    index >= 0 ? formPath[2].find((i) => i === categories[index - 1]) : 'DisablityCategories';
+  const prevStep = previous || 'DisablityCategories';
+  const { goToNextStep } = useNavigationLogic(prevStep, nextStep);
   const handleContinue = () => {
     if (!hasDrivingLicense.validate()) return;
     hasDrivingLicense.save();

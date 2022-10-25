@@ -12,6 +12,7 @@ export const formPath = [
     'CurrentPassNumber',
     'ChangePhoto',
     'ApplicantPhoto',
+    'NotEligible',
   ],
   [
     'RightCategories',

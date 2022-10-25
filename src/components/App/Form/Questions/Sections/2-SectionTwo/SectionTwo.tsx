@@ -12,6 +12,8 @@ import CurrentPass from './Steps/7-ApplicantCurrentPass';
 import CurrentPassNumber from './Steps/8-CurrentPassNumber';
 import ChangePhoto from './Steps/9-ChangePhoto';
 import ApplicantPhoto from './Steps/10-ApplicantPhoto';
+import NotEligible from './Steps/11-NotEligible';
+
 import { useFormDataSubscription } from '../../../../../../customHooks';
 
 const SectionTwo = ({ totalSections }: TSectionProps) => {
@@ -33,6 +35,7 @@ const SectionTwo = ({ totalSections }: TSectionProps) => {
         CurrentPassNumber,
         ChangePhoto,
         ApplicantPhoto,
+        NotEligible,
       ]}
     />
   );

@@ -15,7 +15,9 @@ const Arms = () => {
       ? formPath[2].find((i) => i === categories[index + 1])
       : 'Summary';
 
-  const prevStep = 'DisablityCategories';
+  const previous =
+    index >= 0 ? formPath[2].find((i) => i === categories[index - 1]) : 'DisablityCategories';
+  const prevStep = previous || 'DisablityCategories';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
   const question = 'Proof of disability - unable to use both arms';
   const canApply = true;

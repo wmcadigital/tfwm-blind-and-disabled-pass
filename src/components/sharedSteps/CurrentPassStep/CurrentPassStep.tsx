@@ -20,14 +20,14 @@ const CurrentPassStep = ({ handleNavigation, question }: TSharedStepProps) => {
   return (
     <Question question={question} handleContinue={handleContinue} showError={passNumber.hasError}>
       <p>This is the long number on the front of the card.</p>
-      <img className="wmnds-img wmnds-col-auto" src={card} alt="Direct debit logo" />
+      <img className="wmnds-img wmnds-col-auto" src={card} alt="Passcard example" />
 
       <Input
         groupClassName="wmnds-m-b-lg"
         name="passNumber"
         inputmode="numeric"
         label={<>Pass number</>}
-        type="text"
+        type="number"
         pattern="[0-9]*"
         maxLength={18}
         className="wmnds-col-1 wmnds-col-md-1-2"

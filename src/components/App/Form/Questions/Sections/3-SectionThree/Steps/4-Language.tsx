@@ -14,16 +14,18 @@ const Language = () => {
     index >= 0 && index < categories.length - 1
       ? formPath[2].find((i) => i === categories[index + 1])
       : 'Summary';
-
-  const prevStep = 'DisablityCategories';
+  const previous =
+    index >= 0 ? formPath[2].find((i) => i === categories[index - 1]) : 'DisablityCategories';
+  const prevStep = previous || 'DisablityCategories';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
   const canApply = false;
   const question = 'Proof of disability - cannot speak at all in any language';
   const pronoun = applicationForMe.currentValue ? 'you' : 'they';
-  const application = () => {
+  const pronouns = applicationForMe.currentValue ? 'your' : 'their';
+  const applicationInfo = () => {
     return (
       <>
-        <p>If their speech is slow or difficult to understand.</p>
+        <p>If {pronouns} speech is slow or difficult to understand.</p>
       </>
     );
   };
@@ -45,7 +47,7 @@ const Language = () => {
       handleNavigation={goToNextStep}
       question={question}
       documentsList={documentsList}
-      application={application}
+      applicationInfo={applicationInfo}
       canApply={canApply}
       dataCategoryPrefix="Language"
       alternateEvidence={false}

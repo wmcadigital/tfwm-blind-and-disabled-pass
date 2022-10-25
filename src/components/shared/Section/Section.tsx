@@ -18,12 +18,13 @@ const Section = ({ totalSections, title, steps }: TProps) => {
     }
     return '1';
   };
+  const eligible = currentSection === 2 && currentStep === 12;
   return (
     <div>
-      {currentSection !== 1 && (
+      {currentSection !== 1 && !eligible && (
         <p className="wmnds-m-b-none">{`Section ${options()} of ${totalSections - 1}`}</p>
       )}
-      <strong>{title}</strong>
+      {!eligible && <strong>{title}</strong>}
       <StepToShow />
     </div>
   );

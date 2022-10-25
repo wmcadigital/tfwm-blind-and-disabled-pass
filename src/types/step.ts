@@ -31,8 +31,9 @@ export type TSharedDocProps = {
   question: string;
   canApply: boolean;
   documentsList: () => void;
-  application: () => void;
+  application?: () => void;
   applicationNot?: () => void;
+  applicationInfo?: () => void;
   dataNamePrefix: 'Behalf' | 'Applicant';
   dataCategoryPrefix: string;
   alternateEvidence: boolean;
@@ -61,4 +62,5 @@ export type TSharedStepDocsProps = Pick<
   | 'dataCategoryPrefix'
   | 'alternateEvidence'
   | 'applicationNot'
+  | 'applicationInfo'
 >;

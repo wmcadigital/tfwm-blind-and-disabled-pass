@@ -3,6 +3,7 @@ import { useGlobalContext } from 'state/globalState';
 
 import { Question, FileUpload } from 'components/shared';
 import { TSharedStepSimpleProps } from 'types/step';
+import card from 'assets/images/Face.jpg';
 
 const PhotoUploadStep = ({ handleNavigation, question }: TSharedStepSimpleProps) => {
   const file = useFormDataSubscription('ApplicantPhoto');
@@ -32,8 +33,23 @@ const PhotoUploadStep = ({ handleNavigation, question }: TSharedStepSimpleProps)
     <Question question={question} handleContinue={handleContinue} showError={file.hasError}>
       <p>We&apos;ll use this on {applicationForMe.savedValue ? 'your' : 'their'} new pass.</p>
       <p>
-        This must be a clear portrait photo of {applicationForMe.savedValue ? 'your' : 'their'} face
-        without any filters.
+        <strong>{applicationForMe.savedValue ? 'Your' : 'Their'} digital photo needs to</strong>
+      </p>
+      <ul>
+        <li>have a plain, light-coloured background</li>
+        <li>include {applicationForMe.savedValue ? 'your' : 'their'} shoulders</li>
+        <li>show {applicationForMe.savedValue ? 'your' : 'their'} face clearly</li>
+        <li>
+          show {applicationForMe.savedValue ? 'you' : 'them'} without glasses, unless{' '}
+          {applicationForMe.savedValue ? 'you' : 'they'} have to do so
+        </li>
+        <li>not use any filters</li>
+      </ul>
+      <p>
+        <strong>Example photo</strong>
+      </p>
+      <p>
+        <img className="wmnds-img wmnds-col-auto" src={card} alt="Passcard example" />
       </p>
       <FileUpload
         label={applicationForMe.savedValue ? 'Your photo' : 'Their photo'}
