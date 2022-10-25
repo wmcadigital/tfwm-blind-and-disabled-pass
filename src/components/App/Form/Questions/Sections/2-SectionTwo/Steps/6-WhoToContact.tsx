@@ -6,11 +6,12 @@ const WhoToContact = () => {
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { isEditing } = globalState.form;
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
-
-  const { goToNextStep } = useNavigationLogic(
-    'ApplicantEthnicityDetails',
-    'ApplicantContactDetails',
-  );
+  const ethnicity = useFormDataSubscription('ethnicity');
+  const ethPrevious =
+    ethnicity.savedValue === 'Prefer not to say'
+      ? 'ApplicantEthnicity'
+      : 'ApplicantEthnicityDetails';
+  const { goToNextStep } = useNavigationLogic(ethPrevious, 'ApplicantContactDetails');
 
   const contactPerson = useFormDataSubscription('contactPerson');
 

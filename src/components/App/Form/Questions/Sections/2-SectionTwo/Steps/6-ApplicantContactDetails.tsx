@@ -5,7 +5,12 @@ const ApplicantContactDetails = () => {
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
 
   const applicationForMe = useFormDataSubscription('applicationForMe');
-  const previousStep = applicationForMe.currentValue ? 'ApplicantEthnicityDetails' : 'WhoToContact';
+  const ethnicity = useFormDataSubscription('ethnicity');
+  const ethPrevious =
+    ethnicity.savedValue === 'Prefer not to say'
+      ? 'ApplicantEthnicity'
+      : 'ApplicantEthnicityDetails';
+  const previousStep = applicationForMe.currentValue ? ethPrevious : 'WhoToContact';
   const { goToNextStep } = useNavigationLogic(previousStep, 'CurrentPass');
   const contactPerson = useFormDataSubscription('contactPerson');
   const contact = contactPerson.savedValue ? 'you' : ApplicantFirstName.savedValue;
