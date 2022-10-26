@@ -13,12 +13,10 @@ const EthnicityStep = ({ handleNavigation, question }: TSharedStepProps) => {
   const handleContinue = () => {
     if (!ethnicity.validate()) return;
     // If user changes this step we need to delete any saved data
-    if (ethnicity.savedValue !== null && ethnicity.currentValue !== ethnicity.savedValue) {
-      if (isEditing && ethnicity.currentValue === 'Prefer not to say') {
-        ethnicity.save();
-        ethnicityDetails.set(null);
-        globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
-      }
+    if (isEditing && ethnicity.currentValue === 'Prefer not to say') {
+      ethnicity.save();
+      ethnicityDetails.set(null);
+      globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     }
     ethnicity.save();
     handleNavigation();

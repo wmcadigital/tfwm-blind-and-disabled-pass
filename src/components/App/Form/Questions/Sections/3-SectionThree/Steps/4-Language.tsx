@@ -8,7 +8,6 @@ const Language = () => {
   const { disabilityCategories } = formDataState;
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const categories = disabilityCategories || [];
-
   const index = categories.indexOf('Language');
   const next =
     index >= 0 && index < categories.length - 1

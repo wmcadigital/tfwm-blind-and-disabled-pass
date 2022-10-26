@@ -8,7 +8,6 @@ const Walk = () => {
   const { disabilityCategories } = formDataState;
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const categories = disabilityCategories || [];
-
   const index = categories.indexOf('Walk');
   const next =
     index >= 0 && index < categories.length - 1

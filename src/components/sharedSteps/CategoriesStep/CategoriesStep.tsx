@@ -44,6 +44,9 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
     if (arr.includes('Deaf') && !proofDocumentDeaf.savedValue) {
       return 4;
     }
+    if (arr.includes('Language') && !proofDocumentLanguage.savedValue) {
+      return 5;
+    }
     if (arr.includes('Walk') && distanceMetric.savedValue === null) {
       if (!proofDocumentWalk.savedValue) {
         return 6;
@@ -55,9 +58,6 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
     }
     if (arr.includes('Learn') && !proofDocumentLearn.savedValue) {
       return 9;
-    }
-    if (arr.includes('Language') && !proofDocumentLanguage.savedValue) {
-      return 5;
     }
     if (arr.includes('DrivingLicense') && !proofDocumentDrive.savedValue) {
       return 10;

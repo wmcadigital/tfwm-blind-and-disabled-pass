@@ -14,13 +14,7 @@ const EthnicityDetailsStep = ({ handleNavigation, question }: TSharedStepProps) 
   const handleContinue = () => {
     if (!ethnicityDetails.validate()) return;
     // If user changes this step we need to delete any saved data
-    if (
-      ethnicityDetails.savedValue !== null &&
-      ethnicityDetails.currentValue !== ethnicityDetails.savedValue
-    ) {
-      globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
-      if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
-    }
+    if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     ethnicityDetails.save();
     handleNavigation();
   };
