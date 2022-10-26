@@ -21,13 +21,14 @@ const Arms = () => {
   const { goToNextStep } = useNavigationLogic(prevStep, next);
   const question = 'Proof of disability - unable to use both arms';
   const canApply = true;
+  const pronouns = applicationForMe.currentValue ? 'your' : 'their';
 
   const application = () => {
     return (
       <>
         <p>
-          If their disability has a big impact on daily activities such as paying a fare on a bus or
-          train.
+          If {pronouns} disability has a big impact on daily activities such as paying a fare on a
+          bus or train.
         </p>
       </>
     );

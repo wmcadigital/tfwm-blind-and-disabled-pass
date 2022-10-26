@@ -19,10 +19,12 @@ const Walk = () => {
   const prevStep = previous || 'DisablityCategories';
   const { goToNextStep } = useNavigationLogic(prevStep, next);
   const question = 'Proof of disability - cannot walk or find it difficult to walk short distances';
+  const pronouns = applicationForMe.currentValue ? 'Your' : 'Their';
+
   const application = () => {
     return (
       <>
-        <p>Their impairment is the same as someone who gets</p>
+        <p>{pronouns} impairment is the same as someone who gets</p>
 
         <ul>
           <li>high rate mobility component of the Disability Living Allowance (DLA)</li>
