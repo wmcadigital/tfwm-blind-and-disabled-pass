@@ -26,7 +26,7 @@ const Walk = () => {
         <p>{pronouns} impairment is the same as someone who gets</p>
 
         <ul>
-          <li>high rate mobility component of the Disability Living Allowance (DLA)</li>
+          <li>High rate mobility component of the Disability Living Allowance (DLA)</li>
           <li>
             Standard or enhanced rate of the mobility component of Personal Independence Payments
             (PIP).

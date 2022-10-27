@@ -6,7 +6,6 @@ import { removeNthItem } from 'helpers/summary';
 const AboutTheApplicant = () => {
   const [formDataState] = useFormDataContext();
   const { applicationForMe } = formDataState;
-
   const {
     ApplicantFirstName,
     ApplicantLastName,
@@ -52,14 +51,14 @@ const AboutTheApplicant = () => {
     [
       <span>Ethnicity</span>,
       <span>{`${
-        ethnicity !== 'Prefer not to say' ? ethnicityDetails || ethnicity : ethnicity
+        ethnicity !== 'Prefer not to say' ? `${ethnicity}, ${ethnicityDetails}` : ethnicity
       }`}</span>,
       <ChangeAnswerButton from="ApplicantEthnicity" />,
     ],
     [
       <span>Ethnicity</span>,
       <span>{`${
-        ethnicity !== 'Prefer not to say' ? ethnicityDetails || ethnicity : ethnicity
+        ethnicity !== 'Prefer not to say' ? `${ethnicity}, ${ethnicityDetails}` : ethnicity
       }`}</span>,
       <ChangeAnswerButton from="ApplicantEthnicity" />,
     ],

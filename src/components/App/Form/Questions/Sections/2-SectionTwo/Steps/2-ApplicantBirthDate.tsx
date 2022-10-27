@@ -4,13 +4,17 @@ import { BirthDateStep } from 'components/sharedSteps';
 const ApplicantBirthDate = () => {
   const applicationForMe = useFormDataSubscription('applicationForMe');
   const dob = useFormDataSubscription('ApplicantDateOfBirth');
-  const birthDate = dob.savedValue ? dob.savedValue : Date.now();
-  // @ts-ignore
-  const diff = Date.now() - birthDate;
-  const age = new Date(diff);
-  const years = Math.abs(age.getUTCFullYear() - 1970);
-
-  const next = years > 5 ? 'ApplicantAddress' : 'NotEligible';
+  const birthDated = dob.savedValue ? dob.savedValue : Date.now();
+  const birthDate = new Date(birthDated).toISOString().slice(0, 10);
+  const now = new Date().toISOString().slice(0, 10);
+  const getMonthDifference = (
+    startDate: { getTime: () => number; getFullYear: () => number },
+    endDate: { getTime: () => number; getFullYear: () => number },
+  ) => {
+    return Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+  };
+  const months = getMonthDifference(new Date(birthDate), new Date(now));
+  const next = months > 1826 ? 'ApplicantAddress' : 'NotEligible';
   const { goToNextStep } = useNavigationLogic('ApplicantName', next);
 
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');

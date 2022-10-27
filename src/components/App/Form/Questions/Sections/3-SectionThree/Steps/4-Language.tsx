@@ -24,7 +24,7 @@ const Language = () => {
   const applicationInfo = () => {
     return (
       <>
-        <p>If {pronouns} speech is slow or difficult to understand.</p>
+        <p>You cannot apply if {pronouns} speech is slow or difficult to understand.</p>
       </>
     );
   };

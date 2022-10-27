@@ -46,7 +46,7 @@ const Drive = () => {
         </ul>
         <p>
           We might need more proof or a healthcare assessment to understand how severe {pronounOwn}
-          condition is.
+          &nbsp;condition is.
         </p>
       </>
     );
