@@ -171,6 +171,8 @@ const SendYourRequest = () => {
         onChange={toggleCheckboxValue(sethasAgreedToPrivacy, setPrivacyError)}
         error={privacyError}
       />
+      <br />
+      <span>Submission can take a while depending upon the size of your attached files.</span>
       <Button
         type="button"
         btnClass="wmnds-btn wmnds-btn--start wmnds-m-t-lg"
