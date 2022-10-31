@@ -13,6 +13,7 @@ export const formPath = [
     'ChangePhoto',
     'ApplicantPhoto',
     'NotEligible',
+    'NotEligiblePostCode',
   ],
   [
     'RightCategories',

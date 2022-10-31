@@ -7,7 +7,7 @@ import s from './Question.module.scss';
 const Question = ({ question, handleContinue, children, showError, isLoading }: TQuestionProps) => {
   const [globalState] = useGlobalContext();
   const { currentSection, currentStep } = globalState.form;
-  const eligible = currentSection === 2 && currentStep === 12;
+  const eligible = currentSection === 2 && (currentStep === 12 || currentStep === 13);
 
   return (
     <>

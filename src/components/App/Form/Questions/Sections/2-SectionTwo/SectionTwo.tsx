@@ -13,6 +13,7 @@ import CurrentPassNumber from './Steps/8-CurrentPassNumber';
 import ChangePhoto from './Steps/9-ChangePhoto';
 import ApplicantPhoto from './Steps/10-ApplicantPhoto';
 import NotEligible from './Steps/11-NotEligible';
+import NotEligiblePostCode from './Steps/11-NotEligiblePostCode';
 
 import { useFormDataSubscription } from '../../../../../../customHooks';
 
@@ -36,6 +37,7 @@ const SectionTwo = ({ totalSections }: TSectionProps) => {
         ChangePhoto,
         ApplicantPhoto,
         NotEligible,
+        NotEligiblePostCode,
       ]}
     />
   );

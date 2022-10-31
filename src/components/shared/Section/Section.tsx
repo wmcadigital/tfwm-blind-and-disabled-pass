@@ -18,7 +18,7 @@ const Section = ({ totalSections, title, steps }: TProps) => {
     }
     return '1';
   };
-  const eligible = currentSection === 2 && currentStep === 12;
+  const eligible = currentSection === 2 && (currentStep === 12 || currentStep === 13);
   return (
     <div>
       {currentSection !== 1 && !eligible && (
