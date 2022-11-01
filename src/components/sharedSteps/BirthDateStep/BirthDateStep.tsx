@@ -16,7 +16,7 @@ const BirthDateStep = ({ handleNavigation, question, dataNamePrefix }: TSharedSt
     return Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
   };
   const months = getMonthDifference(new Date(birthDates), new Date(now));
-  const next = months > 1826;
+  const next = months > 1765;
   const [globalState, globalStateDispatch] = useGlobalContext();
   const { isEditing } = globalState.form;
   const handleContinue = () => {
