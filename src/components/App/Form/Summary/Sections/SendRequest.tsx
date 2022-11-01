@@ -75,7 +75,7 @@ const SendYourRequest = () => {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
-        to: 6,
+        to: 8,
         subject: `Blind and disabled application number ${applicationNumber}`,
         body: '{"M":"j"}',
         bodyHtml: base64Content,
