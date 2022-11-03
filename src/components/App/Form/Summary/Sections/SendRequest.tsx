@@ -76,7 +76,7 @@ const SendYourRequest = () => {
       },
       body: JSON.stringify({
         to: 8,
-        subject: `Blind and disabled application number ${applicationNumber}`,
+        subject: `Blind and disabled application`,
         body: '{"M":"j"}',
         bodyHtml: base64Content,
         from:

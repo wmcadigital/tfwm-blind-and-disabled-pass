@@ -1,20 +1,12 @@
-import { useGlobalContext } from 'state/globalState';
 import { Message } from 'components/shared';
 
 const SuccessPage = () => {
-  const [globalState] = useGlobalContext();
-  const { referenceNo } = globalState.form;
-
   return (
     <>
       <Message
         type="success-fill-no-icon"
         title="We've received your form"
-        content={
-          <p className="wmnds-m-t-md wmnds-m-b-none">
-            Your application reference number is <strong>{referenceNo}</strong>
-          </p>
-        }
+        content={<span />}
         classes="wmnds-p-lg wmnds-text-align-center wmnds-m-b-lg"
       />
       <div>

@@ -35,13 +35,11 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
   };
 
   const handleContinue = () => {
-    const hasEmail = contactPref.includes('Email');
     const hasPhone = contactPref.includes('Phone');
     const isEmailValid = emailAddress.save();
     const isPhoneNumberValid = phoneNumber.save();
     contactPreferences.save();
-    if (contactPref.length < 1 || (hasEmail && !isEmailValid) || (hasPhone && !isPhoneNumberValid))
-      return;
+    if (!isEmailValid || (hasPhone && !isPhoneNumberValid)) return;
     if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
@@ -58,6 +56,28 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
     >
       <div className="wmnds-m-b-lg">
         <p className="wmnds-m-b-lg">{details}</p>
+        <p className="wmnds-m-b-lg">
+          The email address is mandatory. We use this to confirm receipt of your application.
+        </p>
+        <div className="wmnds-m-b-l">
+          <Input
+            groupClassName="wmnds-m-b-l"
+            name="email"
+            inputmode="email"
+            label={
+              <>
+                Email *
+                <br />
+                For example, name@example.com
+              </>
+            }
+            defaultValue={emailAddress.currentValue}
+            type="text"
+            className="wmnds-col-1 wmnds-col-md-2-3"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => emailAddress.set(e.target.value)}
+            error={emailAddress.error}
+          />
+        </div>
         <Checkbox
           name="Phone"
           classes="wmnds-m-b-md"
@@ -86,36 +106,7 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
             />
           </div>
         )}
-        <Checkbox
-          name="Email"
-          classes="wmnds-m-b-md"
-          labelElement={<span>Email</span>}
-          defaultValue={contactPref.includes('Email')}
-          onChange={handleClick}
-        />
-        {contactPref.includes('Email') && (
-          <div className="wmnds-m-b-l wmnds-m-l-xl">
-            <Input
-              groupClassName="wmnds-m-b-l wmnds-m-l-md"
-              name="email"
-              inputmode="email"
-              label={
-                <>
-                  Email address
-                  <br />
-                  For example, name@example.com
-                </>
-              }
-              defaultValue={emailAddress.currentValue}
-              type="text"
-              className="wmnds-col-1 wmnds-col-md-2-3"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                emailAddress.set(e.target.value)
-              }
-              error={emailAddress.error}
-            />
-          </div>
-        )}
+
         {!contactPerson.savedValue === true && (
           <>
             <Checkbox
