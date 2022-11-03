@@ -66,7 +66,7 @@ const ContactDetailsStep = ({ handleNavigation, question, dataNamePrefix }: TSha
             inputmode="email"
             label={
               <>
-                Email *
+                Email address *
                 <br />
                 For example, name@example.com
               </>
