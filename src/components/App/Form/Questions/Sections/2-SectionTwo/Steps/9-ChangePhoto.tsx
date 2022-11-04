@@ -20,7 +20,6 @@ const CurrentPass = () => {
     if (!changePhoto.validate()) return;
     // If user changes this step we need to delete any saved data
     if (changePhoto.savedValue !== null && changePhoto.currentValue !== changePhoto.savedValue) {
-      globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
       if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
     }
     changePhoto.save();

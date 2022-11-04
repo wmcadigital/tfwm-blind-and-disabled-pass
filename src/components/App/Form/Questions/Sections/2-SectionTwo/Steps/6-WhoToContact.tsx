@@ -22,7 +22,6 @@ const WhoToContact = () => {
       contactPerson.savedValue !== null &&
       contactPerson.currentValue !== contactPerson.savedValue
     ) {
-      globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
       if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
     }
     contactPerson.save();

@@ -11,7 +11,10 @@ const SuccessPage = () => {
       />
       <div>
         <h2>What happens next?</h2>
-        <p>You’ll receive an email to confirm that we have received your application.</p>
+        <p>
+          You’ll receive an email to confirm that we have received your application. It will contain
+          a reference number in case you need to contact us.
+        </p>
         <p>
           It can take up to 6 weeks to process an application. It may take longer if we need more
           information from you.
