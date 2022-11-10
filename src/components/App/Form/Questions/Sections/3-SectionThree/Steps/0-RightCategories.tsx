@@ -38,7 +38,7 @@ const RightCategories = () => {
       <ul>
         {categories.includes('Blind') && <li>are blind or partially sighted in both eyes</li>}
         {categories.includes('Deaf') && (
-          <li>are very deaf or only able to hear a little sound in both ears</li>
+          <li>are deaf or only able to hear a little sound in both ears</li>
         )}
         {categories.includes('Walk') && (
           <li>cannot walk or find it difficult to walk short distances</li>

@@ -38,7 +38,7 @@ const StartPageAlt = () => {
   );
   const deafContent = (
     <>
-      <h3>Very deaf or only able to hear a little sound in both ears</h3>
+      <h3>Deaf or only able to hear a little sound in both ears</h3>
       <p>
         Please upload <strong>one</strong> of the documents below:
       </p>

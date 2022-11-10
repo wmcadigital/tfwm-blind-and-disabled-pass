@@ -58,9 +58,7 @@ const DisablityCategories = () => {
           name="Deaf"
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Deaf')}
-          labelElement={
-            <span>I am very deaf or only able to hear a little sound in both ears</span>
-          }
+          labelElement={<span>I am deaf or only able to hear a little sound in both ears</span>}
           onChange={toggleCheckboxValue(setHasError)}
         />
         <Checkbox

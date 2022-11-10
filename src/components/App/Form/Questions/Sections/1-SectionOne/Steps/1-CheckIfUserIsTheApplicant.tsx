@@ -27,7 +27,6 @@ const CheckIfUserIsTheApplicant = () => {
       applicationForMe.savedValue !== null &&
       applicationForMe.currentValue !== applicationForMe.savedValue
     ) {
-      globalStateDispatch({ type: 'UPDATE_EDIT_FORM_TO', payload: 'ApplicantPhoto' });
       if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
       else {
         formDataDispatch({ type: 'CLEAR_TICKET_HOLDER_DATA' });

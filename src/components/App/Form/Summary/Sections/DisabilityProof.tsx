@@ -45,7 +45,7 @@ const DisabilityProof = () => {
       if (i === 'Blind') {
         arr.push(`${pronoun} ${prep} blind or partially sighted in both eyes`);
       } else if (i === 'Deaf') {
-        arr.push(`${pronoun} ${prep} very deaf or only able to hear a little sound in both ears`);
+        arr.push(`${pronoun} ${prep} deaf or only able to hear a little sound in both ears`);
       } else if (i === 'Walk') {
         arr.push(`${pronoun} cannot walk or find it difficult to walk short distances`);
       } else if (i === 'Arms') {

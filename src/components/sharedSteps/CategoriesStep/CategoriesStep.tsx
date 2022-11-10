@@ -113,7 +113,7 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
           defaultValue={hasDisability.includes('Deaf')}
           labelElement={
             <span>
-              {pronoun} {prep} very deaf or only able to hear a little sound in both ears
+              {pronoun} {prep} deaf or only able to hear a little sound in both ears
             </span>
           }
           onChange={toggleCheckboxValue(setHasError)}
