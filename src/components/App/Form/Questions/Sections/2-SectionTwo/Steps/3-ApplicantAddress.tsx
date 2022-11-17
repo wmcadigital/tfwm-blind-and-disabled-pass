@@ -12,6 +12,7 @@ const ApplicantAddress = () => {
     ApplicantCurrentPostcode && ApplicantCurrentPostcode.substring(0, 1).toUpperCase();
   const postcodeNumber = ApplicantCurrentPostcode ? ApplicantCurrentPostcode.substring(1, 2) : '';
   const isDigit = (n: string) => /\d+/.test(n);
+
   const exceptions =
     postcodeLetter === 'CV8' || postcodeLetter === 'B46' || postcodeLetter === 'WV5';
   const postcodeSort =
