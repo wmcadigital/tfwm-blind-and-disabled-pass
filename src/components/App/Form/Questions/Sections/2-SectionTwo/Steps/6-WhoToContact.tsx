@@ -17,13 +17,6 @@ const WhoToContact = () => {
 
   const handleContinue = () => {
     if (!contactPerson.validate()) return;
-    // If user changes this step we need to delete any saved data
-    if (
-      contactPerson.savedValue !== null &&
-      contactPerson.currentValue !== contactPerson.savedValue
-    ) {
-      if (isEditing) globalStateDispatch({ type: 'ADD_EMPTY_TEMP_PAYER_AND_TICKET_HOLDER_DATA' });
-    }
     contactPerson.save();
     goToNextStep();
   };
