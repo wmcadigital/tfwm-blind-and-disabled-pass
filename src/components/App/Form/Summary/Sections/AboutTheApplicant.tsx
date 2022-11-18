@@ -25,6 +25,7 @@ const AboutTheApplicant = () => {
     currentDisabledPass,
     passNumber,
     contactPreference,
+    contactPerson,
   } = formDataState;
   const tableValues = [
     [
@@ -62,6 +63,15 @@ const AboutTheApplicant = () => {
       }`}</span>,
       <ChangeAnswerButton from="ApplicantEthnicity" />,
     ],
+    applicationForMe
+      ? []
+      : [
+          <span>Who should we contact about this application?</span>,
+          <span>
+            <p>{`${contactPerson ? 'Me' : ApplicantFirstName}`}</p>
+          </span>,
+          <ChangeAnswerButton from="WhoToContact" />,
+        ],
     [
       <span>How would {applicationForMe ? `you` : `they`} like to be contacted?</span>,
       <span>
