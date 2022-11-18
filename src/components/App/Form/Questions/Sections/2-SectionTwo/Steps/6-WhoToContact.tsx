@@ -1,10 +1,7 @@
-import { useGlobalContext } from 'state/globalState';
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
 import { Question, Radios } from 'components/shared';
 
 const WhoToContact = () => {
-  const [globalState, globalStateDispatch] = useGlobalContext();
-  const { isEditing } = globalState.form;
   const ApplicantFirstName = useFormDataSubscription('ApplicantFirstName');
   const ethnicity = useFormDataSubscription('ethnicity');
   const ethPrevious =
