@@ -66,7 +66,7 @@ const AboutTheApplicant = () => {
     applicationForMe
       ? []
       : [
-          <span>Who should we contact about this application?</span>,
+          <span>Who should we contact?</span>,
           <span>
             <p>{`${contactPerson ? 'Me' : ApplicantFirstName}`}</p>
           </span>,
