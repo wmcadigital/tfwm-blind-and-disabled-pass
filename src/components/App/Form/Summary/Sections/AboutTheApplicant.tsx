@@ -73,7 +73,7 @@ const AboutTheApplicant = () => {
           <ChangeAnswerButton from="WhoToContact" />,
         ],
     [
-      <span>How would {applicationForMe ? `you` : `they`} like to be contacted?</span>,
+      <span>Contact preference</span>,
       <span>
         <p>{`${contactPreference.filter((n) => {
           return n.includes('etter');
