@@ -14,7 +14,10 @@ const ApplicantAddress = () => {
   const isDigit = (n: string) => /\d+/.test(n);
 
   const exceptions =
-    postcodeLetter === 'CV8' || postcodeLetter === 'B46' || postcodeLetter === 'WV5';
+    postcodeLetter === 'CV8' ||
+    postcodeLetter === 'B46' ||
+    postcodeLetter === 'WV5' ||
+    postcodeLetter === 'WS11';
   const postcodeSort =
     postcodeWV === 'WV' ||
     postcodeWV === 'CV' ||
