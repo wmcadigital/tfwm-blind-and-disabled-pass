@@ -6,6 +6,7 @@ export type TAddressSubscription = {
   addressLine2: TSubscriptionReturn<Nullable<string>>;
   addressLine3: TSubscriptionReturn<Nullable<string>>;
   addressLine4: TSubscriptionReturn<Nullable<string>>;
+  district: TSubscriptionReturn<Nullable<string>>;
   postcode: TSubscriptionReturn<Nullable<string>>;
 };
 
@@ -14,5 +15,6 @@ export type T4LineAddress = {
   line2: string;
   line3: string;
   line4: string;
+  district: string;
   postcode: string;
 };

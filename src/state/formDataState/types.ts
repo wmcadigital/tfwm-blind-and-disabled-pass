@@ -46,6 +46,7 @@ export type TFormDataState = {
   BehalfCurrentAddressLine2: Nullable<string>;
   BehalfCurrentAddressLine3: Nullable<string>;
   BehalfCurrentAddressLine4: Nullable<string>;
+  BehalfCurrentDistrict: Nullable<string>;
   BehalfCurrentTown: Nullable<string>;
   BehalfPreviousPostcode: Nullable<string>;
   BehalfPreviousAddressLine1: Nullable<string>;
@@ -73,6 +74,7 @@ export type TFormDataState = {
   ApplicantCurrentAddressLine2: Nullable<string>;
   ApplicantCurrentAddressLine3: Nullable<string>;
   ApplicantCurrentAddressLine4: Nullable<string>;
+  ApplicantCurrentDistrict: Nullable<string>;
   ApplicantCurrentTown: Nullable<string>;
   ApplicantPreviousPostcode: Nullable<string>;
   ApplicantPreviousAddressLine1: Nullable<string>;

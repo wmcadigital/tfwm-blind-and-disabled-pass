@@ -8,7 +8,7 @@ import { T4LineAddress } from '../AddressStep.types';
 import { TAddressAutocompleteOption, TAddressAutocompleteProps } from './AddressAutocomplete.types';
 
 const AddressAutocomplete = ({ handleNotFound, address }: TAddressAutocompleteProps) => {
-  const { postcode, addressLine1, addressLine2, addressLine3, addressLine4 } = address;
+  const { postcode, addressLine1, addressLine2, addressLine3, addressLine4, district } = address;
   const [addresses, setAddresses] = useState<Nullable<TAddressAutocompleteOption[]>>(null);
   const [isEditingPostcode, setIsEditingPostcode] = useState(true);
 
@@ -29,6 +29,7 @@ const AddressAutocomplete = ({ handleNotFound, address }: TAddressAutocompletePr
             line2: singleAddress.line_2,
             line3: singleAddress.line_3,
             line4: singleAddress.county,
+            district: singleAddress.district,
             postcode: singleAddress.postcode,
           }),
         };
@@ -47,6 +48,7 @@ const AddressAutocomplete = ({ handleNotFound, address }: TAddressAutocompletePr
     addressLine2.set(addressToSet.line2);
     addressLine3.set(addressToSet.line3);
     addressLine4.set(addressToSet.line4);
+    district.set(addressToSet.district);
     postcode.set(addressToSet.postcode);
   };
 

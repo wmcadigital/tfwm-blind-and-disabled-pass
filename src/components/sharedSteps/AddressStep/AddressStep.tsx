@@ -21,6 +21,7 @@ const AddressStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStep
     { rule: 'OPTIONAL' },
   ]);
   const addressLine4 = useFormDataSubscription(`${dataNamePrefix}CurrentAddressLine4`);
+  const district = useFormDataSubscription(`${dataNamePrefix}CurrentDistrict`);
   const postcode = useFormDataSubscription(`${dataNamePrefix}CurrentPostcode`);
 
   const address = {
@@ -28,6 +29,7 @@ const AddressStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStep
     addressLine2,
     addressLine3,
     addressLine4,
+    district,
     postcode,
   };
 
@@ -36,8 +38,17 @@ const AddressStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStep
     const line2Valid = addressLine2.save();
     const line3Valid = addressLine3.save();
     const line4Valid = addressLine4.save();
+    const districtValid = district.save();
     const postcodeValid = postcode.save();
-    if (!line1Valid || !line2Valid || !line3Valid || !line4Valid || !postcodeValid) return;
+    if (
+      !line1Valid ||
+      !line2Valid ||
+      !line3Valid ||
+      !line4Valid ||
+      !districtValid ||
+      !postcodeValid
+    )
+      return;
     if (isEditing) globalStateDispatch({ type: 'SHOW_SUMMARY_PAGE' });
     handleNavigation();
   };
@@ -47,6 +58,7 @@ const AddressStep = ({ handleNavigation, question, dataNamePrefix }: TSharedStep
     addressLine2.hasError ||
     addressLine3.hasError ||
     addressLine4.hasError ||
+    district.hasError ||
     postcode.hasError;
 
   return (
