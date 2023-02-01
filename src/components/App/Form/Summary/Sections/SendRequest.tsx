@@ -152,7 +152,14 @@ const SendYourRequest = () => {
         classes="wmnds-m-b-md"
         labelElement={
           <span>
-            Agree to the <a href="/##">terms and condition</a>
+            Agree to the{' '}
+            <a
+              href="https://www.tfwm.org.uk/terms-and-conditions/transport-for-west-midlands-website/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              terms and condition
+            </a>
           </span>
         }
         defaultValue={hasAgreedToTerms}
@@ -164,7 +171,14 @@ const SendYourRequest = () => {
         classes="wmnds-m-b-md"
         labelElement={
           <span>
-            Agree to the <a href="/#">privacy policy</a>
+            Agree to the{' '}
+            <a
+              href="https://www.tfwm.org.uk/policies/privacy-and-cookies-policy/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              privacy policy
+            </a>
           </span>
         }
         defaultValue={hasAgreedToPrivacy}
