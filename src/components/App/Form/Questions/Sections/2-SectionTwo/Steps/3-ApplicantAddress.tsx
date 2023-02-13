@@ -11,7 +11,8 @@ const ApplicantAddress = () => {
     'Dudley',
     'Sandwell',
     'Solihull',
-    'Walsall' || 'Wolverhampton',
+    'Walsall',
+    'Wolverhampton',
   ];
   const nextStep = districsAllowed.includes(districtCheck)
     ? 'ApplicantEthnicity'
