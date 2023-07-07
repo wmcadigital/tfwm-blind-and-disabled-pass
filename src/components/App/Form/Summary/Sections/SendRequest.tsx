@@ -47,6 +47,7 @@ const SendYourRequest = () => {
     );
   const sendEmailHandler = async () => {
     const base64Content = editedText && btoa(unescape(encodeURIComponent(editedText)));
+    const fullName = `${formDataState.ApplicantFirstName} ${formDataState.ApplicantLastName}`;
     // returns the base64 string of files
     const toBase64 = (file: Blob) =>
       new Promise((resolve, reject) => {
@@ -84,6 +85,7 @@ const SendYourRequest = () => {
           formDataState.BehalfEmailAddress ||
           'test@test.com',
         files: fileData || [],
+        displayName: fullName,
       }),
     }).then((response) => {
       // If the response is successful(200: OK)
