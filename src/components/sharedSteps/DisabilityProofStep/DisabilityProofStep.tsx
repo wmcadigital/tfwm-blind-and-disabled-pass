@@ -97,7 +97,7 @@ const DisabilityProofStep = ({
       handleNavigation();
     }
   };
-  const one = !question.includes('learn') ? 'one' : 'at least two';
+  // const one = !question.includes('learn') ? 'one' : 'at least two';
   return (
     <Question
       question={question}
@@ -146,9 +146,7 @@ const DisabilityProofStep = ({
           <br />
         </div>
       )}
-      <p>
-        Please upload <strong>{one}</strong> of the documents below:
-      </p>
+      <p>Please upload one of the documents below:</p>
       {documentsList()}
       <p>
         You can take a picture of the document on a mobile phone. Please make sure the image is

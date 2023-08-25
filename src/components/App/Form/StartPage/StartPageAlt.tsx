@@ -143,7 +143,7 @@ const StartPageAlt = () => {
         </div>
       </div>
       <p>
-        Please upload <strong>at least two</strong> of the documents below:
+        Please upload <strong>one</strong> of the documents below:
       </p>
       <ul>
         <li>A letter from your school about your learning ability</li>
