@@ -1,8 +1,9 @@
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
-import { Button, FileUpload, Question } from 'components/shared';
+import { Button, Question } from 'components/shared';
 import { TSharedStepDocsProps, sharedStepSimplePropTypes } from 'types/step';
 import Icon from 'components/shared/Icon/Icon';
 import { useGlobalContext } from 'state/globalState';
+import MultiFileUpload from 'components/shared/MultiFileUpload/MultiFileUpload';
 
 const DisabilityProofStep = ({
   handleNavigation,
@@ -152,12 +153,12 @@ const DisabilityProofStep = ({
         You can take a picture of the document on a mobile phone. Please make sure the image is
         clear enough to read.
       </p>
-      <FileUpload
+      <MultiFileUpload
         hint="Files must be jpeg, png or pdf file format"
         accept=".png,.jpg,.jpeg,.pdf"
         name={`${dataCategoryPrefix}proof`}
-        defaultFile={identityDocument.currentValue}
-        updateFile={identityDocument.set}
+        defaultFiles={identityDocument.currentValue}
+        updateFiles={identityDocument.set}
         error={identityDocument.error}
         aria-label="Files must be jpeg, png or pdf file format"
       />

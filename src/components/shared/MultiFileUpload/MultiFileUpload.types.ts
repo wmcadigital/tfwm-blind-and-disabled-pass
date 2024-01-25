@@ -1,0 +1,12 @@
+import { Nullable } from 'types/helpers';
+import { TError } from 'types/validation';
+
+export type TMultiFileUploadProps = {
+  name: string;
+  error: Nullable<TError>;
+  label?: string;
+  hint?: string;
+  defaultFiles?: Nullable<File[]>;
+  updateFiles: (files: Nullable<File[]>) => void;
+  accept?: string;
+};

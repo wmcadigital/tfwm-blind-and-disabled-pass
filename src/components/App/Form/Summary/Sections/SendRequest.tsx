@@ -29,13 +29,13 @@ const SendYourRequest = () => {
   const applicationNumber = Math.floor(Math.random() * 10000000 + 1).toString();
   const files = [
     formDataState.ApplicantPhoto,
-    formDataState.proofDocumentArms,
-    formDataState.proofDocumentBlind,
-    formDataState.proofDocumentDeaf,
-    formDataState.proofDocumentDrive,
-    formDataState.proofDocumentLanguage,
-    formDataState.proofDocumentLearn,
-    formDataState.proofDocumentWalk,
+    ...formDataState.proofDocumentArms,
+    ...formDataState.proofDocumentBlind,
+    ...formDataState.proofDocumentDeaf,
+    ...formDataState.proofDocumentDrive,
+    ...formDataState.proofDocumentLanguage,
+    ...formDataState.proofDocumentLearn,
+    ...formDataState.proofDocumentWalk,
   ];
   const checkAnswersEl = document.getElementById('application-summary');
   // remove change button
