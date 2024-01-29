@@ -98,6 +98,17 @@ const DisabilityProofStep = ({
       handleNavigation();
     }
   };
+  const deleteFile = (file: File) => {
+    if (identityDocument.currentValue !== null) {
+      const array = [...identityDocument.currentValue];
+      const index = identityDocument.currentValue.indexOf(file);
+      if (index > -1) {
+        array.splice(index, 1);
+        identityDocument.set(array);
+      }
+    }
+  };
+
   // const one = !question.includes('learn') ? 'one' : 'at least two';
   return (
     <Question
@@ -159,6 +170,7 @@ const DisabilityProofStep = ({
         name={`${dataCategoryPrefix}proof`}
         defaultFiles={identityDocument.currentValue}
         updateFiles={identityDocument.set}
+        removeFile={deleteFile}
         error={identityDocument.error}
         aria-label="Files must be jpeg, png or pdf file format"
       />

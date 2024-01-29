@@ -8,5 +8,6 @@ export type TMultiFileUploadProps = {
   hint?: string;
   defaultFiles?: Nullable<File[]>;
   updateFiles: (files: Nullable<File[]>) => void;
+  removeFile: (file: File) => void;
   accept?: string;
 };
