@@ -11,7 +11,7 @@ export const propTypes = {
   filesConfig: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      // files: PropTypes.instanceOf(arrayOf(File)).isRequired,
+      files: PropTypes.arrayOf(PropTypes.instanceOf(File)).isRequired,
     }).isRequired,
   ),
 };
