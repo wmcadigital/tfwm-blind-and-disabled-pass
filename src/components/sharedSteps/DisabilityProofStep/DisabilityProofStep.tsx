@@ -1,8 +1,9 @@
 import { useFormDataSubscription, useNavigationLogic } from 'customHooks';
-import { Button, FileUpload, Question } from 'components/shared';
+import { Button, Question } from 'components/shared';
 import { TSharedStepDocsProps, sharedStepSimplePropTypes } from 'types/step';
 import Icon from 'components/shared/Icon/Icon';
 import { useGlobalContext } from 'state/globalState';
+import MultiFileUpload from 'components/shared/MultiFileUpload/MultiFileUpload';
 
 const DisabilityProofStep = ({
   handleNavigation,
@@ -27,6 +28,7 @@ const DisabilityProofStep = ({
   const proofDocumentLanguage = useFormDataSubscription('proofDocumentLanguage');
   const proofDocumentDrive = useFormDataSubscription('proofDocumentDrive');
   const applicationForMe = useFormDataSubscription('applicationForMe');
+  const maxFilesAllowed = 8;
 
   const { goToNextStep } = useNavigationLogic('DisablityCategories', 'Distance');
   const pronoun = applicationForMe.currentValue ? 'You' : 'They';
@@ -97,6 +99,17 @@ const DisabilityProofStep = ({
       handleNavigation();
     }
   };
+  const deleteFile = (file: File) => {
+    if (identityDocument.currentValue !== null) {
+      const array = [...identityDocument.currentValue];
+      const index = identityDocument.currentValue.indexOf(file);
+      if (index > -1) {
+        array.splice(index, 1);
+        identityDocument.set(array);
+      }
+    }
+  };
+
   // const one = !question.includes('learn') ? 'one' : 'at least two';
   return (
     <Question
@@ -152,14 +165,16 @@ const DisabilityProofStep = ({
         You can take a picture of the document on a mobile phone. Please make sure the image is
         clear enough to read.
       </p>
-      <FileUpload
-        hint="Files must be jpeg, png or pdf file format"
+      <MultiFileUpload
+        hint={`Files must be jpeg, png or pdf file format. You can upload up to ${maxFilesAllowed} files.`}
         accept=".png,.jpg,.jpeg,.pdf"
         name={`${dataCategoryPrefix}proof`}
-        defaultFile={identityDocument.currentValue}
-        updateFile={identityDocument.set}
+        maxFiles={maxFilesAllowed}
+        defaultFiles={identityDocument.currentValue}
+        updateFiles={identityDocument.set}
+        removeFile={deleteFile}
         error={identityDocument.error}
-        aria-label="Files must be jpeg, png or pdf file format"
+        aria-label={`Files must be jpeg, png or pdf file format. You can upload up to ${maxFilesAllowed} files.`}
       />
       {alternateEvidence && (
         <Button

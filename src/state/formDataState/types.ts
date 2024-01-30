@@ -94,13 +94,13 @@ export type TFormDataState = {
   studentIdPhoto: Nullable<File>;
   studentProofDocument: Nullable<File>;
   identityDocument: Nullable<File>;
-  proofDocumentBlind: Nullable<File>;
-  proofDocumentDeaf: Nullable<File>;
-  proofDocumentWalk: Nullable<File>;
-  proofDocumentArms: Nullable<File>;
-  proofDocumentLearn: Nullable<File>;
-  proofDocumentLanguage: Nullable<File>;
-  proofDocumentDrive: Nullable<File>;
+  proofDocumentBlind: Nullable<File[]>;
+  proofDocumentDeaf: Nullable<File[]>;
+  proofDocumentWalk: Nullable<File[]>;
+  proofDocumentArms: Nullable<File[]>;
+  proofDocumentLearn: Nullable<File[]>;
+  proofDocumentLanguage: Nullable<File[]>;
+  proofDocumentDrive: Nullable<File[]>;
 
   disabilityCategories: Nullable<Array<string>>;
   drivingLicense: Nullable<string>;
