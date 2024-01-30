@@ -6,10 +6,11 @@ import { Icon } from 'components/shared';
 import s from './MultiFileUpload.module.scss';
 import { TMultiFileUploadProps } from './MultiFileUpload.types';
 
-const FileUpload = ({
+const MultiFileUpload = ({
   name,
   label,
   hint,
+  maxFiles,
   defaultFiles,
   updateFiles,
   removeFile,
@@ -22,14 +23,12 @@ const FileUpload = ({
 
   const selectedFiles = defaultFiles ? [...defaultFiles] : [];
 
-  // const previewUrl = defaultFile ? URL.createObjectURL(defaultFile) : undefined;
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target?.files;
     const files = fileList ? [...selectedFiles, ...fileList] : selectedFiles;
 
-    if (!files) return;
-    updateFiles(files);
+    updateFiles(files.slice(0, maxFiles));
+    e.target.value = '';
   };
 
   return (
@@ -100,4 +99,4 @@ const FileUpload = ({
   );
 };
 
-export default FileUpload;
+export default MultiFileUpload;

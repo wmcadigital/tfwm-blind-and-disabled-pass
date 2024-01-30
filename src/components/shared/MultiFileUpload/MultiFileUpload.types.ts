@@ -6,6 +6,7 @@ export type TMultiFileUploadProps = {
   error: Nullable<TError>;
   label?: string;
   hint?: string;
+  maxFiles: number;
   defaultFiles?: Nullable<File[]>;
   updateFiles: (files: Nullable<File[]>) => void;
   removeFile: (file: File) => void;

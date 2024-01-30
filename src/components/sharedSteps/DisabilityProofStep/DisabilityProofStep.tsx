@@ -28,6 +28,7 @@ const DisabilityProofStep = ({
   const proofDocumentLanguage = useFormDataSubscription('proofDocumentLanguage');
   const proofDocumentDrive = useFormDataSubscription('proofDocumentDrive');
   const applicationForMe = useFormDataSubscription('applicationForMe');
+  const maxFilesAllowed = 8;
 
   const { goToNextStep } = useNavigationLogic('DisablityCategories', 'Distance');
   const pronoun = applicationForMe.currentValue ? 'You' : 'They';
@@ -165,14 +166,15 @@ const DisabilityProofStep = ({
         clear enough to read.
       </p>
       <MultiFileUpload
-        hint="Files must be jpeg, png or pdf file format"
+        hint={`Files must be jpeg, png or pdf file format. You can upload up to ${maxFilesAllowed} files.`}
         accept=".png,.jpg,.jpeg,.pdf"
         name={`${dataCategoryPrefix}proof`}
+        maxFiles={maxFilesAllowed}
         defaultFiles={identityDocument.currentValue}
         updateFiles={identityDocument.set}
         removeFile={deleteFile}
         error={identityDocument.error}
-        aria-label="Files must be jpeg, png or pdf file format"
+        aria-label={`Files must be jpeg, png or pdf file format. You can upload up to ${maxFilesAllowed} files.`}
       />
       {alternateEvidence && (
         <Button
