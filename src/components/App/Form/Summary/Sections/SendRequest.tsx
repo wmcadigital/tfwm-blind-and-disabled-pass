@@ -29,15 +29,17 @@ const SendYourRequest = () => {
   const applicationNumber = Math.floor(Math.random() * 10000000 + 1).toString();
   const files = [
     formDataState.ApplicantPhoto,
-    formDataState.proofDocumentArms,
-    formDataState.proofDocumentBlind,
-    formDataState.proofDocumentDeaf,
-    formDataState.proofDocumentDrive,
-    formDataState.proofDocumentLanguage,
-    formDataState.proofDocumentLearn,
-    formDataState.proofDocumentWalk,
+    formDataState.proofDocumentArms ? [...formDataState.proofDocumentArms] : [],
+    formDataState.proofDocumentBlind ? [...formDataState.proofDocumentBlind] : [],
+    formDataState.proofDocumentDeaf ? [...formDataState.proofDocumentDeaf] : [],
+    formDataState.proofDocumentDrive ? [...formDataState.proofDocumentDrive] : [],
+    formDataState.proofDocumentLanguage ? [...formDataState.proofDocumentLanguage] : [],
+    formDataState.proofDocumentLearn ? [...formDataState.proofDocumentLearn] : [],
+    formDataState.proofDocumentWalk ? [...formDataState.proofDocumentWalk] : [],
   ];
   const checkAnswersEl = document.getElementById('application-summary');
+  // concatenate files
+  const concatFiles = files.flat();
   // remove change button
   const editedText =
     checkAnswersEl &&
@@ -56,7 +58,7 @@ const SendYourRequest = () => {
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
       });
-    const filteredFiles = files.filter((n) => n);
+    const filteredFiles = concatFiles.filter((n) => n);
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < filteredFiles.length; i++) {
       // eslint-disable-next-line no-await-in-loop

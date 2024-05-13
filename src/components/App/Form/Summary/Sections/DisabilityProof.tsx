@@ -1,7 +1,7 @@
 import { useFormDataContext } from 'state/formDataState/context';
 import { Table, ChangeAnswerButton } from 'components/shared';
-import { FileCell } from 'components/sharedTableCells';
 import dompurify from 'dompurify';
+import MultiFileCell from 'components/sharedTableCells/MultiFileCell/MultiFileCell';
 
 const { sanitize } = dompurify;
 
@@ -68,21 +68,21 @@ const DisabilityProof = () => {
   const proofBlind = categories.includes('Blind')
     ? [
         <span>Proof of disability - blind or partially sighted</span>,
-        <FileCell filesConfig={[{ title: '', file: proofDocumentBlind! }]} />,
+        <MultiFileCell filesConfig={[{ title: '', files: proofDocumentBlind! }]} />,
         <ChangeAnswerButton from="Blind" />,
       ]
     : [];
   const proofDeaf = categories.includes('Deaf')
     ? [
         <span>Proof of disability - deaf or only able to hear a little sound in both ears</span>,
-        <FileCell filesConfig={[{ title: '', file: proofDocumentDeaf! }]} />,
+        <MultiFileCell filesConfig={[{ title: '', files: proofDocumentDeaf! }]} />,
         <ChangeAnswerButton from="Deaf" />,
       ]
     : [];
   const proofLanguage = categories.includes('Language')
     ? [
         <span>Proof of disability - cannot speak at all in any language</span>,
-        <FileCell filesConfig={[{ title: '', file: proofDocumentLanguage! }]} />,
+        <MultiFileCell filesConfig={[{ title: '', files: proofDocumentLanguage! }]} />,
         <ChangeAnswerButton from="Language" />,
       ]
     : [];
@@ -96,14 +96,14 @@ const DisabilityProof = () => {
       ]
     : [
         <span>Proof of disability - cannot walk or find it difficult to walk short distances</span>,
-        <FileCell filesConfig={[{ title: '', file: proofDocumentWalk! }]} />,
+        <MultiFileCell filesConfig={[{ title: '', files: proofDocumentWalk! }]} />,
         <ChangeAnswerButton from="Walk" />,
       ];
   const proofWalk = categories.includes('Walk') ? proofWalkAlt : [];
   const proofArms = categories.includes('Arms')
     ? [
         <span>Proof of disability - unable to use both arms</span>,
-        <FileCell filesConfig={[{ title: '', file: proofDocumentArms! }]} />,
+        <MultiFileCell filesConfig={[{ title: '', files: proofDocumentArms! }]} />,
         <ChangeAnswerButton from="Arms" />,
       ]
     : [];
@@ -113,7 +113,7 @@ const DisabilityProof = () => {
           Proof of disability - find it hard to learn and remember new information and live
           independently
         </span>,
-        <FileCell filesConfig={[{ title: '', file: proofDocumentLearn! }]} />,
+        <MultiFileCell filesConfig={[{ title: '', files: proofDocumentLearn! }]} />,
         <ChangeAnswerButton from="Learn" />,
       ]
     : [];
@@ -138,7 +138,7 @@ const DisabilityProof = () => {
   const proofDrive = categories.includes('DrivingLicense')
     ? [
         <span>Proof of disability - cannot drive a car because of a medical condition</span>,
-        <FileCell filesConfig={[{ title: '', file: proofDocumentDrive! }]} />,
+        <MultiFileCell filesConfig={[{ title: '', files: proofDocumentDrive! }]} />,
         <ChangeAnswerButton from="Drive" />,
       ]
     : [];
@@ -162,7 +162,7 @@ const DisabilityProof = () => {
     refusedLicense,
     proofDrive,
   ].filter((el) => {
-    return el !== [] && el.length !== 0;
+    return el !== undefined && el.length !== 0;
   });
   return (
     <Table
