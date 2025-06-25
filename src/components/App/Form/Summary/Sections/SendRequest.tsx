@@ -19,6 +19,8 @@ const SendYourRequest = () => {
   const [hasAgreedToPrivacy, sethasAgreedToPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState<Nullable<TError>>(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const wouldLikeNetworkClubNews = useFormDataSubscription('wouldLikeNetworkClubNews', [
     {
       rule: 'OPTIONAL',
@@ -48,6 +50,7 @@ const SendYourRequest = () => {
       '',
     );
   const sendEmailHandler = async () => {
+    setIsSubmitting(true); // Set loading state
     const base64Content = editedText && btoa(unescape(encodeURIComponent(editedText)));
     const fullName = `${formDataState.ApplicantFirstName} ${formDataState.ApplicantLastName}`;
     // returns the base64 string of files
@@ -97,6 +100,7 @@ const SendYourRequest = () => {
           payload: applicationNumber,
         });
       }
+      setIsSubmitting(false); // Reset loading state
     });
   };
 
@@ -198,6 +202,7 @@ const SendYourRequest = () => {
         text="Accept and send"
         isFetching={globalState.form.isLoading}
         iconRight="general-chevron-right"
+        disabled={isSubmitting}
       />
     </div>
   );
