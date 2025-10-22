@@ -87,7 +87,7 @@ const DisablityCategories = () => {
           classes="wmnds-m-b-md"
           defaultValue={hasDisability.includes('Learn')}
           labelElement={
-            <span>I find it hard to learn, remember new information and live on my own</span>
+            <span>I find it hard to learn or remember new information, or I would or do find it hard to live on my own</span>
           }
           onChange={toggleCheckboxValue(setHasError)}
         />
