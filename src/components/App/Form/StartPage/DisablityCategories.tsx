@@ -89,7 +89,7 @@ const DisablityCategories = () => {
           labelElement={
             <span>
               I find it hard to learn or remember new information, or I would or do find it hard to live on my own
-              </span>
+            </span>
           }
           onChange={toggleCheckboxValue(setHasError)}
         />
