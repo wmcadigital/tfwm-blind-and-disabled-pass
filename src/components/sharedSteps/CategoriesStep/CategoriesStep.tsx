@@ -151,7 +151,8 @@ const CategoriesStep = ({ handleNavigation, question, categories }: TCategoriesS
           defaultValue={hasDisability.includes('Learn')}
           labelElement={
             <span>
-              {pronoun} find it hard to learn, remember new information and live on {pronounOwn} own
+              {pronoun} find it hard to learn or remember new information, or {pronoun} would or do
+              find it hard to live on {pronounOwn} own
             </span>
           }
           onChange={toggleCheckboxValue(setHasError)}
