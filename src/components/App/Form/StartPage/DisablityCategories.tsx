@@ -105,5 +105,5 @@ const DisablityCategories = () => {
     </Question>
   );
 };
-
+/*end of component*/
 export default DisablityCategories;
