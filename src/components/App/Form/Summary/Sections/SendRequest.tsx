@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // @ts-nocheck
 import { useState } from 'react';
 import { Button, Checkbox } from 'components/shared';
@@ -10,7 +11,6 @@ import { useGlobalContext } from 'state/globalState/context';
 
 const SendYourRequest = () => {
   const [formDataState] = useFormDataContext();
-
   const [hasAgreedToTerms, setHasAgreedToTerms] = useState(false);
   const [termsError, setTermsError] = useState<Nullable<TError>>(null);
   const [hasAgreedToContact, setHasAgreedToContact] = useState(false);
@@ -19,16 +19,19 @@ const SendYourRequest = () => {
   const [hasAgreedToPrivacy, sethasAgreedToPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState<Nullable<TError>>(null);
 
+  // local submitting state used to disable button and show spinner
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // error shown to the user if the API send fails
+  const [submitError, setSubmitError] = useState<Nullable<string>>(null);
 
   const wouldLikeNetworkClubNews = useFormDataSubscription('wouldLikeNetworkClubNews', [
     {
       rule: 'OPTIONAL',
     },
   ]);
-  const [globalState, globalStateDispatch] = useGlobalContext();
+  const [, globalStateDispatch] = useGlobalContext();
   const fileData = [];
-  const applicationNumber = Math.floor(Math.random() * 10000000 + 1).toString();
   const files = [
     formDataState.ApplicantPhoto,
     formDataState.proofDocumentArms ? [...formDataState.proofDocumentArms] : [],
@@ -39,20 +42,49 @@ const SendYourRequest = () => {
     formDataState.proofDocumentLearn ? [...formDataState.proofDocumentLearn] : [],
     formDataState.proofDocumentWalk ? [...formDataState.proofDocumentWalk] : [],
   ];
-  const checkAnswersEl = document.getElementById('application-summary');
   // concatenate files
   const concatFiles = files.flat();
-  // remove change button
-  const editedText =
-    checkAnswersEl &&
-    checkAnswersEl.outerHTML.replaceAll(
-      '<td class="wmnds-text-align-right" colspan="0"><button type="button" class="wmnds-btn wmnds-btn--link">Change</button></td>',
-      '',
-    );
+
   const sendEmailHandler = async () => {
     setIsSubmitting(true); // Set loading state
-    const base64Content = editedText && btoa(unescape(encodeURIComponent(editedText)));
-    const fullName = `${formDataState.ApplicantFirstName} ${formDataState.ApplicantLastName}`;
+
+    // Log form data for debugging (avoid logging sensitive data in production)
+    // This will print the full formDataState and a generated application number.
+    console.log('formDataState:', formDataState);
+    // create a sanitized copy of the form data with null values removed
+    const removeNulls = (obj) => {
+      if (Array.isArray(obj)) {
+        return obj.map((v) => removeNulls(v)).filter((v) => v !== null && v !== undefined);
+      }
+      if (obj && typeof obj === 'object') {
+        return Object.entries(obj).reduce((acc, [k, v]) => {
+          if (v === null || v === undefined) return acc;
+          const cleaned = removeNulls(v);
+          if (cleaned === null || cleaned === undefined) return acc;
+          if (
+            typeof cleaned === 'object' &&
+            !Array.isArray(cleaned) &&
+            Object.keys(cleaned).length === 0
+          ) {
+            return acc;
+          }
+          acc[k] = cleaned;
+          return acc;
+        }, {});
+      }
+      return obj;
+    };
+
+    const sanitizedFormData = removeNulls(JSON.parse(JSON.stringify(formDataState)));
+    console.log('sanitizedFormData:', sanitizedFormData);
+
+    // convert sanitized JSON to base64 (safe for Unicode)
+    const base64SanitizedFormData = sanitizedFormData
+      ? btoa(unescape(encodeURIComponent(JSON.stringify(sanitizedFormData))))
+      : null;
+    console.log('base64SanitizedFormData:', base64SanitizedFormData);
+
+    setSubmitError(null); // clear previous submit errors
     // returns the base64 string of files
     const toBase64 = (file: Blob) =>
       new Promise((resolve, reject) => {
@@ -75,33 +107,39 @@ const SendYourRequest = () => {
     globalStateDispatch({
       type: 'LOAD_FORM',
     });
-    await fetch(`https://internal-api.wmca.org.uk/emails/api/email`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        to: 8,
-        subject: `Blind and disabled application`,
-        body: '{"M":"j"}',
-        bodyHtml: base64Content,
-        from:
-          formDataState.ApplicantEmailAddress ||
-          formDataState.BehalfEmailAddress ||
-          'test@test.com',
-        files: fileData || [],
-        displayName: fullName,
-      }),
-    }).then((response) => {
-      // If the response is successful(200: OK)
-      if (response.status === 200) {
+    const endpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        body: JSON.stringify({
+          to: 7,
+          subject: `Blind and disabled application`,
+          body: '',
+          bodyHtml: base64SanitizedFormData,
+          from: 'DoNotReply@tfwm.org.uk',
+          files: fileData || [],
+        }),
+      });
+
+      if (response.ok) {
         globalStateDispatch({
           type: 'SHOW_SUCCESS_PAGE',
-          payload: applicationNumber,
+          payload: null,
         });
+      } else {
+        // handle non-200 responses: show friendly error message
+        console.error('Email API responded with status', response.status);
+        setSubmitError('There was a problem sending your application. Please try again later.');
       }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitError('There was a problem sending your application. Please try again later.');
+    } finally {
       setIsSubmitting(false); // Reset loading state
-    });
+    }
   };
 
   const toggleCheckboxValue = (
@@ -195,12 +233,20 @@ const SendYourRequest = () => {
       />
       <br />
       <span>Submission can take a while depending upon the size of your attached files.</span>
+
+      {/* show API error if sending failed */}
+      {submitError && (
+        <div role="alert" aria-live="polite" className="wmnds-p-t-sm">
+          <p className="wmnds-text-color-danger">{submitError}</p>
+        </div>
+      )}
+
       <Button
         type="button"
         btnClass="wmnds-btn wmnds-btn--start wmnds-m-t-lg"
         onClick={handleSubmit}
         text="Accept and send"
-        isFetching={globalState.form.isLoading}
+        isFetching={isSubmitting}
         iconRight="general-chevron-right"
         disabled={isSubmitting}
       />

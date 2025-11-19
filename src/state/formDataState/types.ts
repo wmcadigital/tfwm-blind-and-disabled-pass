@@ -62,6 +62,9 @@ export type TFormDataState = {
   ApplicantWorkPhoneNumber: Nullable<string>;
   ApplicantMobilePhoneNumber: Nullable<string>;
   ApplicantEmailAddress: Nullable<string>;
+  firstName: Nullable<string>;
+  lastName: Nullable<string>;
+  emailAddress: Nullable<string>;
   ApplicantDisability: Nullable<string>;
   wouldLikeNetworkClubNews: Nullable<boolean>;
   ethnicity: Nullable<string>;
