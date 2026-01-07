@@ -87,10 +87,6 @@ const StartPageAlt = () => {
           A letter from the Service Personnel &amp; Veterans Agency (SPA) that says you get a War
           Pensions Mobility Supplement (WPMS)
         </li>
-        <li>
-          A copy of both sides of your Disabled Persons&apos; Parking permit (Blue badge). This must
-          one of the new style plastic permits.
-        </li>
       </ul>
     </>
   );
