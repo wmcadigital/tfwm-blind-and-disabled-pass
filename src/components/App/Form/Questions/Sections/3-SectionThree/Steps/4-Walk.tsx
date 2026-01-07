@@ -37,7 +37,6 @@ const Walk = () => {
   };
   const canApply = true;
   const pronoun = applicationForMe.currentValue ? 'you' : 'they';
-  const pronounOwn = applicationForMe.currentValue ? 'your' : 'their';
   const documentsList = () => {
     return (
       <ul>
@@ -53,10 +52,6 @@ const Walk = () => {
         <li>
           A letter from the Service Personnel &amp; Veterans Agency (SPA) that says {pronoun} get a
           War Pensions Mobility Supplement (WPMS)
-        </li>
-        <li>
-          A copy of both sides of {pronounOwn} Disabled Persons&apos; Parking permit (Blue badge).
-          This must be one of the new style plastic permits.
         </li>
       </ul>
     );
