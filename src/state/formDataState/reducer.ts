@@ -31,10 +31,47 @@ const reducer: TFormDataStateReducer = (state, action) => {
     case 'UPDATE_FORM_DATA': {
       const newData = payload as Partial<TFormDataState>;
 
-      return {
+      // merge incoming form data
+      const merged = {
         ...state,
         ...newData,
-      };
+      } as TFormDataState;
+
+      // If ApplicantEmailAddress is provided (not null or empty), copy it to emailAddress
+      if (
+        newData.ApplicantEmailAddress !== undefined &&
+        newData.ApplicantEmailAddress !== null &&
+        newData.ApplicantEmailAddress !== ''
+      ) {
+        merged.emailAddress = newData.ApplicantEmailAddress as string;
+      } else if (
+        newData.BehalfEmailAddress !== undefined &&
+        newData.BehalfEmailAddress !== null &&
+        newData.BehalfEmailAddress !== ''
+      ) {
+        // Otherwise, if BehalfEmailAddress is provided, use that
+        merged.emailAddress = newData.BehalfEmailAddress as string;
+      }
+
+      // If ApplicantFirstName is provided (not null/undefined/empty), copy it to firstName
+      if (
+        newData.ApplicantFirstName !== undefined &&
+        newData.ApplicantFirstName !== null &&
+        newData.ApplicantFirstName !== ''
+      ) {
+        merged.firstName = newData.ApplicantFirstName as string;
+      }
+
+      // If ApplicantLastName is provided (not null/undefined/empty), copy it to lastName
+      if (
+        newData.ApplicantLastName !== undefined &&
+        newData.ApplicantLastName !== null &&
+        newData.ApplicantLastName !== ''
+      ) {
+        merged.lastName = newData.ApplicantLastName as string;
+      }
+
+      return merged;
     }
 
     case 'CLEAR_FORM_DATA': {

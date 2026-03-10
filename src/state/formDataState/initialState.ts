@@ -97,7 +97,6 @@ const initialState: TFormDataState = {
   proofDocumentLearn: null,
   proofDocumentLanguage: null,
   proofDocumentDrive: null,
-
   disabilityCategories: null,
   drivingLicense: null,
   hasDrivingLicense: null,
@@ -109,6 +108,10 @@ const initialState: TFormDataState = {
   contactPreference: [],
   contactPerson: null,
   changePhoto: null,
+  // crm fields
+  firstName: '',
+  lastName: '',
+  emailAddress: '',
 };
 
 export default initialState;
