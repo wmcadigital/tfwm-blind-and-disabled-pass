@@ -1,6 +1,12 @@
 [[plugins]]
 package = "@netlify/plugin-sitemap"
 
+# Exclude public API endpoints from secrets scanning
+# These environment variables are bundled into the client-side React app
+# and are safe to expose as they are public API endpoints
+[build.environment]
+SECRETS_SCAN_OMIT_KEYS = "REACT_APP_ADDRESS_API_ENDPOINT,REACT_APP_EMAIL_API_ENDPOINT,REACT_APP_EMAIL_API_ENDPOINT_HEADER"
+
 # Uncomment the below when due to go live to public
 # Some other things will need to be set up within Sentry.
 # If you've not done this, then ask for help.
