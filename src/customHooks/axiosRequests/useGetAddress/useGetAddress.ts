@@ -3,7 +3,10 @@ import useAxiosRequest from '../_useAxiosRequest';
 
 const useGetAddress = (searchString: string) => {
   const { isLoading, hasError, response, sendRequest } = useAxiosRequest<TApiAddress[]>({
-    url: `https://api.wmnetwork.co.uk/address/v1/AddressByPostcode/${encodeURI(searchString)}`,
+    url: `${process.env.REACT_APP_ADDRESS_API_ENDPOINT}/${encodeURI(searchString)}`,
+    headers: {
+      'power-automate': process.env.REACT_APP_EMAIL_API_ENDPOINT_HEADER,
+    },
   });
 
   return {

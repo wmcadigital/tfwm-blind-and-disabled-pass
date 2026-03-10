@@ -75,20 +75,18 @@ const SendYourRequest = () => {
     globalStateDispatch({
       type: 'LOAD_FORM',
     });
-    await fetch(`https://internal-api.wmca.org.uk/emails/api/email`, {
+    const emailEndpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
+    await fetch(`${emailEndpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({
-        to: 8,
+        to: 7,
         subject: `Blind and disabled application`,
         body: '{"M":"j"}',
         bodyHtml: base64Content,
-        from:
-          formDataState.ApplicantEmailAddress ||
-          formDataState.BehalfEmailAddress ||
-          'test@test.com',
+        from: 'DoNotReply@tfwm.org.uk',
         files: fileData || [],
         displayName: fullName,
       }),
