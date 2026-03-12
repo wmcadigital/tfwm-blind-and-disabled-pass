@@ -45,7 +45,8 @@ const DateInputs = ({ name, defaultDate, onChange, hasError, hint }: TDateInputP
       const yearInt = parseInt(year, 10);
       const monthInt = parseInt(month, 10) - 1; // month is zero-indexed
       const dayInt = parseInt(day, 10);
-      const newDate = new Date(yearInt, monthInt, dayInt);
+      // Use UTC date to prevent timezone offset issues
+      const newDate = new Date(Date.UTC(yearInt, monthInt, dayInt));
       const fullDateIsValid = newDate.toString() !== 'Invalid Date';
       onChange(fullDateIsValid ? newDate : null);
     }
