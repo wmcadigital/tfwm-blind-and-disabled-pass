@@ -166,7 +166,7 @@ const DisabilityProofStep = ({
         clear enough to read.
       </p>
       <MultiFileUpload
-        hint={`Files must be jpeg, png or pdf file format. You can upload up to ${maxFilesAllowed} files.`}
+        hint={`Files must be jpeg, png or pdf file format. each. You can upload up to ${maxFilesAllowed} files.`}
         accept=".png,.jpg,.jpeg,.pdf"
         name={`${dataCategoryPrefix}proof`}
         maxFiles={maxFilesAllowed}
@@ -174,7 +174,8 @@ const DisabilityProofStep = ({
         updateFiles={identityDocument.set}
         removeFile={deleteFile}
         error={identityDocument.error}
-        aria-label={`Files must be jpeg, png or pdf file format. You can upload up to ${maxFilesAllowed} files.`}
+        maxSizeBytes={2 * 1024 * 1024}
+        aria-label={`Files must be jpeg, png or pdf file format. each. You can upload up to ${maxFilesAllowed} files.`}
       />
       {alternateEvidence && (
         <Button

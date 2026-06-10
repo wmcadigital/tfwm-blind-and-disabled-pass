@@ -1,0 +1,15 @@
+{
+  "firstName": "Nathan",
+  "lastName": "Rogan",
+  "emailAddress": "nathan.rogan@wmca.org.uk",
+  "buildingNameOrNumber": "16",
+  "streetName": "Summer Lane",
+  "cityTown": "Birmingham",
+  "county": "West Midlands",
+  "postcode": "B19 3SD",
+  "whatIsTheMainModeOfPublicTransportYouUse": [
+    "Bus",
+    "Train",
+    "Tram"
+  ]
+}

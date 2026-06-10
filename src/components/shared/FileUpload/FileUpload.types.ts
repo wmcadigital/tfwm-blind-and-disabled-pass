@@ -9,4 +9,5 @@ export type TFileUploadProps = {
   defaultFile?: Nullable<File>;
   updateFile: (file: Nullable<File>) => void;
   accept?: string;
+  maxSizeBytes?: number;
 };

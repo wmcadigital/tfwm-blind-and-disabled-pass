@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 // @ts-nocheck
-import { useState } from 'react';
-import { Button, Checkbox } from 'components/shared';
+import { useState, useRef, useEffect } from 'react';
+import { Button, Checkbox, WarningText } from 'components/shared';
 import { validate } from 'helpers/validation';
 import { Nullable } from 'types/helpers';
 import { TError } from 'types/validation';
@@ -19,11 +20,22 @@ const SendYourRequest = () => {
   const [hasAgreedToPrivacy, sethasAgreedToPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState<Nullable<TError>>(null);
 
+  // local test mode routes requests to a test mailbox/group
+  const [isLocalTest] = useState(process.env.NODE_ENV !== 'production');
+
   // local submitting state used to disable button and show spinner
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // error shown to the user if the API send fails
   const [submitError, setSubmitError] = useState<Nullable<string>>(null);
+
+  // track mounted state to avoid setting state on unmounted component
+  const isMountedRef = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const wouldLikeNetworkClubNews = useFormDataSubscription('wouldLikeNetworkClubNews', [
     {
@@ -46,7 +58,7 @@ const SendYourRequest = () => {
   const concatFiles = files.flat();
 
   const sendEmailHandler = async () => {
-    setIsSubmitting(true); // Set loading state
+    if (isMountedRef.current) setIsSubmitting(true); // Set loading state
 
     // Log form data for debugging (avoid logging sensitive data in production)
     // This will print the full formDataState and a generated application number.
@@ -74,17 +86,323 @@ const SendYourRequest = () => {
       }
       return obj;
     };
+    // console.log('Original formDataState:', formDataState);
+    const {
+      onlineApplicationNo,
+      submissionDate,
+      applicationForMe,
+      promotionalCode,
+      previousCustomer,
+      previousCustomerReferenceNumber,
+      currentSwiftcard,
+      currentSwiftcardNumber,
+      addProductToExistingCard,
+      isApprentice,
+      schoolName,
+      schoolPostcode,
+      employerName,
+      employerPostcode,
+      filename,
+      BehalfTitle,
+      BehalfFirstName,
+      BehalfLastName,
+      BehalfDateOfBirth,
+      BehalfHomePhoneNumber,
+      BehalfWorkPhoneNumber,
+      BehalfMobilePhoneNumber,
+      BehalfEmailAddress,
+      currentTimeAtAddressYears,
+      currentTimeAtAddressMonths,
+      previousTimeAtAddressYears,
+      previousTimeAtAddressMonths,
+      BehalfCurrentPostcode,
+      BehalfCurrentAddressLine1,
+      BehalfCurrentAddressLine2,
+      BehalfCurrentAddressLine3,
+      BehalfCurrentAddressLine4,
+      BehalfCurrentDistrict,
+      BehalfCurrentTown,
+      BehalfPreviousPostcode,
+      BehalfPreviousAddressLine1,
+      BehalfPreviousAddressLine2,
+      BehalfPreviousAddressLine3,
+      BehalfPreviousAddressLine4,
+      BehalfPreviousTown,
+      ApplicantTitle,
+      ApplicantFirstName,
+      ApplicantLastName,
+      ApplicantDateOfBirth,
+      ApplicantHomePhoneNumber,
+      ApplicantWorkPhoneNumber,
+      ApplicantMobilePhoneNumber,
+      ApplicantEmailAddress,
+      ApplicantDisability,
+      howDidYouHearAboutCentroDirectDebit,
+      ethnicity,
+      ethnicityDetails,
+      currentDisabledPass,
+      passNumber,
+      ApplicantCurrentPostcode,
+      ApplicantCurrentAddressLine1,
+      ApplicantCurrentAddressLine2,
+      ApplicantCurrentAddressLine3,
+      ApplicantCurrentAddressLine4,
+      ApplicantCurrentDistrict,
+      ApplicantCurrentTown,
+      ApplicantPreviousPostcode,
+      ApplicantPreviousAddressLine1,
+      ApplicantPreviousAddressLine2,
+      ApplicantPreviousAddressLine3,
+      ApplicantPreviousAddressLine4,
+      ApplicantPreviousTown,
+      accountName,
+      accountNumber,
+      sortCode,
+      relationshipToApplicant,
+      discarded,
+      ticketPrice,
+      receiveByftFree,
+      ApplicantPhoto,
+      studentIdPhoto,
+      studentProofDocument,
+      identityDocument,
+      proofDocumentBlind,
+      proofDocumentDeaf,
+      proofDocumentWalk,
+      proofDocumentArms,
+      proofDocumentLearn,
+      proofDocumentLanguage,
+      proofDocumentDrive,
+      disabilityCategories,
+      drivingLicense,
+      hasDrivingLicense,
+      refusedDrivingLicense,
+      refusedLicense,
+      distance,
+      distanceMetric,
+      alternateStart,
+      contactPreference,
+      contactPerson,
+      changePhoto,
+      firstName,
+      lastName,
+      emailAddress,
+    } = formDataState;
 
-    const sanitizedFormData = removeNulls(JSON.parse(JSON.stringify(formDataState)));
-    // console.log('sanitizedFormData:', sanitizedFormData);
+    let dataToSend = {};
 
-    // convert sanitized JSON to base64 (safe for Unicode)
-    const base64SanitizedFormData = sanitizedFormData
-      ? btoa(unescape(encodeURIComponent(JSON.stringify(sanitizedFormData))))
-      : null;
-    // console.log('base64SanitizedFormData:', base64SanitizedFormData);
+    // Ensure disabilityCategories is always an array or null (avoid nested ternary)
+    let disabilityCategoriesArray = null;
+    if (Array.isArray(disabilityCategories)) {
+      disabilityCategoriesArray = disabilityCategories;
+    } else if (disabilityCategories) {
+      disabilityCategoriesArray = [disabilityCategories];
+    }
+
+    const disabilityCategoriesArraystr = `[${disabilityCategoriesArray
+      .map((v) => `"${v}"`)
+      .join(', ')}]`;
+
+    // Helper to normalize file(s) into a stringified array literal (or null)
+    // e.g. ["file1.jpg", "file2.png"]
+    const fileNamesArray = (val) => {
+      if (!val) return null;
+      let names = [];
+      if (Array.isArray(val)) {
+        names = val.map((f) => (f && f.name ? f.name : null)).filter(Boolean);
+      } else if (val && val.name) {
+        names = [val.name];
+      }
+      return names.length > 0 ? `[${names.map((v) => `"${v}"`).join(', ')}]` : null;
+    };
+
+    // Escape and encode arrays for safe API transmission
+    const escapeArray = (arr) => {
+      if (!arr) return null;
+      // if already a string (e.g. "[\"a\", \"b\"]"), try to double-decode
+      if (typeof arr === 'string') {
+        try {
+          const doubleDecoded = decodeURIComponent(decodeURIComponent(arr));
+          if (typeof doubleDecoded === 'string' && doubleDecoded.trim().startsWith('[')) {
+            // return literal array string (e.g. ["a","b"]) so callers see [] instead of %255B...
+            return doubleDecoded;
+          }
+        } catch (e) {
+          // ignore and fall back to encoding
+        }
+        try {
+          return escape(encodeURIComponent(arr));
+        } catch (e) {
+          return escape(encodeURIComponent(String(arr)));
+        }
+      }
+      const a = Array.isArray(arr) ? arr : [arr];
+      try {
+        return escape(encodeURIComponent(JSON.stringify(a)));
+      } catch (e) {
+        return escape(encodeURIComponent(String(a)));
+      }
+    };
+
+    let contactPreferenceArray = null;
+    if (Array.isArray(contactPreference)) {
+      contactPreferenceArray = contactPreference;
+    } else if (contactPreference) {
+      contactPreferenceArray = [contactPreference];
+    }
+
+    const contactPreferenceArraystr = `[${contactPreferenceArray.map((v) => `"${v}"`).join(', ')}]`;
+
+    dataToSend = Object.entries({
+      firstName,
+      lastName,
+      emailAddress,
+      onlineApplicationNo,
+      submissionDate,
+      applicationForMe,
+      promotionalCode,
+      previousCustomer,
+      previousCustomerReferenceNumber,
+      currentSwiftcard,
+      currentSwiftcardNumber,
+      addProductToExistingCard,
+      isApprentice,
+      schoolName,
+      schoolPostcode,
+      employerName,
+      employerPostcode,
+      // filename,
+      BehalfTitle,
+      BehalfFirstName,
+      BehalfLastName,
+      BehalfDateOfBirth,
+      BehalfHomePhoneNumber,
+      BehalfWorkPhoneNumber,
+      BehalfMobilePhoneNumber,
+      BehalfEmailAddress,
+      currentTimeAtAddressYears,
+      currentTimeAtAddressMonths,
+      previousTimeAtAddressYears,
+      previousTimeAtAddressMonths,
+      BehalfCurrentPostcode,
+      BehalfCurrentAddressLine1,
+      BehalfCurrentAddressLine2,
+      BehalfCurrentAddressLine3,
+      BehalfCurrentAddressLine4,
+      BehalfCurrentDistrict,
+      BehalfCurrentTown,
+      BehalfPreviousPostcode,
+      BehalfPreviousAddressLine1,
+      BehalfPreviousAddressLine2,
+      BehalfPreviousAddressLine3,
+      BehalfPreviousAddressLine4,
+      BehalfPreviousTown,
+      ApplicantTitle,
+      ApplicantFirstName,
+      ApplicantLastName,
+      ApplicantDateOfBirth,
+      ApplicantHomePhoneNumber,
+      ApplicantWorkPhoneNumber,
+      ApplicantMobilePhoneNumber,
+      ApplicantEmailAddress,
+      ApplicantDisability,
+      howDidYouHearAboutCentroDirectDebit,
+      ethnicity,
+      ethnicityDetails,
+      currentDisabledPass,
+      passNumber,
+      ApplicantCurrentPostcode,
+      ApplicantCurrentAddressLine1,
+      ApplicantCurrentAddressLine2,
+      ApplicantCurrentAddressLine3,
+      ApplicantCurrentAddressLine4,
+      ApplicantCurrentDistrict,
+      ApplicantCurrentTown,
+      ApplicantPreviousPostcode,
+      ApplicantPreviousAddressLine1,
+      ApplicantPreviousAddressLine2,
+      ApplicantPreviousAddressLine3,
+      ApplicantPreviousAddressLine4,
+      ApplicantPreviousTown,
+      accountName,
+      accountNumber,
+      sortCode,
+      relationshipToApplicant,
+      discarded,
+      ticketPrice,
+      receiveByftFree,
+      ApplicantPhoto: escapeArray(fileNamesArray(ApplicantPhoto)),
+      studentIdPhoto: escapeArray(fileNamesArray(studentIdPhoto)),
+      studentProofDocument: escapeArray(fileNamesArray(studentProofDocument)),
+      identityDocument: escapeArray(fileNamesArray(identityDocument)),
+      proofDocumentBlind: escapeArray(fileNamesArray(proofDocumentBlind)),
+      proofDocumentDeaf: escapeArray(fileNamesArray(proofDocumentDeaf)),
+      proofDocumentWalk: escapeArray(fileNamesArray(proofDocumentWalk)),
+      proofDocumentArms: escapeArray(fileNamesArray(proofDocumentArms)),
+      proofDocumentLearn: escapeArray(fileNamesArray(proofDocumentLearn)),
+      proofDocumentLanguage: escapeArray(fileNamesArray(proofDocumentLanguage)),
+      proofDocumentDrive: escapeArray(fileNamesArray(proofDocumentDrive)),
+      disabilityCategories: disabilityCategoriesArraystr, // send as stringified array (escaped)
+      drivingLicense,
+      hasDrivingLicense,
+      refusedDrivingLicense,
+      refusedLicense,
+      distance,
+      distanceMetric,
+      alternateStart,
+      contactPreference: contactPreferenceArraystr, // send as stringified array (escaped)
+      contactPerson,
+      changePhoto,
+    }).reduce((acc, [key, value]) => {
+      if (
+        value !== null &&
+        value !== undefined &&
+        (Array.isArray(value) ? value.length > 0 : true)
+      ) {
+        acc[key] = value;
+      }
+      return acc;
+    }, {} as Record<string, any>);
+
+    // console.log(dataToSend);
+
+    const cleanedFormData = removeNulls(formDataState);
+    const formattedJson = JSON.stringify(cleanedFormData);
+    const encodedFormattedJson = encodeURIComponent(formattedJson);
+    const escapedFormattedJson = escape(encodedFormattedJson);
+    // console.log(escapedFormattedJson);
+    const stringifiedFormData = JSON.stringify(formDataState);
+    const firstChar = stringifiedFormData.charAt(0);
+    const lastChar = stringifiedFormData.charAt(stringifiedFormData.length - 1);
+    const middleData = stringifiedFormData.slice(1, -1);
+    const escapedMiddle = middleData
+      .replace(/"/g, '\\"')
+      .replace(/{/g, '\\"{')
+      .replace(/}/g, '}\\"')
+      .replace(/\[/g, '\\"[')
+      .replace(/\]/g, ']\\"');
+    const escapedFormData = firstChar + escapedMiddle + lastChar;
+    const cleanedEscapedFormData = escapedFormData.replace(/\/\/\//g, '/');
+    // console.log(cleanedEscapedFormData);
+    // console.log(JSON.stringify(cleanedEscapedFormData));
 
     setSubmitError(null); // clear previous submit errors
+
+    // Check total file size before converting to base64
+    // Base64 adds ~33% overhead (4 bytes per 3), so for a 10 MB API limit we cap raw files at ~7 MB
+    const MAX_RAW_FILE_SIZE_BYTES = 7 * 1024 * 1024; // 7 MB
+    const filteredFiles = concatFiles.filter((n) => n);
+    const totalFileSize = filteredFiles.reduce((sum, f) => sum + f.size, 0);
+    if (totalFileSize > MAX_RAW_FILE_SIZE_BYTES) {
+      if (isMountedRef.current) {
+        setIsSubmitting(false);
+        setSubmitError(
+          `The total size of your attachments exceeds our 10 MB limit. Please remove some files and try again.`,
+        );
+      }
+      return;
+    }
+
     // returns the base64 string of files
     const toBase64 = (file: Blob) =>
       new Promise((resolve, reject) => {
@@ -93,7 +411,6 @@ const SendYourRequest = () => {
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
       });
-    const filteredFiles = concatFiles.filter((n) => n);
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < filteredFiles.length; i++) {
       // eslint-disable-next-line no-await-in-loop
@@ -108,6 +425,7 @@ const SendYourRequest = () => {
       type: 'LOAD_FORM',
     });
     const endpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
+    const recipient = isLocalTest ? 7 : 8;
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -115,10 +433,10 @@ const SendYourRequest = () => {
           'Content-Type': 'application/json; charset=utf-8',
         },
         body: JSON.stringify({
-          to: 8,
+          to: recipient,
           subject: `Blind and disabled application`,
-          body: '',
-          bodyHtml: base64SanitizedFormData,
+          body: JSON.stringify(dataToSend),
+          // bodyHtml: base64FormattedJsonFormData,`
           from: 'DoNotReply@tfwm.org.uk',
           files: fileData || [],
         }),
@@ -132,13 +450,15 @@ const SendYourRequest = () => {
       } else {
         // handle non-200 responses: show friendly error message
         console.error('Email API responded with status', response.status);
-        setSubmitError('There was a problem sending your application. Please try again later.');
+        if (isMountedRef.current)
+          setSubmitError('There was a problem sending your application. Please try again later.');
       }
     } catch (error) {
       console.error('Error sending email:', error);
-      setSubmitError('There was a problem sending your application. Please try again later.');
+      if (isMountedRef.current)
+        setSubmitError('There was a problem sending your application. Please try again later.');
     } finally {
-      setIsSubmitting(false); // Reset loading state
+      if (isMountedRef.current) setIsSubmitting(false); // Reset loading state
     }
   };
 
@@ -237,7 +557,7 @@ const SendYourRequest = () => {
       {/* show API error if sending failed */}
       {submitError && (
         <div role="alert" aria-live="polite" className="wmnds-p-t-sm">
-          <p className="wmnds-text-color-danger">{submitError}</p>
+          <WarningText type="error" message={submitError} />
         </div>
       )}
 
