@@ -11,4 +11,5 @@ export type TMultiFileUploadProps = {
   updateFiles: (files: Nullable<File[]>) => void;
   removeFile: (file: File) => void;
   accept?: string;
+  maxSizeBytes?: number;
 };

@@ -54,12 +54,13 @@ const StudentProofStep = ({ handleNavigation, question }: TSharedStepSimpleProps
       </ul>
       <FileUpload
         label="Upload student ID card"
-        hint="Files must be jpeg or png file format"
+        hint="Files must be jpeg or png file format."
         accept=".png, .jpg, .jpeg"
         name="studentIdPhoto"
         defaultFile={studentIdPhoto.currentValue}
         updateFile={studentIdPhoto.set}
         error={studentIdPhoto.error}
+        maxSizeBytes={2 * 1024 * 1024}
       />
       {showAlternativeProof ? (
         <h3 className="wmnds-m-t-none wmnds-m-b-lg">Or</h3>
@@ -93,21 +94,23 @@ const StudentProofStep = ({ handleNavigation, question }: TSharedStepSimpleProps
           </ul>
           <FileUpload
             label="Upload proof you're a student"
-            hint="Files must be word or pdf file format"
+            hint="Files must be word or pdf file format."
             accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             name="studentProofDocument"
             defaultFile={studentProofDocument.currentValue}
             updateFile={studentProofDocument.set}
             error={studentProofDocument.error}
+            maxSizeBytes={2 * 1024 * 1024}
           />
           <FileUpload
             label="Upload an identity document"
-            hint="Files must be jpeg or png file format"
+            hint="Files must be jpeg or png file format."
             accept=".png,.jpg,.jpeg"
             name="identityDocuemnt"
             defaultFile={identityDocument.currentValue}
             updateFile={identityDocument.set}
             error={identityDocument.error}
+            maxSizeBytes={2 * 1024 * 1024}
           />
         </>
       )}

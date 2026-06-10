@@ -53,12 +53,13 @@ const PhotoUploadStep = ({ handleNavigation, question }: TSharedStepSimpleProps)
       </p>
       <FileUpload
         label={applicationForMe.savedValue ? 'Your photo' : 'Their photo'}
-        hint="Files must be jpeg or png file format"
+        hint="Files must be jpeg or png file format."
         accept=".png, .jpg, .jpeg"
         name="ApplicantPhoto"
         defaultFile={file.currentValue}
         updateFile={handleUpdateFile}
         error={file.error}
+        maxSizeBytes={2 * 1024 * 1024}
       />
     </Question>
   );
