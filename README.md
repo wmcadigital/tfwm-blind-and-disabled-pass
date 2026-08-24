@@ -2,6 +2,10 @@
 
 ## Get started
 
+### Node version
+
+- This project targets Node.js v24. Use `nvm use` or your preferred version manager to switch to Node v24 before installing.
+
 ### Installation
 
 - Click `Use this template` in the top right hand corner of Github
