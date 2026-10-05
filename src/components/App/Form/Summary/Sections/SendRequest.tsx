@@ -425,7 +425,7 @@ const SendYourRequest = () => {
       type: 'LOAD_FORM',
     });
     const endpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
-    const recipient = isLocalTest ? 7 : 8;
+    const recipient = isLocalTest ? 7 : 10;
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
